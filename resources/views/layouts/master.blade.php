@@ -8,15 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@yield('page-title')</title>
-    <!-- Bootstrap core CSS-->
-    <link href="{{ asset('sb_admin/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('sb_admin/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-    <!-- Page level plugin CSS-->
-    <link href="{{ asset('sb_admin/vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('sb_admin/css/sb-admin.css') }}" rel="stylesheet">
-
+    @include('layouts.head_css')
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -30,7 +22,7 @@
     <footer class="sticky-footer">
         <div class="container">
             <div class="text-center">
-                <small>Copyright © 彰化縣和東國小資訊教學網 2017</small>
+                <small>Copyright © 彰化縣和東國小資訊教學網 2017 Power By Laravel 5.5</small>
             </div>
         </div>
     </footer>
@@ -62,20 +54,7 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('sb_admin/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('sb_admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('sb_admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="{{ asset('sb_admin/vendor/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('sb_admin/vendor/datatables/jquery.dataTables.js') }}"></script>
-    <script src="{{ asset('sb_admin/vendor/datatables/dataTables.bootstrap4.js') }}"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('sb_admin/js/sb-admin.min.js') }}"></script>
-    <!-- Custom scripts for this page-->
-    <script src="{{ asset('sb_admin/js/sb-admin-datatables.min.js') }}"></script>
-    <script src="{{ asset('sb_admin/js/sb-admin-charts.min.js') }}"></script>
+    @include('layouts.under_js')
 </div>
 </body>
 </html>

@@ -1,14 +1,62 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="{{ route('index') }}">和東資訊教學網</a>
+    <a class="navbar-brand" href="{{ route('/') }}">和東資訊教學網</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ route('index') }}">
                     <i class="fa fa-fw fa-dashboard"></i>
-                    <span class="nav-link-text">Dashboard</span>
+                    <span class="nav-link-text">儀表統計</span>
+                </a>
+            </li>
+            @if (auth()->check())
+                @if(auth()->user()->admin)
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Setting">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSetting" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-cogs"></i>
+                            <span class="nav-link-text">系統管理</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseSetting">
+                            <li>
+                                <a href="{{ route('SetAccount') }}">帳號管理</a>
+                            </li>
+                            <li>
+                                <a href="register.html">訊息管理</a>
+                            </li>
+                            <li>
+                                <a href="register.html">公告管理</a>
+                            </li>
+                            <li>
+                                <a href="register.html">作業管理</a>
+                            </li>
+                            <li>
+                                <a href="forgot-password.html">打字管理</a>
+                            </li>
+                            <li>
+                                <a href="blank.html">其他管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                @endif
+            @endif
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Post">
+                <a class="nav-link" href="index.html">
+                    <i class="fa fa-fw fa-bullhorn"></i>
+                    <span class="nav-link-text">公告系統</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">
+                <a class="nav-link" href="index.html">
+                    <i class="fa fa-fw fa-file-text-o"></i>
+                    <span class="nav-link-text">學生作業</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-fw fa-link"></i>
+                    <span class="nav-link-text">好站連結</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
@@ -88,12 +136,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-fw fa-link"></i>
-                    <span class="nav-link-text">Link</span>
-                </a>
-            </li>
+
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
@@ -103,13 +146,14 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+            @if(auth()->check())
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-fw fa-envelope"></i>
-                    <span class="d-lg-none">Messages
+                    <i class="fa fa-fw fa-envelope"></i>訊息
+                    <span class="d-lg-none">訊息
               <span class="badge badge-pill badge-primary">12 New</span>
             </span>
-                    <span class="indicator text-primary d-none d-lg-block">
+                    <span class="indicator text-danger d-none d-lg-block">
               <i class="fa fa-fw fa-circle"></i>
             </span>
                 </a>
@@ -139,8 +183,8 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-fw fa-bell"></i>
-                    <span class="d-lg-none">Alerts
+                    <i class="fa fa-fw fa-bell"></i>任務
+                    <span class="d-lg-none">任務
               <span class="badge badge-pill badge-warning">6 New</span>
             </span>
                     <span class="indicator text-warning d-none d-lg-block">
@@ -180,6 +224,7 @@
                     <a class="dropdown-item small" href="#">View all alerts</a>
                 </div>
             </li>
+            @endif
             <li class="nav-item">
                 <form class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
@@ -192,15 +237,37 @@
                     </div>
                 </form>
             </li>
-            <li class="nav-item">
+
                 @if (auth()->check())
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="hi()"> Hi
+                        <i class="fa fa-fw fa-user-circle-o"></i>{{ auth()->user()->name }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-fw fa-cog"></i>個人設定</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
                         <i class="fa fa-fw fa-sign-out"></i>登出</a>
+                </li>
                 @else
+                <li class="nav-item">
                     <a class="nav-link" href="{{ url('login') }}">
                         <i class="fa fa-fw fa-sign-in"></i>登入</a>
+                </li>
                 @endif
             </li>
         </ul>
     </div>
 </nav>
+@if(auth()->check())
+    <script>
+        var i=0;
+        function hi()
+        {
+            i++;
+            alert('Hi, {{ auth()->user()->name }}, 你按了'+ i +'下');
+        }
+    </script>
+@endif
