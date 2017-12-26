@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'username' => env('ADMIN_USERNAME'),
             'password' => bcrypt(env('DEFAULT_USER_PWD')),
             'name' => '王老師',
-            'admin' => '1',
+            'group_id' => '1',
         ]);
     }
 }

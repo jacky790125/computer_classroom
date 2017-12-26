@@ -12,7 +12,7 @@
                 </a>
             </li>
             @if (auth()->check())
-                @if(auth()->user()->admin)
+                @if(auth()->user()->group_id == 1)
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Setting">
                         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSetting" data-parent="#exampleAccordion">
                             <i class="fa fa-fw fa-cogs"></i>
@@ -20,7 +20,7 @@
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapseSetting">
                             <li>
-                                <a href="{{ route('SetAccount') }}">帳號管理</a>
+                                <a href="{{ route('admin.account.index') }}">帳號管理</a>
                             </li>
                             <li>
                                 <a href="register.html">訊息管理</a>

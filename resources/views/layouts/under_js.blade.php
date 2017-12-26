@@ -12,3 +12,5 @@
 <!-- Custom scripts for this page-->
 <script src="{{ asset('sb_admin/js/sb-admin-datatables.min.js') }}"></script>
 <script src="{{ asset('sb_admin/js/sb-admin-charts.min.js') }}"></script>
+
+<script src="{{ asset('js/bootbox.min.js') }}"></script>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use Illuminate\Http\Request;
 
-class SetAccountController extends Controller
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class SetAccountController extends Controller
      */
     public function index()
     {
-        return view('settings.SetAccount');
+        //
     }
 
     /**
@@ -34,7 +35,8 @@ class SetAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Group::create($request->all());
+        return redirect()->route('admin.account.index');
     }
 
     /**
@@ -66,9 +68,10 @@ class SetAccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Group $group)
     {
-        //
+        $group->update($request->all());
+        return redirect()->route('admin.account.index');
     }
 
     /**

@@ -23,7 +23,7 @@
               </div>
               <div class="mr-5">帳號管理</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="{{ route('SetAccount') }}">
+            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.account.index') }}">
               <span class="float-left">前往設定</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -39,7 +39,7 @@
               </div>
               <div class="mr-5">訊息管理</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="{{ route('SetAccount') }}">
+            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.account.index') }}">
               <span class="float-left">前往設定</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -55,7 +55,7 @@
               </div>
               <div class="mr-5">公告管理</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="{{ route('SetAccount') }}">
+            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.account.index') }}">
               <span class="float-left">前往設定</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>

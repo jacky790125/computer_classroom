@@ -31,10 +31,19 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+//管理員
+Route::group(['middleware' => 'admin'],function() {
 //系統管理
-Route::get('setting', function () {
-    return view('settings.index');
-})->name('setting.index');
+    Route::get('admin', function () {
+        return view('admin.index');
+    })->name('admin.index');
 
 //帳號管理
-Route::get('SetAccount', 'SetAccountController@index')->name('SetAccount');
+    Route::get('admin/account', 'AccountController@index')->name('admin.account.index');
+    Route::get('admin/account/create', 'AccountController@create')->name('admin.account.create');
+    Route::post('admin/acc', 'AccountController@store')->name('admin.account.store');
+
+    //群組管理
+    Route::post('admin/group','GroupController@store')->name('admin.group.store');
+    Route::patch('admin/{group}','GroupController@update')->name('admin.group.update');
+});
