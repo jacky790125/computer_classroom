@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AccountController extends Controller
 {
@@ -16,8 +17,10 @@ class AccountController extends Controller
     public function index()
     {
         $groups = Group::all();
+        $users = User::all();
         $data = [
             'groups'=>$groups,
+            'users'=>$users,
         ];
         return view('admin.account.index',$data);
     }
@@ -56,6 +59,27 @@ class AccountController extends Controller
         $att['group_id'] = $request->input('group_id');
         $att['un_active'] = $request->input('un_active');
         User::create($att);
+        return redirect()->route('admin.account.index');
+    }
+
+    public function storeMore(Request $request)
+    {
+
+        $filePath = $request->file('csv')->getRealPath();
+        $data = Excel::load($filePath, function ($reader) {
+        })->get();
+
+        foreach ($data as $key => $value) {
+            $att['username'] = $value['學號'];
+            $att['password'] = bcrypt($value['生日月日']);
+            $att['name'] = $value['姓名'];
+            $att['sex'] = $value['性別'];
+            $att['year_class_num'] = $value['年級'].$value['班級'].$value['座號'];
+            $att['student_sn'] = $value['學號'];
+            $att['group_id'] = $value['群組id'];
+            $att['active'] = "1";
+            User::create($att);
+        }
         return redirect()->route('admin.account.index');
     }
 
@@ -102,5 +126,13 @@ class AccountController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function download_csv()
+    {
+        $realFile = asset('demo.csv');
+        header("Content-type:application");
+        header("Content-Disposition: attachment; filename=demo.csv");
+        readfile($realFile);
     }
 }

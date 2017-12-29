@@ -42,6 +42,8 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('admin/account', 'AccountController@index')->name('admin.account.index');
     Route::get('admin/account/create', 'AccountController@create')->name('admin.account.create');
     Route::post('admin/acc', 'AccountController@store')->name('admin.account.store');
+    Route::post('admin/account/storeMore', 'AccountController@storeMore')->name('admin.account.storeMore');
+    Route::get('admin/account/download_csv', 'AccountController@download_csv')->name('admin.account.download_csv');
 
     //群組管理
     Route::post('admin/group','GroupController@store')->name('admin.group.store');

@@ -17,5 +17,8 @@ class GroupsTableSeeder extends Seeder
         Group::create([
             'name' => '系統管理員',
         ]);
+        Group::create([
+            'name' => '資訊教師',
+        ]);
     }
 }

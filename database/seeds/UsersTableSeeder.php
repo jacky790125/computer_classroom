@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt(env('DEFAULT_USER_PWD')),
             'name' => '王老師',
             'group_id' => '1',
+            'active' => '1',
         ]);
     }
 }
