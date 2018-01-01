@@ -15,8 +15,11 @@
     <li class="breadcrumb-item active">帳號管理</li>
   </ol>
   <div class="row">
+    <h1><img src="{{ asset('img/title/account.png') }}" alt="帳號管理logo" width="60">帳號管理</h1>
+  </div>
+  <div class="row">
     <div class="col-4">
-      <h1>群組</h1>
+      <h2>群組</h2>
       <table class="table table-light">
         <tr>
           <th>
@@ -65,7 +68,7 @@
       </table>
     </div>
     <div class="col-8">
-      <h1>帳號</h1>
+      <h2>帳號</h2>
       <table class="table table-light">
         <tr>
           <td>
@@ -96,7 +99,8 @@
                 <th>帳(學)號</th>
                 <th>姓名</th>
                 <th>性別</th>
-                <th>啟用</th>
+                <th>狀態</th>
+                <th>動作</th>
               </tr>
               </thead>
               <tfoot>
@@ -106,7 +110,8 @@
                 <th>帳(學)號</th>
                 <th>姓名</th>
                 <th>性別</th>
-                <th>啟用</th>
+                <th>狀態</th>
+                <th>動作</th>
               </tr>
               </tfoot>
               <tbody>
@@ -117,7 +122,13 @@
                 <td>{{ $user->year_class_num }}</td>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->name }}</td>
-                <td>{{ $user->sex }}</td>
+                @if($user->sex == 1)
+                  <td><img src="{{ asset('img/male.png') }}"></td>
+                @elseif($user->sex == 2)
+                  <td><img src="{{ asset('img/female.png') }}"></td>
+                @else
+                  <td></td>
+                @endif
                 @if($user->active == 1)
                   <td><span class="text-success">啟用</span></td>
                 @elseif($user->active == 2)
@@ -125,6 +136,7 @@
                 @else
                   <td><span class="text-danger">停用</span></td>
                 @endif
+                <td><a href="{{ route('admin.account.edit',$user->id) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil-square-o"></i> 編輯</a></td>
               </tr>
                 <?php
                   $this_date = $user->updated_at;

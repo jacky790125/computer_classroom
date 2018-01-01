@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();//登入帳號
             $table->string('password');
             $table->string('name');
+            $table->string('nickname')->nullable();//暱稱
             $table->unsignedInteger('sex')->nullable();//1男,2女
             $table->string('year_class_num')->nullable();//學生的年班座號
             $table->string('student_sn')->nullable();//學生的學號

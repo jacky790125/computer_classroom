@@ -13,7 +13,7 @@
   </ol>
   <div class="row">
     <div class="col-12">
-      <h1>系統管理</h1>
+      <h1><img src="{{ asset('img/title/admin.png') }}" alt="系統管理logo" width="60">系統管理</h1>
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
           <div class="card text-white bg-info o-hidden h-100">

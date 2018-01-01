@@ -100,9 +100,16 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        //群組選單
+        $groups_array = Group::all()->pluck('name', 'id')->toArray();
+
+        $data = [
+            'groups_array'=>$groups_array,
+            'user'=>$user,
+        ];
+        return view('admin.account.edit',$data);
     }
 
     /**
@@ -112,9 +119,10 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,User $user)
     {
-        //
+        $user->update($request->all());
+        return redirect()->route('admin.account.edit',$user->id);
     }
 
     /**
@@ -123,9 +131,10 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('admin.account.index');
     }
 
     public function download_csv()
@@ -134,5 +143,12 @@ class AccountController extends Controller
         header("Content-type:application");
         header("Content-Disposition: attachment; filename=demo.csv");
         readfile($realFile);
+    }
+
+    public function reset(User $user)
+    {
+        $att['password'] = bcrypt(env('DEFAULT_USER_PWD'));
+        $user->update($att);
+        return redirect()->route('admin.account.edit',$user->id);
     }
 }

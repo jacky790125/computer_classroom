@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page-title', '帳號管理|和東資訊教學網')
+@section('page-title', '新增帳號|和東資訊教學網')
 
 @section('content')
 <div class="container-fluid">
@@ -15,14 +15,14 @@
     <li class="breadcrumb-item">
       <a href="{{ route('admin.account.index') }}">帳號管理</a>
     </li>
-    <li class="breadcrumb-item active">新增使用者</li>
+    <li class="breadcrumb-item active">新增帳號</li>
   </ol>
   <div class="row">
     <div class="col-12">
       <h1>帳號管理</h1>
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-plus-circle"></i> 新增使用者
+          <i class="fa fa-plus-circle"></i> 新增帳號
         </div>
         <div class="card-body">
           <div class="col-6">
@@ -76,7 +76,7 @@
                 <i class="fa fa-dot-circle-o"></i> 年班座號 ：
               </td>
               <td colspan="2">
-                {{ Form::text('year_class_num', null, ['id' => 'year_class_num', 'class' => 'form-control','maxlength'=>'5','placeholder' => '60101','required'=>'required']) }}
+                {{ Form::text('year_class_num', null, ['id' => 'year_class_num', 'class' => 'form-control','maxlength'=>'5','placeholder' => '例：60101','required'=>'required']) }}
               </td>
             </tr>
             <tr>
@@ -84,7 +84,7 @@
                 <i class="fa fa-dot-circle-o"></i> 電子郵件 ：
               </td>
               <td colspan="2">
-                {{ Form::email('email', null,['class' => 'form-control','placeholder' => 'example.gmail.com']) }}
+                {{ Form::email('email', null,['class' => 'form-control','placeholder' => '例：example.gmail.com']) }}
               </td>
             </tr>
             <tr>
@@ -92,7 +92,7 @@
                 <i class="fa fa-dot-circle-o"></i> 個人網站 ：
               </td>
               <td colspan="2">
-                {{ Form::text('website', null, ['id' => 'website', 'class' => 'form-control', 'placeholder' => 'http://www.example.com.tw( 含 http:// )']) }}
+                {{ Form::text('website', null, ['id' => 'website', 'class' => 'form-control', 'placeholder' => '例：http://www.example.com.tw( 含 http:// )']) }}
               </td>
             </tr>
             <tr>

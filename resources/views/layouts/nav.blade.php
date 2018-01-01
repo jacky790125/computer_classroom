@@ -147,9 +147,16 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             @if(auth()->check())
+            <li class="nav-item">
+                <img src="{{ asset('img/avatar.jpg') }}" width="40" height="30" class="rounded-circle">
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="hi()"> Hi
+                    <i class="fa fa-fw fa-user-circle-o"></i>{{ auth()->user()->name }}</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-fw fa-envelope"></i>訊息
+                    <i class="fa fa-fw fa-envelope"></i>
                     <span class="d-lg-none">訊息
               <span class="badge badge-pill badge-primary">12 New</span>
             </span>
@@ -183,7 +190,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-fw fa-bell"></i>任務
+                    <i class="fa fa-fw fa-bell"></i>
                     <span class="d-lg-none">任務
               <span class="badge badge-pill badge-warning">6 New</span>
             </span>
@@ -240,12 +247,8 @@
 
                 @if (auth()->check())
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="hi()"> Hi
-                        <i class="fa fa-fw fa-user-circle-o"></i>{{ auth()->user()->name }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-fw fa-cog"></i>個人設定</a>
+                    <a class="nav-link" data-toggle="modal" data-target="#personalModal">
+                        <i class="fa fa-fw fa-cog"></i>個人資訊</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
@@ -270,4 +273,131 @@
             alert('Hi, {{ auth()->user()->name }}, 你按了'+ i +'下');
         }
     </script>
+@endif
+
+<!-- Logout Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">你真的要離開了?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">如果真的，請在底下選擇"登出"</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                <a href="{{ route('logout') }}" class="btn btn-primary"
+                   onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">登出</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if(auth()->check())
+<!-- Personal INFO Modal-->
+    <div class="modal fade" id="personalModal" tabindex="-1" role="dialog" aria-labelledby="personalModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="personalModalLabel">
+                    {{ auth()->user()->name }}( {{ auth()->user()->username }} )-{{ auth()->user()->group->name }}{{ auth()->user()->year_class_num }}
+                    @if(auth()->user()->sex == 1)
+                        <img src="{{ asset('img/male.png') }}" width="24">
+                    @elseif(auth()->user()->sex == 2)
+                        <img src="{{ asset('img/female.png') }}" width="24">
+                    @elseif(auth()->user()->sex == "")
+                        <img src="{{ asset('img/user.png') }}" width="24">
+                    @endif
+                </h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ Form::open(['route' => 'admin.account.store', 'method' => 'POST','name'=>'form1','id'=>'personal_info','onsubmit'=>'return false;']) }}
+                <div><i class="fa fa-dot-circle-o"></i> 圖像：
+                    <input type="file" name="avatar" id="avatar_input">
+                    <img id="avatar_review" class="rounded-circle" src="{{ asset('img/avatar.jpg') }}" alt="你的圖像" width="60" height="60" />
+                </div>
+                <br>
+                <div>
+                    <i class="fa fa-dot-circle-o"></i> 密碼：
+                    {{ Form::password('old_password', ['id' => 'old_password1', 'class' => 'form-control','placeholder' => '舊密碼','required'=>'required']) }}
+                    {{ Form::password('password1', ['id' => 'password1', 'class' => 'form-control','placeholder' => '新密碼','required'=>'required']) }}
+                    {{ Form::password('password2', ['id' => 'password2', 'class' => 'form-control','placeholder' => '再一次新密碼','required'=>'required','onchange'=>'checkpwd()']) }}
+                </div>
+                <br>
+                <div>
+                    <i class="fa fa-dot-circle-o"></i> 暱稱：
+                    {{ Form::text('nickname', auth()->user()->nickname, ['id' => 'nickname', 'class' => 'form-control', 'placeholder' => '暱稱']) }}
+                </div>
+                <br>
+                <div>
+                    <i class="fa fa-dot-circle-o"></i> 電子郵件：
+                    {{ Form::email('email', null,['class' => 'form-control','placeholder' => '例：example.gmail.com']) }}
+                </div>
+                <br>
+                <div>
+                    <i class="fa fa-dot-circle-o"></i> 個人網站：
+                    {{ Form::text('website', null, ['id' => 'website', 'class' => 'form-control', 'placeholder' => '例：http://www.example.com.tw( 含 http:// 或 https://)']) }}
+                </div>
+                <script>
+                    function p_checkpwd()
+                    {
+                        with(document.all){
+                            if(password1.value!=password2.value)
+                            {
+                                bbalert('兩次密碼不同！');
+                                password1.value = "";
+                                password2.value = "";
+                            }
+                        }
+                    }
+                    function p_checkpwd2()
+                    {
+                        with(document.all) {
+                            if (password1.value == "" | password2.value == "") {
+                                bbalert('密碼不得為空值！');
+                                password1.value = "";
+                                password2.value = "";
+                                return false;
+                            }else if(name.value == ""){
+                                bbalert('姓名不得為空值！');
+                            }else{
+                                bbconfirm('store_account','你確定要新增嗎？');
+                            }
+                        }
+                    }
+                    function readURL(input) {
+
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function(e) {
+                                $('#avatar_review').attr('src', e.target.result);
+                            }
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+
+                    $("#avatar_input").change(function() {
+                        readURL(this);
+                    });
+                </script>
+                {{ Form::close() }}
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                <button class="btn btn-success" type="button" data-dismiss="modal">儲存</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endif
