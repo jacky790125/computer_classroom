@@ -56,5 +56,6 @@ Route::group(['middleware' => 'admin'],function() {
 
 //註冊會員才能看
 Route::group(['middleware' => 'auth'],function() {
-    
+    Route::post('personal_info_update/{user}','HomeController@personal_info_update')->name('personal_info.update');
+
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -31,5 +32,15 @@ class HomeController extends Controller
     public function admin()
     {
         return view('admin');
+    }
+
+    public function personal_info_update(Request $request,User $user)
+    {
+        $att['password'] = bcrypt($request->input('password1'));
+        $att['nickname'] = $request->input('nickname');
+        $att['email'] = $request->input('email');
+        $att['website'] = $request->input('website');
+        $user->update($att);
+        return redirect()->route('index');
     }
 }

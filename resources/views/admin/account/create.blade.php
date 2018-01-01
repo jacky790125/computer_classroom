@@ -19,10 +19,10 @@
   </ol>
   <div class="row">
     <div class="col-12">
-      <h1>帳號管理</h1>
+      <h1><img src="{{ asset('img/title/add_account.png') }}" alt="新增帳號logo" width="60">新增帳號</h1>
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-plus-circle"></i> 新增帳號
+          <i class="fa fa-info-circle"></i> 帳號資訊
         </div>
         <div class="card-body">
           <div class="col-6">
@@ -105,7 +105,7 @@
             </tr>
             <tr>
               <td colspan="3">
-                <a href="#" class="btn btn-success" onclick="checkpwd2()"><i class="fa fa-plus-square"></i> 新增使用者</a>
+                <a href="#" class="btn btn-success" onclick="checkpwd2()"><i class="fa fa-plus-square"></i> 新增帳號</a>
               </td>
             </tr>
           </table>

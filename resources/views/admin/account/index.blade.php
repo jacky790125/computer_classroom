@@ -15,8 +15,10 @@
     <li class="breadcrumb-item active">帳號管理</li>
   </ol>
   <div class="row">
-    <h1><img src="{{ asset('img/title/account.png') }}" alt="帳號管理logo" width="60">帳號管理</h1>
-  </div>
+    <div class="col-12">
+      <h1><img src="{{ asset('img/title/account.png') }}" alt="帳號管理logo" width="60">帳號管理</h1>
+    </div>
+    </div>
   <div class="row">
     <div class="col-4">
       <h2>群組</h2>
@@ -78,9 +80,9 @@
           </td>
           <td style="text-align:right">
             {{ Form::open(['route' => 'admin.account.storeMore', 'method' => 'POST','id'=>'upload_csv','files'=>true]) }}
-            <a class="btn btn-primary" href="{{ route('admin.account.download_csv') }}"><i class="fa fa-cloud-download"></i> 下載CSV檔</a>
+            <a class="btn btn-primary" href="{{ route('admin.account.download_csv') }}"><i class="fa fa-cloud-download"></i> 先下載範本</a>
             <input name="csv" type="file" required="required" multiple>
-            <a class="btn btn-success" href="#" onclick="bbconfirm('upload_csv','你確定要大量匯入嗎？')"><i class="fa fa-cloud-upload"></i> 匯入多筆</a>
+            <a class="btn btn-success" href="#" onclick="bbconfirm('upload_csv','你確定要大量匯入嗎？')"><i class="fa fa-cloud-upload"></i> 匯入</a>
             {{ Form::close() }}
           </td>
         </tr>
@@ -97,7 +99,6 @@
                 <th>群組</th>
                 <th>年班座號</th>
                 <th>帳(學)號</th>
-                <th>姓名</th>
                 <th>性別</th>
                 <th>狀態</th>
                 <th>動作</th>
@@ -108,7 +109,6 @@
                 <th>群組</th>
                 <th>年班座號</th>
                 <th>帳(學)號</th>
-                <th>姓名</th>
                 <th>性別</th>
                 <th>狀態</th>
                 <th>動作</th>
@@ -122,13 +122,6 @@
                 <td>{{ $user->year_class_num }}</td>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->name }}</td>
-                @if($user->sex == 1)
-                  <td><img src="{{ asset('img/male.png') }}"></td>
-                @elseif($user->sex == 2)
-                  <td><img src="{{ asset('img/female.png') }}"></td>
-                @else
-                  <td></td>
-                @endif
                 @if($user->active == 1)
                   <td><span class="text-success">啟用</span></td>
                 @elseif($user->active == 2)

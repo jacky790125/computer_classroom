@@ -287,7 +287,7 @@
             </div>
             <div class="modal-body">如果真的，請在底下選擇"登出"</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+                <a href="#" class="btn btn-secondary" data-dismiss="modal">取消</a>
                 <a href="{{ route('logout') }}" class="btn btn-primary"
                    onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">登出</a>
@@ -320,7 +320,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                {{ Form::open(['route' => 'admin.account.store', 'method' => 'POST','name'=>'form1','id'=>'personal_info','onsubmit'=>'return false;']) }}
+                {{ Form::open(['route' => ['personal_info.update',auth()->user()->id], 'method' => 'POST','name'=>'form1','id'=>'personal_info.update']) }}
                 <div><i class="fa fa-dot-circle-o"></i> 圖像：
                     <input type="file" name="avatar" id="avatar_input">
                     <img id="avatar_review" class="rounded-circle" src="{{ asset('img/avatar.jpg') }}" alt="你的圖像" width="60" height="60" />
@@ -330,7 +330,7 @@
                     <i class="fa fa-dot-circle-o"></i> 密碼：
                     {{ Form::password('old_password', ['id' => 'old_password1', 'class' => 'form-control','placeholder' => '舊密碼','required'=>'required']) }}
                     {{ Form::password('password1', ['id' => 'password1', 'class' => 'form-control','placeholder' => '新密碼','required'=>'required']) }}
-                    {{ Form::password('password2', ['id' => 'password2', 'class' => 'form-control','placeholder' => '再一次新密碼','required'=>'required','onchange'=>'checkpwd()']) }}
+                    {{ Form::password('password2', ['id' => 'password2', 'class' => 'form-control','placeholder' => '再一次新密碼','required'=>'required','onchange'=>'p_checkpwd()']) }}
                 </div>
                 <br>
                 <div>
@@ -340,12 +340,12 @@
                 <br>
                 <div>
                     <i class="fa fa-dot-circle-o"></i> 電子郵件：
-                    {{ Form::email('email', null,['class' => 'form-control','placeholder' => '例：example.gmail.com']) }}
+                    {{ Form::email('email', auth()->user()->email,['class' => 'form-control','placeholder' => '例：example.gmail.com']) }}
                 </div>
                 <br>
                 <div>
                     <i class="fa fa-dot-circle-o"></i> 個人網站：
-                    {{ Form::text('website', null, ['id' => 'website', 'class' => 'form-control', 'placeholder' => '例：http://www.example.com.tw( 含 http:// 或 https://)']) }}
+                    {{ Form::text('website', auth()->user()->website, ['id' => 'website', 'class' => 'form-control', 'placeholder' => '例：http://www.example.com.tw( 含 http:// 或 https://)']) }}
                 </div>
                 <script>
                     function p_checkpwd()
@@ -359,21 +359,7 @@
                             }
                         }
                     }
-                    function p_checkpwd2()
-                    {
-                        with(document.all) {
-                            if (password1.value == "" | password2.value == "") {
-                                bbalert('密碼不得為空值！');
-                                password1.value = "";
-                                password2.value = "";
-                                return false;
-                            }else if(name.value == ""){
-                                bbalert('姓名不得為空值！');
-                            }else{
-                                bbconfirm('store_account','你確定要新增嗎？');
-                            }
-                        }
-                    }
+
                     function readURL(input) {
 
                         if (input.files && input.files[0]) {
@@ -394,8 +380,9 @@
                 {{ Form::close() }}
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
-                <button class="btn btn-success" type="button" data-dismiss="modal">儲存</button>
+                <a href="#" class="btn btn-secondary" data-dismiss="modal">取消</a>
+                <a href="#" class="btn btn-success" type="button" data-dismiss="modal" onclick="event.preventDefault();
+                        document.getElementById('personal_info.update').submit();">儲存</a>
             </div>
         </div>
     </div>
