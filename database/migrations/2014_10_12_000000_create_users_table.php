@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('website')->nullable();
             $table->unsignedInteger('group_id')->nullable();
             $table->unsignedInteger('active');//0停用,null or 1啟用 or 2轉出
+            $table->string('avatar')->nullable();//個人頭像
             $table->rememberToken();
             $table->timestamps();
         });

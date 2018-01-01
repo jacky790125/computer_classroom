@@ -146,4 +146,3 @@
   </div>
 </div>
 @endsection
-@include('layouts.bootbox')

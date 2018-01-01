@@ -32,6 +32,7 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fa fa-angle-up"></i>
     </a>
+    @include('layouts.bootbox')
     @include('layouts.under_js')
 </div>
 </body>

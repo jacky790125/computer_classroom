@@ -41,10 +41,10 @@
                 <i class="fa fa-dot-circle-o"></i> 密碼*：
               </td>
               <td>
-                {{ Form::password('password1', ['id' => 'password1', 'class' => 'form-control','placeholder' => '密碼','required'=>'required']) }}
+                {{ Form::password('new_password1', ['id' => 'new_password1', 'class' => 'form-control','placeholder' => '密碼','required'=>'required']) }}
               </td>
               <td>
-                {{ Form::password('password2', ['id' => 'password2', 'class' => 'form-control','placeholder' => '再一次密碼','required'=>'required','onchange'=>'checkpwd()']) }}
+                {{ Form::password('new_password2', ['id' => 'new_password2', 'class' => 'form-control','placeholder' => '再一次密碼','required'=>'required','onchange'=>'checkpwd()']) }}
               </td>
             </tr>
             <tr>
@@ -113,21 +113,21 @@
               function checkpwd()
               {
                   with(document.all){
-                      if(password1.value!=password2.value)
+                      if(new_password1.value!=new_password2.value)
                       {
                           bbalert('兩次密碼不同！');
-                          password1.value = "";
-                          password2.value = "";
+                          new_password1.value = "";
+                          new_password2.value = "";
                       }
                   }
               }
               function checkpwd2()
               {
                   with(document.all) {
-                      if (password1.value == "" | password2.value == "") {
+                      if (new_password1.value == "" | new_password2.value == "") {
                           bbalert('密碼不得為空值！');
-                          password1.value = "";
-                          password2.value = "";
+                          new_password1.value = "";
+                          new_password2.value = "";
                           return false;
                       }else if(name.value == ""){
                           bbalert('姓名不得為空值！');
@@ -148,4 +148,3 @@
   </div>
 </div>
 @endsection
-@include('layouts.bootbox')

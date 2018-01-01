@@ -148,7 +148,7 @@
         <ul class="navbar-nav ml-auto">
             @if(auth()->check())
             <li class="nav-item">
-                <img src="{{ asset('img/avatar.jpg') }}" width="40" height="30" class="rounded-circle">
+                <img src="{{ url('avatars/'.auth()->user()->id) }}" width="40" height="40" class="rounded-circle">
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" onclick="hi()"> Hi
@@ -320,17 +320,18 @@
                 </button>
             </div>
             <div class="modal-body">
-                {{ Form::open(['route' => ['personal_info.update',auth()->user()->id], 'method' => 'POST','name'=>'form1','id'=>'personal_info.update']) }}
-                <div><i class="fa fa-dot-circle-o"></i> 圖像：
+                {{ Form::open(['route' => ['personal_info.update',auth()->user()->id], 'method' => 'POST','name'=>'form1','id'=>'personal_info.update','files' => true]) }}
+                <div><i class="fa fa-dot-circle-o"></i> 頭像(1MB內)：
                     <input type="file" name="avatar" id="avatar_input">
-                    <img id="avatar_review" class="rounded-circle" src="{{ asset('img/avatar.jpg') }}" alt="你的圖像" width="60" height="60" />
+                    <img id="avatar_review" class="rounded-circle" src="{{ url('avatars/'.auth()->user()->id) }}" alt="你的圖像" width="60" height="60" />
+
                 </div>
                 <br>
                 <div>
                     <i class="fa fa-dot-circle-o"></i> 密碼：
-                    {{ Form::password('old_password', ['id' => 'old_password1', 'class' => 'form-control','placeholder' => '舊密碼','required'=>'required']) }}
-                    {{ Form::password('password1', ['id' => 'password1', 'class' => 'form-control','placeholder' => '新密碼','required'=>'required']) }}
-                    {{ Form::password('password2', ['id' => 'password2', 'class' => 'form-control','placeholder' => '再一次新密碼','required'=>'required','onchange'=>'p_checkpwd()']) }}
+                    {{ Form::password('old_password', ['id' => 'old_password', 'class' => 'form-control','placeholder' => '舊密碼(保持空著，就不會換成新密碼)']) }}
+                    {{ Form::password('password1', ['id' => 'password1', 'class' => 'form-control','placeholder' => '新密碼']) }}
+                    {{ Form::password('password2', ['id' => 'password2', 'class' => 'form-control','placeholder' => '再一次新密碼','onchange'=>'p_checkpwd()']) }}
                 </div>
                 <br>
                 <div>
@@ -381,7 +382,7 @@
             </div>
             <div class="modal-footer">
                 <a href="#" class="btn btn-secondary" data-dismiss="modal">取消</a>
-                <a href="#" class="btn btn-success" type="button" data-dismiss="modal" onclick="event.preventDefault();
+                <a href="#" class="btn btn-success" onclick="event.preventDefault();
                         document.getElementById('personal_info.update').submit();">儲存</a>
             </div>
         </div>
