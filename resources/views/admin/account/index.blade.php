@@ -82,7 +82,7 @@
             {{ Form::open(['route' => 'admin.account.storeMore', 'method' => 'POST','id'=>'upload_csv','files'=>true]) }}
             <a class="btn btn-primary" href="{{ route('admin.account.download_csv') }}"><i class="fa fa-cloud-download"></i> 先下載範本</a>
             <input name="csv" type="file" required="required" multiple>
-            <a class="btn btn-success" href="#" onclick="bbconfirm('upload_csv','你確定要大量匯入嗎？')"><i class="fa fa-cloud-upload"></i> 匯入</a>
+            <a class="btn btn-success" href="#" onclick="bbconfirm('upload_csv','你確定要大量匯入嗎？')"><i class="fa fa-cloud-upload"></i> 再匯入</a>
             {{ Form::close() }}
           </td>
         </tr>
