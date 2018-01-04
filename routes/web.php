@@ -52,11 +52,19 @@ Route::group(['middleware' => 'admin'],function() {
     //群組管理
     Route::post('admin/group','GroupController@store')->name('admin.group.store');
     Route::patch('admin/{group}','GroupController@update')->name('admin.group.update');
+
+    //公告系統
+    Route::get('post/create', 'PostController@create')->name('post.create');
+    Route::post('post/store', 'PostController@store')->name('post.store');
 });
 
 //註冊會員才能看
 Route::group(['middleware' => 'auth'],function() {
     Route::post('personal_info_update/{user}','HomeController@personal_info_update')->name('personal_info.update');
 });
+
+//公開的公告
+Route::get('post/index', 'PostController@index')->name('post.index');
+
 //取得頭像
 Route::get('avatars/{user}', 'HomeController@getAvatar');

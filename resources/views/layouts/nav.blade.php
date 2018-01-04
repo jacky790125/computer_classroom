@@ -26,7 +26,7 @@
                                 <a href="register.html">訊息管理</a>
                             </li>
                             <li>
-                                <a href="register.html">公告管理</a>
+                                <a href="#">公告管理</a>
                             </li>
                             <li>
                                 <a href="register.html">作業管理</a>
@@ -42,7 +42,7 @@
                 @endif
             @endif
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Post">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ route('post.index') }}">
                     <i class="fa fa-fw fa-bullhorn"></i>
                     <span class="nav-link-text">公告系統</span>
                 </a>
