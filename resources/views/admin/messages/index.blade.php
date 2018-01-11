@@ -13,7 +13,7 @@
   </ol>
   <div class="row">
     <div class="col-12">
-      <h1><img src="{{ asset('img/title/post.png') }}" alt="公告系統logo" width="60">Blank</h1>
+      <h1><img src="{{ asset('img/title/message.png') }}" alt="訊息管理logo" width="60">訊息管理</h1>
       <p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
     </div>
   </div>

@@ -16,13 +16,20 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
         $users = User::all();
         $data = [
-            'groups'=>$groups,
             'users'=>$users,
         ];
         return view('admin.account.index',$data);
+    }
+
+    public function group_index()
+    {
+        $groups = Group::all();
+        $data = [
+            'groups'=>$groups,
+        ];
+        return view('admin.account.group',$data);
     }
 
     /**
@@ -69,16 +76,25 @@ class AccountController extends Controller
         $data = Excel::load($filePath, function ($reader) {
         })->get();
 
+
         foreach ($data as $key => $value) {
-            $att['username'] = $value['學號'];
-            $att['password'] = bcrypt($value['生日月日']);
-            $att['name'] = $value['姓名'];
-            $att['sex'] = $value['性別'];
-            $att['year_class_num'] = $value['年級'].$value['班級'].$value['座號'];
-            $att['student_sn'] = $value['學號'];
-            $att['group_id'] = $value['群組id'];
-            $att['active'] = "1";
-            User::create($att);
+            $user = User::where('username','=',$value['學號'])->first();
+            if(empty($user)) {
+                $att['username'] = $value['學號'];
+                $att['password'] = bcrypt(sprintf("%04s",$value['生日月日']));
+                $att['name'] = $value['姓名'];
+                $att['sex'] = $value['性別'];
+                $att['year_class_num'] = $value['學期'].$value['年級'] . sprintf("%02s",$value['班級']) . sprintf("%02s",$value['座號']);
+                $att['group_id'] = $value['群組id'];
+                $att['active'] = "1";
+                User::create($att);
+            }else{
+                $att['name'] = $value['姓名'];
+                $att['year_class_num'] = $value['學期'].$value['年級'] . sprintf("%02s",$value['班級']) . sprintf("%02s",$value['座號']);
+                $att['group_id'] = $value['群組id'];
+                $att['active'] = "1";
+                $user->update($att);
+            }
         }
         return redirect()->route('admin.account.index');
     }
@@ -139,8 +155,9 @@ class AccountController extends Controller
 
     public function download_csv()
     {
-        $realFile = asset('demo.csv');
+        $realFile = "../public/demo.csv";
         header("Content-type:application");
+        header("Content-Length: " .(string)(filesize($realFile)));
         header("Content-Disposition: attachment; filename=demo.csv");
         readfile($realFile);
     }

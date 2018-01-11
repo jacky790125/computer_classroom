@@ -36,7 +36,7 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         Group::create($request->all());
-        return redirect()->route('admin.account.index');
+        return redirect()->route('admin.account.group');
     }
 
     /**
@@ -71,7 +71,7 @@ class GroupController extends Controller
     public function update(Request $request, Group $group)
     {
         $group->update($request->all());
-        return redirect()->route('admin.account.index');
+        return redirect()->route('admin.account.group');
     }
 
     /**

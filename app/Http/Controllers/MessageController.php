@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('updated_at','DESC')
-        ->paginate(10);
-        $data = [
-            'posts'=>$posts,
-        ];
-        return view('posts.index',$data);
+        return view('admin.messages.index');
     }
 
     /**
@@ -29,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        //
     }
 
     /**
@@ -40,12 +34,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $att['title'] = $request->input('title');
-        $att['content'] = $request->input('content');
-        $att['user_id'] = auth()->user()->id;
-        $att['view'] = "0";
-        Post::create($att);
-        return redirect()->route('post.index');
+        //
     }
 
     /**
@@ -65,9 +54,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        return view('posts.edit',compact('post'));
+        //
     }
 
     /**
@@ -77,10 +66,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        $post->update($request->all());
-        return redirect()->route('post.index');
+        //
     }
 
     /**
@@ -89,24 +77,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        $post->delete();
-        return redirect()->route('post.index');
-    }
-
-    public function admin_post()
-    {
-        $posts = Post::orderBy('updated_at','DESC')
-            ->get();
-        $data = [
-            'posts'=>$posts,
-        ];
-        return view('admin.posts.index',$data);
-    }
-    public function admin_destroy(Post $post)
-    {
-        $post->delete();
-        return redirect()->route('admin.post.index');
+        //
     }
 }

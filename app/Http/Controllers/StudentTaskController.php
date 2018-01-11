@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
+use App\StudentTask;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class StudentTaskController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,27 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('updated_at','DESC')
-        ->paginate(10);
+        //變數
+        $user_id = (auth()->check())?auth()->user()->id:"";
+        $student_tasks = StudentTask::where('user_id','=',$user_id)
+            ->orderBy('id','DESC')
+            ->paginate(5);
         $data = [
-            'posts'=>$posts,
+            'student_tasks'=>$student_tasks,
         ];
-        return view('posts.index',$data);
+        return view('student_tasks.index',$data);
+    }
+
+    public function upload(StudentTask $student_task)
+    {
+        if(!empty($student_task->report)){
+            $words = " 這項作業你已經交了！";
+            return view('layouts.error',compact('words'));
+        }
+        $data = [
+            'student_task'=>$student_task,
+        ];
+        return view('student_tasks.upload',$data);
     }
 
     /**
@@ -29,7 +44,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        //
     }
 
     /**
@@ -38,14 +53,14 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,StudentTask $student_task)
     {
-        $att['title'] = $request->input('title');
-        $att['content'] = $request->input('content');
-        $att['user_id'] = auth()->user()->id;
-        $att['view'] = "0";
-        Post::create($att);
-        return redirect()->route('post.index');
+        if(empty($request->input('report'))){
+            $words = " 沒有輸入東西！";
+            return view('layouts.error',compact('words'));
+        }
+        $student_task->update($request->all());
+        return redirect()->route('student_task.index');
     }
 
     /**
@@ -65,9 +80,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        return view('posts.edit',compact('post'));
+        //
     }
 
     /**
@@ -77,10 +92,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        $post->update($request->all());
-        return redirect()->route('post.index');
+        //
     }
 
     /**
@@ -89,24 +103,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        $post->delete();
-        return redirect()->route('post.index');
-    }
-
-    public function admin_post()
-    {
-        $posts = Post::orderBy('updated_at','DESC')
-            ->get();
-        $data = [
-            'posts'=>$posts,
-        ];
-        return view('admin.posts.index',$data);
-    }
-    public function admin_destroy(Post $post)
-    {
-        $post->delete();
-        return redirect()->route('admin.post.index');
+        //
     }
 }

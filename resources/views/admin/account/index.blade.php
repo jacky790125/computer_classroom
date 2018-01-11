@@ -19,58 +19,10 @@
       <h1><img src="{{ asset('img/title/account.png') }}" alt="帳號管理logo" width="60">帳號管理</h1>
     </div>
     </div>
+
   <div class="row">
-    <div class="col-4">
-      <h2>群組</h2>
-      <table class="table table-light">
-        <tr>
-          <th>
-            id
-          </th>
-          <th>
-            名稱
-          </th>
-          <th>
-            動作
-          </th>
-        </tr>
-        <tr>
-          {{ Form::open(['route'=>'admin.group.store', 'method' => 'POST','id'=>'store_group','onsubmit'=>'return false;']) }}
-          <td>
-          </td>
-          <td>
-            {{ Form::text('name', null, ['id' => 'name', 'class' => 'form-control', 'placeholder' => '群組名稱','required'=>'required']) }}
-          </td>
-          <td>
-            <a href="#" class="btn btn-success" onclick="bbconfirm('store_group','你確定要新增群組嗎？')"><i class="fa fa-plus-circle"></i> 新增群組</a>
-          </td>
-          {{ Form::close() }}
-        </tr>
-        @foreach($groups as $group)
-          <tr>
-            {{ Form::open(['route'=>['admin.group.update',$group->id], 'method' => 'PATCH','id'=>'update_group'.$group->id]) }}
-            <td>
-              {{ $group->id }}
-            </td>
-            <td>
-              @if($group->id == 1 or $group->id == 2)
-              {{ $group->name }}
-              @else
-                {{ Form::text('name', $group->name, ['id' => 'name', 'class' => 'form-control', 'placeholder' => '群組名稱','required'=>'required','onsubmit'=>'return false']) }}
-              @endif
-            </td>
-            <td>
-              @if($group->id > 2)
-                <a href="#" class="btn btn-info" onclick="bbconfirm('update_group{{ $group->id }}','你確定要修改這個群組嗎？')"><i class="fa fa-floppy-o"></i> 儲存修改</a>
-              @endif
-            </td>
-            {{ Form::close() }}
-          </tr>
-        @endforeach
-      </table>
-    </div>
-    <div class="col-8">
-      <h2>帳號</h2>
+    <div class="col-12">
+        <h2>帳號 [<a href="{{ route('admin.account.group') }}">群組管理</a>]</h2>
       <table class="table table-light">
         <tr>
           <td>
@@ -80,9 +32,9 @@
           </td>
           <td style="text-align:right">
             {{ Form::open(['route' => 'admin.account.storeMore', 'method' => 'POST','id'=>'upload_csv','files'=>true]) }}
-            <a class="btn btn-primary" href="{{ route('admin.account.download_csv') }}"><i class="fa fa-cloud-download"></i> 先下載範本</a>
+            <a class="btn btn-primary" href="{{ route('admin.account.download_csv') }}"><i class="fa fa-cloud-download"></i> 1.多筆先下載範本</a>
             <input name="csv" type="file" required="required" multiple>
-            <a class="btn btn-success" href="#" onclick="bbconfirm('upload_csv','你確定要大量匯入嗎？')"><i class="fa fa-cloud-upload"></i> 再匯入</a>
+            <a class="btn btn-success" href="#" onclick="bbconfirm('upload_csv','你確定要大量匯入嗎？')"><i class="fa fa-cloud-upload"></i> 2.再匯入上傳多筆</a>
             {{ Form::close() }}
           </td>
         </tr>
@@ -90,7 +42,7 @@
 
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-users"></i> <span class="glyphicon glyphicon-adjust"></span>帳號列表</div>
+          <i class="fa fa-users"></i> 帳號列表</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
@@ -99,7 +51,7 @@
                 <th>群組</th>
                 <th>年班座號</th>
                 <th>帳(學)號</th>
-                <th>性別</th>
+                <th>姓名</th>
                 <th>狀態</th>
                 <th>動作</th>
               </tr>
@@ -109,7 +61,7 @@
                 <th>群組</th>
                 <th>年班座號</th>
                 <th>帳(學)號</th>
-                <th>性別</th>
+                <th>姓名 </th>
                 <th>狀態</th>
                 <th>動作</th>
               </tr>
@@ -118,7 +70,8 @@
               <?php $updated_date="1978-10-26 00:00:00"; ?>
               @foreach($users as $user)
               <tr>
-                <td>{{ $user->group_id }} - {{ $user->group->name }}</td>
+                <?php $group_name = (empty($user->group))?"無群組":$user->group->name; ?>
+                <td>{{ $user->group_id }} - {{ $group_name }}</td>
                 <td>{{ $user->year_class_num }}</td>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->name }}</td>

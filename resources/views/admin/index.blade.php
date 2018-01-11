@@ -55,7 +55,7 @@
               </div>
               <div class="mr-5">公告管理</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.account.index') }}">
+            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.post.index') }}">
               <span class="float-left">前往設定</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -71,7 +71,7 @@
               </div>
               <div class="mr-5">作業管理</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.task.index') }}">
               <span class="float-left">前往設定</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
