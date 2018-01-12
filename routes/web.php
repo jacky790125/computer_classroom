@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('personal_info_update/{user}','HomeController@personal_info_update')->name('personal_info.update');
     Route::get('student_task/{student_task}/upload', 'StudentTaskController@upload')->name('student_task.upload');
     Route::post('student_task/{student_task}/store', 'StudentTaskController@store')->name('student_task.store');
+    Route::get('student_task/{student_task}/view', 'StudentTaskController@view')->name('student_task.view');
 });
 
 //公開的公告
@@ -90,3 +91,9 @@ Route::get('student_task/index', 'StudentTaskController@index')->name('student_t
 
 //取得頭像
 Route::get('avatars/{user}', 'HomeController@getAvatar');
+
+//取得檔案
+Route::get('file/{student_task}', 'StudentTaskController@getFile');
+
+//下載檔案
+Route::get('download_file/{student_task}', 'StudentTaskController@downloadFile')->name('download_student_task');

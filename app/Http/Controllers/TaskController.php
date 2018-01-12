@@ -25,7 +25,7 @@ class TaskController extends Controller
             'img'=>'2_傳圖片',
             'aud'=>'3_傳聲音',
             'mov'=>'4_傳影片',
-            'scratch2'=>'5_傳sb2',
+            'scratch2'=>'5_傳小貓咪2',
             'file'=>'6_傳檔案',
 
         ];

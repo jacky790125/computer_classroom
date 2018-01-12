@@ -34,6 +34,9 @@
             繳交狀態
           </th>
           <th>
+            公開
+          </th>
+          <th>
             <i class="fa fa-usd"></i> 得分
           </th>
           <th>
@@ -63,7 +66,15 @@
             @if(empty($student_task->report))
               <a href="{{ route('student_task.upload',$student_task->id) }}" class="btn btn-success"><i class="fa fa-plus"></i> 我要交作業</a>
             @else
-              <a href="#" class="btn btn-primary"><i class="fa fa-eye"></i> 我要看作業</a>
+              <a href="{{ route('student_task.view',$student_task->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i> 我要看作業</a>
+            @endif
+          </td>
+          <td>
+            @if($student_task->public == 1)
+            <img src="{{ asset('img/earth.png') }}">
+            @elseif(empty($student_task->report))
+            @else
+            <img src="{{ asset('img/lock.png') }}">
             @endif
           </td>
           <td>
