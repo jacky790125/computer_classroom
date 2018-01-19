@@ -13,7 +13,7 @@
     @include('layouts.head_css')
 </head>
 
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" onselectstart="return false;" ondragstart="return false;" oncontextmenu="return false;">
 <!-- Navigation-->
 
 @include('layouts.nav')
@@ -35,5 +35,6 @@
     @include('layouts.bootbox')
     @include('layouts.under_js')
 </div>
+
 </body>
 </html>

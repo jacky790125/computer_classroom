@@ -52,7 +52,13 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">
                 <a class="nav-link" href="{{ route('student_task.index') }}">
                     <i class="fa fa-fw fa-file-text-o"></i>
-                    <span class="nav-link-text">學生作業</span>
+                    <span class="nav-link-text">作業上傳</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">
+                <a class="nav-link" href="{{ route('student_task.select') }}">
+                    <i class="fa fa-folder-open"></i>
+                    <span class="nav-link-text">作業欣賞</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">

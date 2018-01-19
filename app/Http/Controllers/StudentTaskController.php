@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\StudentTask;
+use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -17,15 +18,110 @@ class StudentTaskController extends Controller
     public function index()
     {
         //變數
-        $user_id = (auth()->check())?auth()->user()->id:"";
-        $student_tasks = StudentTask::where('user_id','=',$user_id)
-            ->orderBy('id','DESC')
-            ->paginate(10);
+        $student_tasks = [];
+
+        if(auth()->check()){
+            $student_tasks = StudentTask::where('user_id','=',auth()->user()->id)
+                ->orderBy('id','DESC')
+                ->paginate(10);
+        }
+
         $data = [
             'student_tasks'=>$student_tasks,
         ];
         return view('student_tasks.index',$data);
     }
+
+    public function open(Request $request)
+    {
+
+        $tasks = Task::orderBy('id','DESC')->pluck('title', 'id')->toArray();
+
+
+        if(empty($request->input('task_id'))) {
+
+            $data = [
+                'tasks' => $tasks,
+            ];
+
+            return view('student_tasks.select', $data);
+        }else{
+            $task_id = $request->input('task_id');
+
+            $task = Task::where('id','=',$task_id)->first();
+
+            $student_tasks = StudentTask::where('task_id','=',$task_id)
+                ->where('public','=','1')
+                ->get()->shuffle();
+
+            $data = [
+                'task'=>$task,
+                'student_tasks' => $student_tasks,
+            ];
+
+            return view('student_tasks.open', $data);
+
+
+        }
+    }
+
+    //ajax like值+1
+    public function likes(Request $request)
+    {
+
+        $student_task = StudentTask::where('id', '=', $request->input('id'))->first();
+
+        if(session('likes'.$student_task->id) != "1"){
+            $att['likes'] = $student_task->likes;
+            $att['likes']++;
+
+            $student_task->update($att);
+
+            $result = $att['likes'];
+            session(['likes'.$student_task->id => '1']);
+
+            echo json_encode($result);
+            return;
+
+        }else{
+            $result = 'failed';
+            echo json_encode($result);
+            return;
+        }
+
+
+
+    }
+
+    //ajax view值+1
+    public function views(Request $request)
+    {
+
+        $student_task = StudentTask::where('id', '=', $request->input('id'))->first();
+
+        if(session('views'.$student_task->id) != "1"){
+            $att['views'] = $student_task->views;
+            $att['views']++;
+
+            $student_task->update($att);
+
+            $result = $att['views'];
+            session(['views'.$student_task->id => '1']);
+
+            echo json_encode($result);
+            return;
+
+        }else{
+            $result = 'failed';
+            echo json_encode($result);
+            return;
+        }
+
+
+
+    }
+
+
 
     public function upload(StudentTask $student_task)
     {

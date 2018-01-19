@@ -7,6 +7,7 @@ use App\StudentTask;
 use App\Task;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -102,6 +103,86 @@ class TaskController extends Controller
         }
 
         return redirect()->route('admin.task.index');
+    }
+
+    public function view($select,$for,$task_id)
+    {
+        $get_groups = explode(',',$for);
+        $groups_collection = DB::table('groups')
+            ->whereIn('id', $get_groups)
+            ->get();
+        $i=0;
+        foreach($groups_collection as $group){
+            $group_tab[$i]['name'] = $group->name;
+            $group_tab[$i]['id'] = $group->id;
+            $i++;
+        }
+
+
+        $student_tasks = StudentTask::where('task_id','=',$task_id)
+            ->orderBy('year_class_num')
+            ->get();
+        foreach($student_tasks as $student_task){
+            $has_done[$student_task->user_id]['年班'] = $student_task->year_class_num;
+            $has_done[$student_task->user_id]['作業'] = $student_task->report;
+            $has_done[$student_task->user_id]['分數'] = $student_task->score;
+            $has_done[$student_task->user_id]['評語'] = $student_task->saying;
+            $has_done[$student_task->user_id]['序號'] = $student_task->id;
+        }
+        //班級學生
+        $students = User::where('group_id','=',$group_tab[$select]['id'])
+            ->orderBy('year_class_num')
+            ->get();
+        foreach($students as $student){
+            if(empty($has_done[$student->id]['作業'])) $has_done[$student->id]['作業']="";
+            if(empty($has_done[$student->id]['分數'])) $has_done[$student->id]['分數']="";
+            if(empty($has_done[$student->id]['評語'])) $has_done[$student->id]['評語']="";
+            if(empty($has_done[$student->id]['年班'])) $has_done[$student->id]['作業']="未指派！";
+        }
+
+        $data=[
+            'group_tab'=>$group_tab,
+            'select'=>$select,
+            'for'=>$for,
+            'task_id'=>$task_id,
+            'students'=>$students,
+            'has_done'=>$has_done,
+        ];
+
+        return view('admin.tasks.view',$data);
+    }
+
+    public function view_one(StudentTask $student_task)
+    {
+        $data = [
+            'student_task'=>$student_task,
+        ];
+        return view('admin.tasks.view_one',$data);
+    }
+
+    public function add_student_task($task_id,$user_id)
+    {
+        $att['task_id'] = $task_id;
+        $att['user_id'] = $user_id;
+        $student = User::where('id','=',$user_id)->first();
+        $att['year_class_num'] = $student->year_class_num;
+        StudentTask::create($att);
+        return redirect()->route('admin.task.index');
+
+    }
+
+    public function stud_store(Request $request)
+    {
+        $score = $request->input('score');
+        $saying = $request->input('saying');
+        foreach($score as $k => $v){
+            $att['score'] = $v;
+            $att['saying'] = $saying[$k];
+            StudentTask::where('id','=',$k)->update($att);
+        }
+
+        return redirect()->route('admin.task.index');
+
     }
 
     /**

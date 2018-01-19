@@ -1,24 +1,16 @@
-@extends('layouts.master')
+@extends('layouts.master2')
 
-@section('page-title', '觀看作業|和東資訊教學網')
+@section('page-title', '觀看單一作業|和東資訊教學網')
 
 @section('content')
 <div class="container-fluid">
   <!-- Breadcrumbs-->
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <a href="{{ route('index') }}">儀表統計</a>
-    </li>
-    <li class="breadcrumb-item">
-      <a href="{{ route('student_task.index') }}">學生作業</a>
-    </li>
-    <li class="breadcrumb-item active">觀看作業</li>
-  </ol>
   <div class="row">
-    <div class="col-8">
+    <div class="col-12">
       <h1><img src="{{ asset('img/title/view.png') }}" alt="觀看作業logo" width="60">觀看作業</h1>
       <h2><i class="fa fa-dot-circle-o"></i> 題目：{{ $student_task->task->title }}</h2>
       <p>說明：{{ $student_task->task->description }}</p>
+      <h2>{{ substr($student_task->year_class_num,4,5) }}-{{ $student_task->user->name }}</h2>
       <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-print"></i> 答
@@ -53,19 +45,6 @@
       @elseif($student_task->task->type == "file")
         <a href="{{ route('download_student_task',$student_task->id) }}" class="btn btn-primary"><i class="fa fa-download"></i> 按我下載</a>
       @endif
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <h1><img src="{{ asset('img/title/teacher_pen.png') }}" alt="觀看作業logo" width="60">作業批改</h1>
-      <h2><i class="fa fa-pencil"></i> 老師評比</h2>
-      <p>得分：</p>
-      <div class="card mb-3">
-        <div class="card-header">
-          <i class="fa fa-reorder"></i> 評語
-        </div>
-        <div class="card-body">
-          {{ $student_task->saying }}
         </div>
       </div>
     </div>

@@ -38,7 +38,7 @@
                   <a href="#" id="a{{ $post->id }}" class="btn btn-primary btn-xs"><i class="fa fa-share"></i> {{ $post->title }}</a>
               </td>
             <td>{{ $post->user->name }}</td>
-            <td>{{ $post->view }}</td>
+            <td><p id="view{{ $post->id }}">{{ $post->view }}</p></td>
           </tr>
           <tr class="bg-light" id="content{{ $post->id }}" style="display: none">
             <td colspan="4">
@@ -48,18 +48,37 @@
               </div>
             </td>
           </tr>
+          {{ Form::open(['route' => 'post.view', 'method' => 'POST','id'=>'form'.$post->id,'onsubmit'=>'return false']) }}
+          <input type="hidden" name="id" value="{{ $post->id }}">
+          {{ Form::close() }}
           <script>
               $(document).ready(function(){
                   $("#a{{ $post->id }}").click(function(){
                       $("#content{{ $post->id }}").toggle(500);
+
+                      $.ajax({
+                          url: '{{ route('post.view') }}',
+                          type : "POST",
+                          dataType : 'json',
+                          data : $("#form{{ $post->id }}").serialize(),
+                          success : function(result) {
+                              if(result != 'failed') {
+                                  document.getElementById('view{{ $post->id }}').innerText = result;
+                              }
+                          },
+                          error: function(result) {
+                              bbalert('失敗！');
+                          }
+                      })
                   });
+
               });
           </script>
         @endforeach
         </tbody>
       </table>
       <nav class="nav-item" aria-label="Page navigation">
-        {{ $posts->links() }}
+        {{ $posts->links('vendor.pagination.bootstrap-4') }}
       </nav>
 
   </div>

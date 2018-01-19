@@ -20,9 +20,10 @@ class CreateStudentTasksTable extends Migration
             $table->unsignedInteger('year_class_num');
             $table->text('report')->nullable();
             $table->unsignedInteger('score')->nullable();
+            $table->string('saying')->nullable();
             $table->unsignedInteger('public')->nullable();//0不公開，1公開
-            $table->unsignedInteger('views')->nullable();
-            $table->unsignedInteger('likes')->nullable();
+            $table->unsignedInteger('views')->default('0');
+            $table->unsignedInteger('likes')->default('0');
             $table->timestamps();
         });
     }

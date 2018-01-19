@@ -73,10 +73,10 @@
             </tr>
             <tr>
               <td>
-                <i class="fa fa-dot-circle-o"></i> 年班座號 ：
+                <i class="fa fa-dot-circle-o"></i> 年班座號* ：
               </td>
               <td colspan="2">
-                {{ Form::text('year_class_num', null, ['id' => 'year_class_num', 'class' => 'form-control','maxlength'=>'5','placeholder' => '例：60101','required'=>'required']) }}
+                {{ Form::text('year_class_num', null, ['id' => 'year_class_num', 'class' => 'form-control','maxlength'=>'9','placeholder' => '例：106160101','required'=>'required']) }}
               </td>
             </tr>
             <tr>

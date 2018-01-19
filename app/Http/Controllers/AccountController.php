@@ -64,7 +64,7 @@ class AccountController extends Controller
         $att['email'] = $request->input('email');
         $att['website'] = $request->input('website');
         $att['group_id'] = $request->input('group_id');
-        $att['un_active'] = $request->input('un_active');
+        $att['active'] = $request->input('active');
         User::create($att);
         return redirect()->route('admin.account.index');
     }

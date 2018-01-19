@@ -70,7 +70,7 @@
         @foreach($tasks as $task)
           <tr>
             <td>
-              <i class="fa fa-folder-open-o"></i> {{ $task->created_at }}
+              <i class="fa fa-folder-open-o"></i> {{ substr($task->created_at,0,10) }}
             </td>
             <td>
               {{ $types[$task->type] }}
@@ -85,6 +85,14 @@
               id：{{ $task->for }}
             </td>
             <td>
+              <?php
+                $data=[
+                    'select'=>0,
+                    'for'=>$task->for,
+                    'task_id'=>$task->id,
+                ];
+              ?>
+              <a href="{{ route('admin.task.view',$data) }}" class="btn btn-primary"><i class="fa fa-eye"></i> 批改作業</a>
               <a href="{{ route('admin.task.destroy',$task->id) }}" class="btn btn-danger" id="delete{{ $task->id }}" onclick="bbconfirm2('delete{{ $task->id }}','確定刪除作業？')"><i class="fa fa-trash"></i> 刪除作業</a>
             </td>
           </tr>

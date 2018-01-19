@@ -12,6 +12,7 @@ class StudentTask extends Model
         'year_class_num',
         'report',
         'score',
+        'saying',
         'public',
         'views',
         'likes',

@@ -94,13 +94,10 @@
           {{ $student_tasks->links() }}
         </nav>
       @else
-      <p>學生上傳作業請先由上方登入！</p>
+        <div class="alert alert-danger" role="alert">
+          <strong>學生上傳作業請先由上方登入！</strong>
+        </div>
       @endif
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-
     </div>
   </div>
 </div>

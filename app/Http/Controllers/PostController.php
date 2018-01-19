@@ -48,6 +48,33 @@ class PostController extends Controller
         return redirect()->route('post.index');
     }
 
+    //ajax view值+1
+    public function view(Request $request)
+    {
+
+        $post = Post::where('id', '=', $request->input('id'))->first();
+
+        if(session('view'.$post->id) != "1"){
+            $att['view'] = $post->view;
+            $att['view']++;
+
+            $post->update($att);
+
+            $result = $att['view'];
+            session(['view'.$post->id => '1']);
+
+            echo json_encode($result);
+            return;
+
+        }else{
+            $result = 'failed';
+            echo json_encode($result);
+            return;
+        }
+
+    }
+
+
     /**
      * Display the specified resource.
      *

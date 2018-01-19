@@ -65,6 +65,11 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('admin/task', 'TaskController@index')->name('admin.task.index');
     Route::post('admin/task', 'TaskController@store')->name('admin.task.store');
     Route::get('admin/task/destroy{task}', 'TaskController@destroy')->name('admin.task.destroy');
+    Route::get('admin/task/view/{select}/{for}/{task_id}', 'TaskController@view')->name('admin.task.view');
+    Route::get('admin/task/view_one/{student_task}', 'TaskController@view_one')->name('admin.task.view_one');
+    Route::get('admin/task/add_student_task/{task_id}/{user_id}', 'TaskController@add_student_task')->name('add_student_task');
+    Route::post('admin/task/stud_store', 'TaskController@stud_store')->name('admin.task.stud_store');
+
 
     //公告系統
     Route::get('post/create', 'PostController@create')->name('post.create');
@@ -84,9 +89,15 @@ Route::group(['middleware' => 'auth'],function() {
 
 //公開的公告
 Route::get('post/index', 'PostController@index')->name('post.index');
+Route::post('post/view', 'PostController@view')->name('post.view');
 
 //公開的學生作業
 Route::get('student_task/index', 'StudentTaskController@index')->name('student_task.index');
+Route::get('student_task/select', 'StudentTaskController@open')->name('student_task.select');
+Route::any('student_task/open', 'StudentTaskController@open')->name('student_task.open');
+Route::post('student_task/likes', 'StudentTaskController@likes')->name('student_task.likes');
+Route::post('student_task/views', 'StudentTaskController@views')->name('student_task.views');
+
 
 
 //取得頭像
