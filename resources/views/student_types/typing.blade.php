@@ -127,9 +127,9 @@ document.getElementById('input2').readOnly=false;
 </head>
 <body oncontextmenu="return false;" onkeydown="if(((event.shiftKey)&&(event.keyCode==121)) || event.altKey || event.keyCode==116 || (event.altKey && event.keyCode==115) || (event.keyCode==78 && event.ctrlKey) || ((event.ctrlKey)&&(event.keyCode==86))) return false;"  ondrag="return false;" onpaste="return false;" onselectstart ="return false;" onselect="document.selection.empty();" oncopy="document.selection.empty();" onbeforecopy="return false;">
 <script language=javascript>
-typecontent0=new String ('五歲的兒子第一次來動物園，走到黑天鵝區，看到黑天');
-typecontent1=new String ('鵝時，高興地跟爸爸說：「爸爸，爸爸，你看！薑母鴨');
-typecontent2=new String ('！」');
+	@foreach($str as $k=>$v)
+		typecontent{{ $k }}=new String ('{{ $v }}');
+	@endforeach
 
 
 function Justcheck() {
@@ -226,7 +226,7 @@ document.getElementById('input2').readOnly=true;
 
 
 <table width=960 align=center border=0 cellspacing=0 cellpadding=0><tr><td>
-<h1>中文打字測驗　薑母鴨</h1><p style="font-size:16px;">本篇文章共 <font color=red>50 </font>字元，含標點符號，不含空白及換行字元。　　<font color=red>小叮嚀：按 <img src="{{ asset('type/images/KeyEnter.gif') }}" align=absmiddle> 就可以切換至下一個輸入區喔！</font></p>
+<h1>中文打字測驗　{{ $article->title }}</h1><p style="font-size:16px;">本篇文章共 <font color=red>{{ $article->words }} </font>字元，含標點符號，不含空白及換行字元。　　<font color=red>小叮嚀：按 <img src="{{ asset('type/images/KeyEnter.gif') }}" align=absmiddle> 就可以切換至下一個輸入區喔！</font></p>
 
 <table width=950 align=center border=0 style="table-layout:fixed;" cellspacing=0 cellpadding=0>
 <tr>
@@ -254,6 +254,7 @@ document.getElementById('input2').readOnly=true;
 <input type=hidden name=notype value="0">
 <input type=hidden name=score value="0">
 <input type=hidden name=timer value="0">
+<input type=hidden name=article_id value="{{ $article->id }}">
 <input type=hidden name=user_id value="{{ auth()->user()->id }}">
 <br><br>
 <input type=submit value="登錄成績" class='btn btn-success'>
@@ -268,16 +269,18 @@ document.getElementById('input2').readOnly=true;
 
 </tr>
 
-<tr><td style="background-color:#ffff99;padding:10px;" width=730 valign=top><p class=typecontent1><img src="{{ asset('type/images/blank.gif') }}" width=10><span id=sc0-0>五</span><span id=sc0-1>歲</span><span id=sc0-2>的</span><span id=sc0-3>兒</span><span id=sc0-4>子</span><span id=sc0-5>第</span><span id=sc0-6>一</span><span id=sc0-7>次</span><span id=sc0-8>來</span><span id=sc0-9>動</span><span id=sc0-10>物</span><span id=sc0-11>園</span><span id=sc0-12>，</span><span id=sc0-13>走</span><span id=sc0-14>到</span><span id=sc0-15>黑</span><span id=sc0-16>天</span><span id=sc0-17>鵝</span><span id=sc0-18>區</span><span id=sc0-19>，</span><span id=sc0-20>看</span><span id=sc0-21>到</span><span id=sc0-22>黑</span><span id=sc0-23>天</span><img src="{{ asset('type/images/enter.svg') }}" width="32"><span id=sc0-24></span><br><input id='input0' onblur='Justcheck();' onfocus='Gostart();' type=text style='width:715px;padding-left:7px;' class=typeanswer1 maxlength=24><br><img src=./images/blank.gif width=10 height=40><span id=sc1-0>鵝</span><span id=sc1-1>時</span><span id=sc1-2>，</span><span id=sc1-3>高</span><span id=sc1-4>興</span><span id=sc1-5>地</span><span id=sc1-6>跟</span><span id=sc1-7>爸</span><span id=sc1-8>爸</span><span id=sc1-9>說</span><span id=sc1-10>：</span><span id=sc1-11>「</span><span id=sc1-12>爸</span><span id=sc1-13>爸</span><span id=sc1-14>，</span><span id=sc1-15>爸</span><span id=sc1-16>爸</span><span id=sc1-17>，</span><span id=sc1-18>你</span><span id=sc1-19>看</span><span id=sc1-20>！</span><span id=sc1-21>薑</span><span id=sc1-22>母</span><span id=sc1-23>鴨</span><span id=sc1-24></span><br><input id='input1' onblur='Justcheck();' type=text style='width:715px;padding-left:7px;' class=typeanswer1 maxlength=24 readonly=true><br><img src=../images/blank.gif width=10 height=40><span id=sc2-0>！</span><span id=sc2-1>」</span><span id=sc2-2></span><br><input id='input2' onblur='Justcheck();' type=text style='width:715px;padding-left:7px;' class=typeanswer1 maxlength=2 readonly=true><br><img src=./images/blank.gif width=10 height=40>
-</td>
+<tr><td style="background-color:#ffff99;padding:10px;" width=730 valign=top><p class=typecontent1><img src="{{ asset('type/images/blank.gif') }}" width=10>@foreach($str as $k1=>$v1)<?php $words = mb_str_split($v1); ?>@foreach($words as $k2=>$v2)<span id=sc{{ $k1 }}-{{ $k2 }}>{{ $v2 }}</span>@endforeach<img src="{{ asset('type/images/enter.svg') }}" width="32"><span id=sc{{ $k1 }}-{{ $k2+1 }}></span><br><input id='input{{ $k1 }}' onblur='Justcheck();' onfocus='Gostart();' type=text style='width:715px;padding-left:7px;' class=typeanswer1 maxlength=24><br><img src="{{ asset('type/images/blank.gif') }}" width=10 height=40>@endforeach
+	</td>
 </tr>
-
 </table>
 <p></p>
-</td></tr></table>
-
-
-
+</td></tr>
+	<tr>
+		<td class="text-center">
+			打完記得快按<font color="red">左下角「打完了，查看成積」</font>
+		</td>
+	</tr>
+</table>
 </div>
 
 <script language=javascript>

@@ -81,6 +81,7 @@ Route::group(['middleware' => 'admin'],function() {
     //打字管理
     Route::get('student_type/admin/index', 'StudentTypeController@admin_index')->name('student_type.admin_index');
     Route::post('student_type/admin/store', 'StudentTypeController@admin_store')->name('student_type.admin_store');
+    Route::get('student_type/admin/delete/{stud_type_article}', 'StudentTypeController@admin_delete')->name('student_type.admin_delete');
 });
 
 //註冊會員才能看
@@ -91,7 +92,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('student_task/{student_task}/view', 'StudentTaskController@view')->name('student_task.view');
 
     //線上打字
-    Route::get('student_type/typing', 'StudentTypeController@typing')->name('student_type.typing');
+    Route::get('student_type/typing/{article}', 'StudentTypeController@typing')->name('student_type.typing');
     Route::post('student_type/store_typing', 'StudentTypeController@store_typing')->name('student_type.store.typing');
 });
 

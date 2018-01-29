@@ -14,7 +14,19 @@
   <div class="row">
     <div class="col-12">
       <h1><img src="{{ asset('img/title/type.png') }}" alt="公告系統logo" width="60">學生打字</h1>
-      <p><a href="#" onclick="openwindow('{{ route('student_type.typing') }}')">This is an example of a blank page that you can use as a starting point for creating new ones.</a></p>
+      <h2><i class="fa fa-list-ul"></i> 文章列表</h2>
+        <?php $i=1; ?>
+      <table>
+        <tr>
+          @foreach($articles as $article)
+            <td width="300"><a href="#" class="btn btn-info" onclick="openwindow('{{ route('student_type.typing',$article->id) }}')">({{ $i }}) {{ $article->title }}</a><font color=red>({{ $article->words }}字)</font></td>
+            @if($i%4 == 0)
+        </tr><tr>
+          @endif
+              <?php $i++;?>
+          @endforeach
+        </tr>
+      </table>
     </div>
   </div>
 </div>

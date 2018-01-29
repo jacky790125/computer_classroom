@@ -8,9 +8,9 @@ class StudType extends Model
 {
     protected $fillable = [
         'user_id',
-        'right_count',
-        'wrong_count',
-        'no_type',
+        'rightcount',
+        'wrongcount',
+        'notype',
         'score',
         'timer',
         'article_id'

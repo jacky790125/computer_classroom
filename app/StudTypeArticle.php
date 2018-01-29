@@ -9,6 +9,7 @@ class StudTypeArticle extends Model
     protected $fillable = [
         'language',
         'title',
-        'content'
+        'content',
+        'words',
     ];
 }

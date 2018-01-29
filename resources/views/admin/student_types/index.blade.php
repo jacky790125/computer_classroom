@@ -25,7 +25,10 @@
             <h5>*語言</h5>
           </td>
           <td>
-            <input type="radio" name="language" value="1" checked>中文 <input type="radio" name="language" value="2">英文
+            <input type="radio" name="language" id="cht" value="1" checked><label for="cht">中文</label>　　<input type="radio" name="language" id="eng" value="2"><label for="eng">英文</label>
+          </td>
+          <td>
+
           </td>
         </tr>
         <tr>
@@ -41,7 +44,7 @@
             <h5>*內文</h5>
           </td>
           <td>
-            {{ Form::textarea('content', null, ['id' => 'content', 'class' => 'form-control', 'placeholder' => '請輸入內文','required'=>'required']) }}
+            {{ Form::textarea('content', null, ['id' => 'content', 'class' => 'form-control', 'placeholder' => '請輸入內文至少50字，否則會出錯！','required'=>'required']) }}
           </td>
         </tr>
       </table>
@@ -53,7 +56,7 @@
       <table>
         <tr>
       @foreach($articles as $article)
-            <td width="300">({{ $i }}) {{ $article->title }} <font color=red>(10字)</font> <a href="#" ><img src="{{ asset('img/delete.png') }}"></a></td>
+            <td width="300"><a href="#" class="btn btn-info">({{ $i }}) {{ $article->title }}</a><font color=red>({{ $article->words }}字)</font> <a href="{{ route('student_type.admin_delete',$article->id) }}" id="delete" onclick="bbconfirm2('delete','真的要刪除？')"><img src="{{ asset('img/delete.png') }}"></a></td>
         @if($i%4 == 0)
         </tr><tr>
         @endif

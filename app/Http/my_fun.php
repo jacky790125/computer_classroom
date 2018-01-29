@@ -19,12 +19,8 @@ if (! function_exists('get_stud_money')) {
 
                 }
                 $stud_money_things[$stud_money->id]['updated_at'] = $stud_money->updated_at;
-
                 $stud_money_things[$stud_money->id]['title'] = $stud_money->description;
-                if($stud_money->thing = "student_task") {
-                    $student_task = \App\StudentTask::where('id','=',$stud_money->thing_id)->first();
-                    $stud_money_things[$stud_money->id]['description'] = $student_task->task->title;
-                }
+
             }
         }
         return $stud_money_things;
@@ -43,5 +39,11 @@ if (! function_exists('get_stud_total_money')) {
             }
         }
         return $total_money;
+    }
+}
+
+if (! function_exists('mb_str_split')) {
+    function mb_str_split($str){
+        return preg_split('/(?<!^)(?!$)/u', $str );
     }
 }

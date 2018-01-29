@@ -18,6 +18,7 @@ class CreateStudTypeArticlesTable extends Migration
             $table->string('title')->nullable();
             $table->text('content')->nullable();
             $table->unsignedInteger('language');//1是中文，2是英文
+            $table->unsignedInteger('words');//字數含符號
             $table->timestamps();
         });
     }
