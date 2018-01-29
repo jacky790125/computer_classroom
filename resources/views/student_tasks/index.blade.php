@@ -40,10 +40,13 @@
             <i class="fa fa-usd"></i> 得分
           </th>
           <th>
-            <i class="fa fa-eye"></i> 點閱
+            <i class="fa fa-balance-scale"></i> 評語
           </th>
           <th>
             <i class="fa fa-heart"></i> 喜歡
+          </th>
+          <th>
+            <i class="fa fa-eye"></i> 點閱
           </th>
         </tr>
         </thead>
@@ -81,17 +84,20 @@
             {{ $student_task->score }}
           </td>
           <td>
-            {{ $student_task->views }}
+            {{ $student_task->saying }}
           </td>
           <td>
             {{ $student_task->likes }}
+          </td>
+          <td>
+            {{ $student_task->views }}
           </td>
         </tr>
         @endforeach
         </tbody>
         </table>
         <nav class="text-center" aria-label="Page navigation">
-          {{ $student_tasks->links() }}
+          {{ $student_tasks->links('vendor.pagination.bootstrap-4') }}
         </nav>
       @else
         <div class="alert alert-danger" role="alert">

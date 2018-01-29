@@ -4,14 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class StudType extends Model
 {
     protected $fillable = [
-        'title',
-        'content',
         'user_id',
-        'view',
+        'right_count',
+        'wrong_count',
+        'no_type',
+        'score',
+        'timer',
+        'article_id'
     ];
+
     public function user()
     {
         return $this->belongsTo(User::class)->withDefault();

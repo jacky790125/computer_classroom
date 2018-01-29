@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\StudentTask;
+use App\StudMoney;
 use App\Task;
 use App\User;
 use Illuminate\Http\Request;
@@ -178,7 +179,29 @@ class TaskController extends Controller
         foreach($score as $k => $v){
             $att['score'] = $v;
             $att['saying'] = $saying[$k];
-            StudentTask::where('id','=',$k)->update($att);
+            $student_task = StudentTask::where('id','=',$k)->first();
+            $student_task->update($att);
+
+            $has_got = StudMoney::where('user_id','=',$student_task->user_id)
+                ->where('thing_id','=',$k)
+                ->first();
+            if(empty($has_got)){
+                $att2['user_id'] = $student_task->user_id;
+                $att2['thing'] = "student_task";
+                $att2['thing_id'] = $k;
+                $att2['stud_money'] = $v;
+                $att2['description'] = "作業得分";
+                if(!empty($v)) {
+                    StudMoney::create($att2);
+                }
+            }else{
+                if(!empty($v)) {
+                    $att2['stud_money'] = $v;
+                    $has_got->update($att2);
+                }
+            }
+
+
         }
 
         return redirect()->route('admin.task.index');

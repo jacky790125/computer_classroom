@@ -34,7 +34,7 @@
                                 <a href="{{ route('admin.task.index') }}">作業管理</a>
                             </li>
                             <li>
-                                <a href="forgot-password.html">打字管理</a>
+                                <a href="{{ route('student_type.admin_index') }}">打字管理</a>
                             </li>
                             <li>
                                 <a href="blank.html">其他管理</a>
@@ -59,6 +59,12 @@
                 <a class="nav-link" href="{{ route('student_task.select') }}">
                     <i class="fa fa-folder-open"></i>
                     <span class="nav-link-text">作業欣賞</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">
+                <a class="nav-link" href="{{ route('student_type.index') }}">
+                    <i class="fa fa-hand-o-down"></i>
+                    <span class="nav-link-text">打字練習</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
@@ -95,7 +101,7 @@
             </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="messagesDropdown">
-                    <h6 class="dropdown-header">New Messages:</h6>
+                    <h6 class="dropdown-header">新訊息:</h6>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">
                         <strong>David Miller</strong>
@@ -115,50 +121,35 @@
                         <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item small" href="#">View all messages</a>
+                    <a class="dropdown-item small" href="#">檢視所有訊息</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-fw fa-bell"></i>
-                    <span class="d-lg-none">任務
+                    <i class="fa fa-usd"></i>
+                    <span class="d-lg-none">資訊幣
               <span class="badge badge-pill badge-warning">6 New</span>
             </span>
                     <span class="indicator text-warning d-none d-lg-block">
               <i class="fa fa-fw fa-circle"></i>
             </span>
                 </a>
+                <?php $stud_money_things = get_stud_money();$total_money=get_stud_total_money(); ?>
                 <div class="dropdown-menu" aria-labelledby="alertsDropdown">
-                    <h6 class="dropdown-header">New Alerts:</h6>
+                    <h6 class="dropdown-header">收支狀況:目前餘： {{ $total_money }} 資訊幣</h6>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-              <span class="text-success">
-                <strong>
-                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
-              </span>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-                    </a>
+                    @foreach($stud_money_things as $k => $v)
+                        <a class="dropdown-item" href="#">
+                            <span class="{{ $v['color'] }}">
+                            <strong>
+                            <i class="fa {{ $v['icon'] }} fa-fw"></i>{{ $v['title'] }} {{ $v['pm'] }}{{ $v['stud_money'] }}</strong>
+                            </span>
+                            <span class="small float-right text-muted">{{ $v['updated_at'] }}</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                    @endforeach
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-              <span class="text-danger">
-                <strong>
-                  <i class="fa fa-long-arrow-down fa-fw"></i>Status Update</strong>
-              </span>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-              <span class="text-success">
-                <strong>
-                  <i class="fa fa-long-arrow-up fa-fw"></i>Status Update</strong>
-              </span>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item small" href="#">View all alerts</a>
+                    <a class="dropdown-item small" href="#">檢視所有收支表</a>
                 </div>
             </li>
             @endif

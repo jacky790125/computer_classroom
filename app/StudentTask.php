@@ -19,10 +19,10 @@ class StudentTask extends Model
     ];
     public function task()
     {
-        return $this->belongsTo(Task::class);
+        return $this->belongsTo(Task::class)->withDefault();
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault();
     }
 }

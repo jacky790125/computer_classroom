@@ -87,7 +87,7 @@
               </div>
               <div class="mr-5">打字管理</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="{{ route('student_type.admin_index') }}">
               <span class="float-left">前往設定</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>

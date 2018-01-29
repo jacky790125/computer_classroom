@@ -1,0 +1,441 @@
+﻿body {background: #FBFBF8 url('../images/pageglare.png') scroll;font-size:16px;}
+h1 {font-size:36px;}
+h2 {color:#32680b;}
+.meta {
+	height: 47px;
+	margin: 10px 0 20px 360px;
+	padding: 15px 20px 0 0;
+	background: url(../images/img07.gif) no-repeat;
+	line-height: normal;
+	text-align:right;
+}
+img{
+	border-width:0px;
+	max-width:950px;
+}
+a {
+	text-decoration: none;
+	color: #0000FF;
+}
+
+a:hover {
+	text-decoration: none;
+	color:red;
+}
+
+table.mytable {
+border-collapse: collapse;
+border:#999999 solid;
+border-width:2px;
+border-spacing: 0px;
+border-style: solid;
+border-collapse: collapse;
+overflow: auto;
+}
+
+table.mytable td {
+border-collapse: collapse;
+border:#999999 solid;
+border-width:1px;
+-moz-border-radius: ;
+padding:3px;
+}
+
+table.mytable2 {
+border-collapse: collapse;
+border:#000000 solid;
+border-width:2px;
+border-spacing: 0px;
+border-style: solid;
+border-collapse: collapse;
+overflow: auto;
+}
+
+table.mytable2 td {
+border-collapse: collapse;
+border:#000000 solid;
+border-width:1px;
+-moz-border-radius: ;
+}
+
+table.gametable {
+border-collapse: collapse;
+border:#999999 solid;
+border-width:2px;
+border-spacing: 0px;
+border-style: solid;
+border-collapse: collapse;
+overflow: auto;
+}
+
+table.gametable td {
+border-collapse: collapse;
+border:#999999 solid;
+border-width:1px;
+-moz-border-radius: ;
+font:84px 教育部標準楷書,標楷體;
+padding:0px 2px;
+padding:12px 2px 0px 2px \9;
+line-height:100%;
+}
+
+input {
+padding: 4px;
+border:1px #999999 solid;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+margin:2px;
+font-size:10pt;
+}
+
+input:radio {border:0px;}
+
+.myinput{
+padding: 4px;
+border:1px #999999 solid;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+margin:2px;
+font-size:10pt;
+}
+
+select {
+padding: 4px;
+border:1px #999999 solid;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+margin:2px;
+font-size:10pt;
+}
+
+textarea {
+padding: 4px;
+border:2px #CCCCCC solid;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+margin:2px;
+font-size:10pt;
+}
+
+.chinese {font : 64pt 教育部標準楷書, 標楷體 ; text-decoration:none;vertical-align:middle;color:black;}
+.chinese2 {font : 80pt 教育部標準楷書, 標楷體 ; text-decoration:none;vertical-align:middle;color:black;}
+.chinese3 {font : 40pt 教育部標準楷書, 標楷體 ; color:black;}
+.chinese4 {font : 50pt 教育部標準楷書, 標楷體 ; text-decoration:none;vertical-align:middle;color:black;}
+.chinese5 {font : 49pt 教育部標準楷書, 標楷體 ; color:black;}
+.chinese5r {font : 49pt 教育部標準楷書, 標楷體 ; color:red;}
+.game7 {font : 40pt 教育部標準楷書, 標楷體 ; color:black;}
+.game7button {font : 35pt 教育部標準楷書, 標楷體 ; color:blue;padding:2px;}
+.phonetic {font : 24pt 教育部標準楷書, 標楷體 ;letter-spacing:-5px; text-decoration:none; line-height: 100%;vertical-align:middle;color:black;}
+.phonetic2 {font : 28pt 教育部標準楷書, 標楷體 ;letter-spacing:-5px; text-decoration:none; line-height: 100%;vertical-align:middle;color:red;}
+.environment {font : 24pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 120%;vertical-align:middle;color:black;padding:20px 0px 20px 10px;}
+.english {font : 28pt "comic sans ms","Times New Roman", Arial, 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 100%;vertical-align:middle;color:black;}
+.englishred {font : 28pt "comic sans ms","Times New Roman", Arial, 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 100%;vertical-align:middle;color:red;}
+.englishs {font : 24pt "comic sans ms","Times New Roman", 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 100%;vertical-align:middle;color:black;}
+.englishblue {font : 24pt "comic sans ms","Times New Roman", Arial, 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 100%;vertical-align:middle;color:blue;}
+.endiccomment {font:16pt "comic sans ms","Times New Roman", Arial, 教育部標準楷書, 標楷體 ;color:#000000;}
+.num {font : 40px Arial, 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 100%;vertical-align:middle;color:#777777;}
+sup {line-height:40%;}
+.native {font : 28pt Arial, 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 100%;vertical-align:middle;color:black;}
+.natives {font : 24pt Arial, 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 100%;vertical-align:middle;color:black;}
+.holo {font : 28pt Arial, 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 100%;vertical-align:middle;color:black;}
+
+ul.album{list-style-type:none;padding:0px;clear:both;}
+ul.album li{width:150px;height:150px;float:left;border:1px solid #FDDAB3;margin:2px;background-color:#FEF4DE;}
+ul.album li div{width:150px;height:150px;display:table-cell;text-align:center;vertical-align:middle;}
+ul.album li div * {vertical-align:middle;}
+ul.album li div sup {line-height:40%;}
+ul.album li div span{height:100%;display:inline-block;}
+
+.diary{font: 9pt arial; color:black;line-height:1.5}
+.title  {font : bold 14pt arial ;color:green ;letter-spacing:4px;position:relative; text-decoration:none;}
+.title2  {font : bold 28pt 教育部標準楷書, 標楷體 ;color:green ;letter-spacing:10px;position:relative; height:16; text-decoration:none;}
+.title3  {font:16pt 教育部標準楷書, 標楷體 ;color: #E3D2B6 ;}
+.title4  {font:16pt 教育部標準楷書, 標楷體 ;color:darkgreen ;}
+.title4r  {font:16pt 教育部標準楷書, 標楷體 ;color:red ;}
+.title4b  {font:16pt 教育部標準楷書, 標楷體 ;color:black ;}
+.smallred {font:10pt 教育部標準楷書, 標楷體;color:#FF0000;}
+.smallbody {font:14pt 教育部標準楷書, 標楷體;color:#000000;}
+.smallbodyr {font:14pt 教育部標準楷書, 標楷體;color:#ff0000;}
+.middlered {font:12pt 教育部標準楷書, 標楷體 ;color:#FF0000;}
+.diccontent {font : 36pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px; text-decoration:none; line-height: 100%;vertical-align:middle;color:blue;}
+.diccontentbrown {font : 36pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px; text-decoration:none; line-height: 100%;vertical-align:middle;color:brown;}
+.diccontentsmall {font : 24pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px; text-decoration:none; line-height: 100%;vertical-align:middle;color:blue;}
+.diccomment {font:16pt 教育部標準楷書, 標楷體 ;color:#000000;}
+.dicphonetic {font:16pt 教育部標準楷書, 標楷體 ;color:#ff0000;}
+.rightscore {font: 40pt arial,標楷體; color:green;line-height:1.5;}
+.wrongscore {font: 40pt arial,標楷體; color:#e30;line-height:1.5;}
+.notype {font: 40pt arial,標楷體; color:#715f08;line-height:1.5;}
+.totalscore {font: 40pt arial,標楷體; color:#19f;line-height:1.5;}
+.clock {font: 40pt arial; color:#FF6600;line-height:1.5;}
+.clock2 {font: 28pt arial; color:#FF6600;line-height:1.5;}
+.answer {font : 80pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px; text-decoration:none; line-height: 100%;vertical-align:middle;color:#CCCCCC;}
+.answer2 {font : 108pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px; text-decoration:none; line-height: 100%;vertical-align:middle;color:#000000;}
+.answer3 {font : 40pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px; text-decoration:none; line-height: 100%;vertical-align:middle;color:blue;}
+.answerinput1 {font : 64pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;text-decoration:none; color:blue;text-align:center;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:blue;}
+.answerinput2 {font : 36pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;text-decoration:none; color:blue;text-align:center;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:blue;ime-mode:disabled;}
+.showans0 {font : 64pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 150%;color:red;vertical-align:middle;}
+.showans1 {font : 32pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 150%;color:red;vertical-align:middle;}
+.phonetic3 {font : 24pt 教育部標準楷書, 標楷體 ;letter-spacing:-5px; text-decoration:none; line-height: 100%;vertical-align:middle;color:#CCCCCC;}
+.phonetic4 {font : 32pt 教育部標準楷書, 標楷體 ;letter-spacing:-5px; text-decoration:none; line-height: 100%;vertical-align:middle;color:black;}
+.phonetic5 {font : 24pt 教育部標準楷書, 標楷體 ;letter-spacing:-5px; text-decoration:none; line-height: 100%;vertical-align:middle;color:blue;}
+.poem {font : 32pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px; text-decoration:none; line-height: 100%;vertical-align:middle;color:blue;}
+.smallph {font:8pt 教育部標準楷書, 標楷體;color:#000000;font-weight:bold;}
+.nativecomment {font:16pt  Arial, 標楷體 ;color:#000000;}
+.nativephonetic {font:16pt  Arial, 標楷體 ;color:#ff0000;}
+.e20bk {font:20pt 教育部標準楷書,標楷體 ;color:#000000;}
+.e20bk2 {font:20pt "Times New Roman", Arial,教育部標準楷書,標楷體 ;color:#000000;}
+.e20eng {font:20pt "comic sans ms","Times New Roman", Arial,教育部標準楷書,標楷體 ;color:#000000;}
+.e20eng2 {font:20pt "Times New Roman", Arial,教育部標準楷書,標楷體 ;color:#000000;}
+.e14eng {font:14pt "Times New Roman", Arial,教育部標準楷書,標楷體 ;color:#000000;line-height:100%;}
+.eng18 {font:18pt "Times New Roman",教育部標準楷書,標楷體 ;color:#000000;}
+.red16  {font:16pt 教育部標準楷書, 標楷體 ;color:red ;}
+.n20bk {font : bold 300% "Times New Roman",教育部標準楷書, 標楷體 ; color:red;width:180px;padding:.1em 5px;}
+.readingq {font : bold 200% "Times New Roman", Arial, 教育部標準楷書, 標楷體 ; width:700px;float:left;padding:.1em 5px;}
+.readinga {font : bold 150% "Times New Roman", Arial, 教育部標準楷書, 標楷體 ; width:700px;float:left;padding:.1em 5px;color:darkgreen;}
+.readingw {font : bold 150% "Times New Roman", Arial, 教育部標準楷書, 標楷體 ; width:700px;float:left;padding:.1em 5px;color:red;}
+.readingshow {font : 20pt 教育部標準楷書, 標楷體 ; line-height: 150%;}
+.readingshoweng {font : 20pt "Times New Roman", Arial, 教育部標準楷書, 標楷體 ; line-height: 150%;}
+.readingshowq {font : 20pt 教育部標準楷書, 標楷體 ; line-height: 150%;color:#0000ff;}
+.readingshowengq {font : 20pt "Times New Roman", Arial, 教育部標準楷書, 標楷體 ; line-height: 150%;color:#0000ff;}
+.readingbody {font:18pt 教育部標準楷書, 標楷體 ;color:#000000;line-height: 120%;}
+.readingbodyeng {font:18pt "Times New Roman", Arial,教育部標準楷書, 標楷體 ;color:#000000;line-height: 150%;}
+.readingtitle {font:36pt 教育部標準楷書, 標楷體 ;color:#000000;line-height: 120%;}
+.readingtitleeng {font:32pt "Times New Roman", Arial,教育部標準楷書, 標楷體 ;color:#000000;line-height: 150%;}
+.classicl {font : 32pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 150%;color:black;vertical-align:middle;}
+.classiclq {font : 32pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;text-decoration:none; line-height: 150%;color:black;vertical-align:middle;}
+.classicla {font : 32pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;text-decoration:none; color:blue;text-align:center;width:130px;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:blue;}
+.classicla1 {font : 32pt 教育部標準楷書, 標楷體 ;background-image:url('../images/bg1.png');background-repeat:no-repeat;background-position:center; letter-spacing:-1px;text-decoration:none; color:blue;text-align:center;width:130px;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:blue;ime-mode:active;}
+.classicla2 {font : 32pt 教育部標準楷書, 標楷體 ;background-image:url('../images/bg2.png');background-repeat:no-repeat;background-position:center; letter-spacing:-1px;text-decoration:none; color:blue;text-align:center;width:130px;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:blue;ime-mode:active;}
+.classicla3 {font : 32pt 教育部標準楷書, 標楷體 ;background-image:url('../images/bg3.png');background-repeat:no-repeat;background-position:center; letter-spacing:-1px;text-decoration:none; color:blue;text-align:center;width:130px;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:blue;ime-mode:active;}
+.classicla4 {font : 32pt 教育部標準楷書, 標楷體 ;background-image:url('../images/bg4.png');background-repeat:no-repeat;background-position:center; letter-spacing:-1px;text-decoration:none; color:blue;text-align:center;width:130px;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:blue;ime-mode:active;}
+.classicsel {font : 32pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;padding:5px;}
+.classiclr2 {font : 32pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;text-decoration:none; line-height: 150%;color:red;vertical-align:middle;}
+.classiclr {font : 32pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 150%;color:red;vertical-align:middle;}
+.classiclrs {font : 28pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 150%;color:red;vertical-align:middle;}
+.classics {font : 28pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 150%;color:black;vertical-align:middle;}
+.classcomment {font:12pt 教育部標準楷書, 標楷體 ;color:gray}
+.eng1000q {font:28pt "Times New Roman" ;color:#000000;}
+.eng1000a {font:32pt "Times New Roman" ;color:#0000ff;text-align:center;vertical-align:middle;background-color:transparent;padding:5px;border:2px #0000ff dashed;ime-mode:disabled;}
+.eng1000ch  {font : 28pt 教育部標準楷書, 標楷體 ;letter-spacing:-5px;}
+.engfill {font : 32pt "EngTress B",教育部標準楷書, 標楷體 ;letter-spacing:1px;text-decoration:none; color:blue;text-align:center;width:130px;vertical-align:middle;background-color:transparent;padding:5px;border:1px solid;border-color:gray;}
+.engletter {font : 32pt "Times New Roman", Arial ;letter-spacing:1px;text-decoration:none; }
+.engletteranswer {font : 24pt "EngTress B",教育部標準楷書, 標楷體 ;letter-spacing:1px;text-decoration:none;}
+.typecontent1 {font : 20pt 教育部標準楷書, 標楷體 ;line-height:120%;letter-spacing:1px;}
+.typeanswer1 {font : 20pt 教育部標準楷書, 標楷體 ;color:#0000ff;background-color:#ffffcc;border:2px dashed;border-color:gray;letter-spacing:1px;}
+.typecontent2 {font : 24pt "Times New Roman" ;line-height:120%;letter-spacing:1px;}
+.typeanswer2 {font : 24pt "Times New Roman" ;color:#0000ff;background-color:transparent;border:2px dashed;border-color:gray;letter-spacing:1px;}
+.typecurrent1 {font : 20pt 教育部標準楷書, 標楷體 ;color:#0000ff;background-color:#ffccff;letter-spacing:1px;}
+.typecurrent2 {font : 20pt "Times New Roman" ;color:#0000ff;background-color:#ffccff;letter-spacing:1px;}
+.tytestans {font : 32pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;text-decoration:none; color:blue;text-align:center;width:190px;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:blue;margin:5px 8px 5px 10px;}
+.tysort {font : 20pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;padding:5px;}
+.tysortans {font : 20pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;text-decoration:none; color:blue;text-align:center;width:120px;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:blue;margin:5px 8px 5px 10px;}
+.tysortansw {font : 20pt 教育部標準楷書, 標楷體 ;letter-spacing:-1px;text-decoration:none; color:red;text-align:center;width:120px;vertical-align:middle;background-color:transparent;padding:5px;border:2px dashed;border-color:red;margin:5px 8px 5px 10px;}
+.shopping1 {font : 24pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 120%;vertical-align:middle;color:black;padding:20px 0px 20px 0px;}
+.shopping2 {font : 20pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 120%;vertical-align:middle;color:black;padding:20px 0px 20px 0px;}
+.traffic1 {font : 24pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 120%;vertical-align:middle;color:black;padding:20px 0px 20px 0px;}
+.traffic2 {font : 20pt 教育部標準楷書, 標楷體 ;text-decoration:none; line-height: 120%;vertical-align:middle;color:black;padding:20px 0px 20px 0px;}
+.gamefont {font : 64pt 教育部標準楷書, 標楷體 ;cursor:pointer;position: relative; left: 5px; top: 16px; z-index: 10;line-height:95%;}
+.gamefont2 {font : 64pt 教育部標準楷書, 標楷體 ;cursor:pointer;position: relative; left: -10px; top: -50px; z-index: 1;color:#cccccc;line-height:0px;display:block;}
+.gamesn {font:12px Arial;z-index:99;top:0px;left:36px;position:relative;}
+.gamelock {position:relative;z-index:999;left:-45px;top:10px;display:block;line-height:0px;width:0px;height:0px;}
+.gamesn2 {font:12px Arial;z-index:99;top:0px;left:70px;position:relative;color:#666666;}
+.gamefont3 {font : 28pt 教育部標準楷書, 標楷體 ;cursor:pointer;position: relative; left: 0px; top: 0px; z-index: 10;line-height:95%;}
+.gamelock2 {position:relative;z-index:999;left:-90px;top:0px;display:block;line-height:0px;width:0px;height:0px;}
+.gamefont4 {font : 16pt 教育部標準楷書, 標楷體 ;line-height:120%;}
+.wordcomment {font:14pt 教育部標準楷書, 標楷體 ;color:#666666;}
+
+form#input_form input#question{font : bold 300% 教育部標準楷書, 標楷體 ; width:500px;float:left;padding:.1em 5px;}
+form#input_form input#answer{font : bold 300% 教育部標準楷書, 標楷體 ; color:red;width:400px;float:left;padding:.1em 5px;}
+form#input_form input#selA{font : bold 200% 教育部標準楷書, 標楷體 ; color:red;width:140px;float:left;padding:.1em 5px;text-align:center;}
+form#input_form input#selB{font : bold 200% 教育部標準楷書, 標楷體 ; color:red;width:140px;float:left;padding:.1em 5px;text-align:center;}
+form#input_form input#selC{font : bold 200% 教育部標準楷書, 標楷體 ; color:red;width:140px;float:left;padding:.1em 5px;text-align:center;}
+form#input_form input#comment{font : 150% 教育部標準楷書, 標楷體 ; color:blue;width:500px;float:left;padding:.1em 5px;}
+form#input_form input#annotate{font : 150% 教育部標準楷書, 標楷體 ; color:blue;width:500px;float:left;padding:.1em 5px;}
+form#input_form input#suggest {font : 150% 教育部標準楷書, 標楷體 ; color:blue;float:left;}
+form#input_form input#suggest2 {font : 120% 教育部標準楷書, 標楷體 ; color:blue;float:left;}
+/* form#inputgotest input {font : bold 400% 教育部標準楷書, 標楷體 ; color:red;width:200px;float:left;padding:.1em 5px;}*/
+form#inputgotest input#submit {font : 100% 教育部標準楷書, 標楷體 ;background-color:#33CC00;color:white;width:200px;}
+form#inputgotest input#submit0 {font : 180% 教育部標準楷書, 標楷體 ;margin:10px;padding:10px;}
+form#inputgotest input#submit1 {font : 180% 教育部標準楷書, 標楷體 ;margin:10px;padding:10px;}
+form#inputgotest input#submit2 {font : 180% 教育部標準楷書, 標楷體 ;margin:10px;padding:10px;}
+form#inputgotest input#submit3 {font : 180% 教育部標準楷書, 標楷體 ;margin:10px;padding:10px;}
+form#inputgotest input#mybutton {font : 200% 教育部標準楷書, 標楷體 ;margin:10px;padding:10px;}
+form#input_form input#answer2{font : bold 300% "Times New Roman",教育部標準楷書, 標楷體 ; color:red;width:400px;float:left;padding:.1em 5px;}
+form#input_form input#selA2{font : bold 180% "Times New Roman",教育部標準楷書, 標楷體 ; color:red;width:180px;float:left;padding:.1em 5px;text-align:center;}
+form#input_form input#selB2{font : bold 180% "Times New Roman",教育部標準楷書, 標楷體 ; color:red;width:180px;float:left;padding:.1em 5px;text-align:center;}
+form#input_form input#selC2{font : bold 180% "Times New Roman",教育部標準楷書, 標楷體 ; color:red;width:180px;float:left;padding:.1em 5px;text-align:center;}
+.myred{
+	border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;
+	color:#FFF; 
+	border:1px solid #df1e1b;
+	background: #de1d1a;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ed3431), to(#c1120f));
+	background: -moz-linear-gradient(top, #ed3431, #c1120f);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed3431', endColorstr='#c1120f');
+	padding:5px;
+}
+.myred:hover{
+	border:1px solid #df1e1b;
+	background: #cb1a17;
+	background: -webkit-gradient(linear, left top, left bottom, from(#de2e2b), to(#ac100d));
+	background: -moz-linear-gradient(top, #de2e2b, #ac100d);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#de2e2b', endColorstr='#ac100d');
+}
+.myred a:link, .red a:visited{ text-decoration:none; color:#FFF;}
+.myred a:hover, .red a:active{ text-decoration:none; color:#FFF;}
+
+.mygreen{
+	border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;
+	color:#FFF; 
+	border:1px solid #006600;
+	background: #008800;
+	background: -webkit-gradient(linear, left top, left bottom, from(#336633), to(#008800));
+	background: -moz-linear-gradient(top, #336633, #008800);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#336633', endColorstr='#008800');
+	padding:6px;
+}
+.mygreen:hover{
+	border:1px solid #006600;
+	background: #008800;
+	background: -webkit-gradient(linear, left top, left bottom, from(#336600), to(#005500));
+	background: -moz-linear-gradient(top, #336600, #005500);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#336600', endColorstr='#005500');
+}
+.mygreen a:link, .red a:visited{ text-decoration:none; color:#FFF;}
+.mygreen a:hover, .red a:active{ text-decoration:none; color:#FFF;}
+
+
+.phrase1 {width:50pt;color:red;text-align:center;border-style:none;background-color:#FFCCCC;}
+.phrase2 {width:50pt;color:darkgreen;text-align:center;border-style:none;background-color:#CCFFCC;}
+.reg1 {text-align:center;border-style:none;}
+
+.button_fmt1 {
+	   background-color:#cceeee;
+        font-size:24px;
+        FONT-FAMILY: 標楷體
+}
+
+.button_fmt2 {
+	   background-color: #aaeba6;
+        font-size:24px;
+        FONT-FAMILY: 教育部標準楷書, 標楷體
+}
+
+.button_fmt3 {
+	   background-color: #eeeecc;
+        font-size:24px;
+        FONT-FAMILY: 教育部標準楷書, 標楷體
+}
+
+.button_fmt4 {
+	   background-color: #f6ccce;
+        font-size:24px;
+        FONT-FAMILY: 教育部標準楷書, 標楷體
+}
+
+.submit_fmt1{
+        border-top : 1px #aaa solid;
+        border-bottom : 1px #aaa solid;
+        border-left : 1px #aaa solid;
+        border-right : 1px #aaa solid;
+        padding-top:2px;
+        font-size:20px;
+        FONT-FAMILY: 教育部標準楷書, 標楷體
+}
+
+.bst_pin2 {
+        text-align:center;
+        vertical-align:middle;
+        border: solid 1px #555;
+        margin: 1px;
+        padding:1px;
+        white-space:nowrap;
+        FONT-FAMILY: 教育部標準楷書, 標楷體;
+        font-size:30px;
+}
+
+
+/*=============================================== 換頁組件 ===================================================*/
+#RandomArtPager				{ width:95%; margin:10px 0px 15px 0px; text-align:center;}
+#RandomArtPager .Pager		{ }
+#RandomArtPager .Buttons	{ }
+#RandomArtPager a			{ border:#999999 1px solid; padding:2px 5px 2px 5px; margin:0px 1px 0px 1px; background:#ffffff; color:#0000ff; font-size:12px; }
+#RandomArtPager a:hover		{ border:#999999 1px solid; padding:2px 5px 2px 5px; margin:0px 1px 0px 1px; background:#0000ff; color:#ffffff;text-decoration: none;  }
+#RandomArtPager .Current	{ border:#999999 1px solid; padding:2px 5px 2px 5px; margin:0px 1px 0px 1px; background:#0000ff; color:#FFFFFF; }
+#RandomArtPager .View		{ border:#999999 1px solid; padding:2px 5px 3px 5px; margin:0px 0px 0px 0px; color:#0000ff; display:none; }
+
+.engimg {
+	background-color: #ccc;
+}
+
+.showpic {
+	margin:5px;
+	padding:5px;
+	border-style:solid;
+	border-width:8px;
+	border-color:#ccc;
+	background-color:#ffffff;
+	vertical-align: middle;
+	margin-bottom: .25em;
+}
+
+.showpic_select {
+	margin:5px;
+	padding:5px;
+	border-style:solid;
+	border-width:8px;
+	border-color:#f00;
+	background-color:#ffffff;
+	vertical-align: middle;
+	margin-bottom: .25em;
+}
+
+.showpic2 {
+float:left;
+/*以下是寬&高不是圖片的寬&高，而是包覆圖片的DIV的寬&高*/
+width:128px;
+height:128px;
+border:1px solid #d0d0d0;
+text-align:center;
+/*line-height設定是重點，建議可以設成跟height一樣*/
+line-height:128px;
+padding:10px;
+background-image:url(../images/transparent.png);
+}
+
+.showpic3 {
+/*以下是寬&高不是圖片的寬&高，而是包覆圖片的DIV的寬&高*/
+width:128px;
+height:128px;
+border:1px solid #999999;
+text-align:center;
+/*line-height設定是重點，建議可以設成跟height一樣*/
+line-height:128px;
+padding:10px;
+background-color:#ffffff;
+margin-top:10px;
+margin-bottom:5px;
+/* IE */
+  *font-size : 115px;  /* 128px * 0.9 = 115px */
+  *font-family : Arial;
+}
+
+.showpic4 {
+/*以下是寬&高不是圖片的寬&高，而是包覆圖片的DIV的寬&高*/
+width:100px;
+height:100px;
+border:1px solid #999999;
+text-align:center;
+/*line-height設定是重點，建議可以設成跟height一樣*/
+line-height:100px;
+background-color:#ffffff;
+margin-top:10px;
+margin-bottom:5px;
+/* IE */
+  *font-size : 90px;  /* 100px * 0.9 = 90px */
+  *font-family : Arial;
+}

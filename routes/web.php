@@ -77,6 +77,10 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('post/{post}/edit', 'PostController@edit')->name('post.edit');
     Route::patch('post/{post}/update', 'PostController@update')->name('post.update');
     Route::get('post/{post}/destroy', 'PostController@destroy')->name('post.destroy');
+
+    //打字管理
+    Route::get('student_type/admin/index', 'StudentTypeController@admin_index')->name('student_type.admin_index');
+    Route::post('student_type/admin/store', 'StudentTypeController@admin_store')->name('student_type.admin_store');
 });
 
 //註冊會員才能看
@@ -85,6 +89,10 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('student_task/{student_task}/upload', 'StudentTaskController@upload')->name('student_task.upload');
     Route::post('student_task/{student_task}/store', 'StudentTaskController@store')->name('student_task.store');
     Route::get('student_task/{student_task}/view', 'StudentTaskController@view')->name('student_task.view');
+
+    //線上打字
+    Route::get('student_type/typing', 'StudentTypeController@typing')->name('student_type.typing');
+    Route::post('student_type/store_typing', 'StudentTypeController@store_typing')->name('student_type.store.typing');
 });
 
 //公開的公告
@@ -98,7 +106,8 @@ Route::any('student_task/open', 'StudentTaskController@open')->name('student_tas
 Route::post('student_task/likes', 'StudentTaskController@likes')->name('student_task.likes');
 Route::post('student_task/views', 'StudentTaskController@views')->name('student_task.views');
 
-
+//打字
+Route::get('student_type/index', 'StudentTypeController@index')->name('student_type.index');
 
 //取得頭像
 Route::get('avatars/{user}', 'HomeController@getAvatar');
