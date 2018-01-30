@@ -2,9 +2,11 @@
 if (! function_exists('get_stud_money')) {
     function get_stud_money(){
         $stud_money_things = [];
-        $stud_moneys = \App\StudMoney::where('user_id','=',auth()->user()->id)
-            ->orderBy('id','DESC')
-            ->paginate(4);
+        $stud_moneys1 = \App\StudMoney::where('user_id','=',auth()->user()->id)
+            ->orderBy('id','DESC');
+        $stud_moneys = $stud_moneys1->paginate(4);
+        $total_num = $stud_moneys1->count();
+
         if(!empty($stud_moneys)){
             foreach($stud_moneys as $stud_money) {
                 $stud_money_things[$stud_money->id]['stud_money'] = $stud_money->stud_money;
@@ -12,14 +14,17 @@ if (! function_exists('get_stud_money')) {
                     $stud_money_things[$stud_money->id]['icon'] = "fa-long-arrow-up";
                     $stud_money_things[$stud_money->id]['pm'] = "+";
                     $stud_money_things[$stud_money->id]['color'] = "text-success";
+                    $stud_money_things[$stud_money->id]['title'] = "得到點數 ";
                 } else {
                     $stud_money_things[$stud_money->id]['icon'] = "fa-long-arrow-down";
                     $stud_money_things[$stud_money->id]['pm'] = "-";
                     $stud_money_things[$stud_money->id]['color'] = "text-danger";
+                    $stud_money_things[$stud_money->id]['title'] = "失去點數 ";
 
                 }
                 $stud_money_things[$stud_money->id]['updated_at'] = $stud_money->updated_at;
-                $stud_money_things[$stud_money->id]['title'] = $stud_money->description;
+                $stud_money_things[$stud_money->id]['description'] = $stud_money->description;
+                $stud_money_things[$stud_money->id]['total'] = $total_num;
 
             }
         }

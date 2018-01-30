@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Link;
+use App\StudMoney;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -34,6 +36,22 @@ class HomeController extends Controller
     public function admin()
     {
         return view('admin');
+    }
+
+    public function view_stud_money()
+    {
+        $stud_moneys = StudMoney::where('user_id','=',auth()->user()->id)->orderBy('id','DESC')->get();
+
+        return view('view_stud_money',compact('stud_moneys'));
+    }
+
+    public function link_index()
+    {
+        $links = Link::orderBy('id')->get();
+        $data = [
+            'links'=>$links,
+        ];
+        return view('links.index',$data);
     }
 
     public function personal_info_update(Request $request,User $user)

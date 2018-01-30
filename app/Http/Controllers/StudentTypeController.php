@@ -49,6 +49,14 @@ class StudentTypeController extends Controller
 
     public function store_typing(Request $request)
     {
+        if($request->input('timer') < 60){
+            $words = "你打不到一分鐘！";
+            return view('layouts.error',compact('words'));
+        }
+        if($request->input('notype') < 60){
+            $words = "你打不到一分鐘！";
+            return view('layouts.error',compact('words'));
+        }
         $att['user_id'] = $request->input('user_id');
         $att['rightcount'] = $request->input('rightcount');
         $att['wrongcount'] = $request->input('wrongcount');
@@ -59,12 +67,12 @@ class StudentTypeController extends Controller
 
 
         StudType::create($att);
-
+        $article = StudTypeArticle::where('id','=',$att['article_id'])->first();
         $att2['user_id'] = auth()->user()->id;
         $att2['thing'] = "student_type";
         $att2['thing_id'] = $request->input('article_id');
         $att2['stud_money'] = $request->input('score');
-        $att2['description'] = "打字得分";
+        $att2['description'] = "打字「".$article->title."」得分";
 
         StudMoney::create($att2);
 

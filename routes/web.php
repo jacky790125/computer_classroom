@@ -82,6 +82,12 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('student_type/admin/index', 'StudentTypeController@admin_index')->name('student_type.admin_index');
     Route::post('student_type/admin/store', 'StudentTypeController@admin_store')->name('student_type.admin_store');
     Route::get('student_type/admin/delete/{stud_type_article}', 'StudentTypeController@admin_delete')->name('student_type.admin_delete');
+
+    //連結管理
+    Route::get('link/admin/index','LinkController@index')->name('link.admin_index');
+    Route::post('link/admin/store','LinkController@store')->name('link.admin_store');
+    Route::post('link/admin/update/{link}','LinkController@update')->name('link.admin_update');
+    Route::get('link/admin/destroy/{link}','LinkController@destroy')->name('link.admin_del');
 });
 
 //註冊會員才能看
@@ -94,6 +100,11 @@ Route::group(['middleware' => 'auth'],function() {
     //線上打字
     Route::get('student_type/typing/{article}', 'StudentTypeController@typing')->name('student_type.typing');
     Route::post('student_type/store_typing', 'StudentTypeController@store_typing')->name('student_type.store.typing');
+    Route::get('student_money/view', 'HomeController@view_stud_money')->name('view_stud_money');
+
+    //訊息盒
+    Route::get('stud_message/index', 'StudMessageController@index')->name('stud_message.index');
+    Route::post('stud_message/store', 'StudMessageController@store')->name('stud_message.store');
 });
 
 //公開的公告
@@ -106,6 +117,9 @@ Route::get('student_task/select', 'StudentTaskController@open')->name('student_t
 Route::any('student_task/open', 'StudentTaskController@open')->name('student_task.open');
 Route::post('student_task/likes', 'StudentTaskController@likes')->name('student_task.likes');
 Route::post('student_task/views', 'StudentTaskController@views')->name('student_task.views');
+
+//好站連結
+Route::get('link/index', 'HomeController@link_index')->name('link_index');
 
 //打字
 Route::get('student_type/index', 'StudentTypeController@index')->name('student_type.index');

@@ -138,7 +138,7 @@ if (i_total_secs==0) {alltime=600;}
 rightcount=0;
 wrongcount=0;
 notype=0;
-for (i=0;i<=2;i++){
+for (i=0;i<={{ $k }};i++){
 	//newtype=document.getElementById('input'+i).value;
 	newtype=$('#input'+i).val();
 	thiscontent=eval('typecontent'+i);
@@ -170,7 +170,7 @@ clearInterval(timerid);
 rightcount=0;
 wrongcount=0;
 notype=0;
-for (i=0;i<=2;i++){
+for (i=0;i<={{ $k }};i++){
 	//newtype=document.getElementById('input'+i).value;
 	newtype=$('#input'+i).val();
 	thiscontent=eval('typecontent'+i);
@@ -275,11 +275,6 @@ document.getElementById('input2').readOnly=true;
 </table>
 <p></p>
 </td></tr>
-	<tr>
-		<td class="text-center">
-			打完記得快按<font color="red">左下角「打完了，查看成積」</font>
-		</td>
-	</tr>
 </table>
 </div>
 

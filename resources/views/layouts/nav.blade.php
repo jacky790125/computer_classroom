@@ -37,7 +37,7 @@
                                 <a href="{{ route('student_type.admin_index') }}">打字管理</a>
                             </li>
                             <li>
-                                <a href="blank.html">其他管理</a>
+                                <a href="{{ route('link.admin_index') }}">連結管理</a>
                             </li>
                         </ul>
                     </li>
@@ -68,7 +68,7 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('link_index') }}">
                     <i class="fa fa-fw fa-link"></i>
                     <span class="nav-link-text">好站連結</span>
                 </a>
@@ -94,10 +94,10 @@
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-envelope"></i>
                     <span class="d-lg-none">訊息
-              <span class="badge badge-pill badge-primary">12 New</span>
+              <span class="badge badge-pill badge-danger">12 New</span>
             </span>
                     <span class="indicator text-danger d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
+              <span class="badge badge-pill badge-danger">1</span>
             </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="messagesDropdown">
@@ -121,20 +121,25 @@
                         <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item small" href="#">檢視所有訊息</a>
+                    <a class="dropdown-item small" href="{{ route('stud_message.index') }}">檢視所有訊息</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-usd"></i>
+                    <?php
+                    $stud_money_things = get_stud_money();
+                    $total_money=get_stud_total_money();
+                    $total = current($stud_money_things);
+                    if(empty($total)) $total['total'] = 0;
+                    ?>
                     <span class="d-lg-none">資訊幣
-              <span class="badge badge-pill badge-warning">6 New</span>
+              <span class="badge badge-pill badge-warning">{{ $total['total'] }}</span>
             </span>
                     <span class="indicator text-warning d-none d-lg-block">
-              <i class="fa fa-fw fa-circle"></i>
+              <span class="badge badge-pill badge-warning">{{ $total['total'] }}</span>
             </span>
                 </a>
-                <?php $stud_money_things = get_stud_money();$total_money=get_stud_total_money(); ?>
                 <div class="dropdown-menu" aria-labelledby="alertsDropdown">
                     <h6 class="dropdown-header">收支狀況:目前餘： {{ $total_money }} 資訊幣</h6>
                     <div class="dropdown-divider"></div>
@@ -144,12 +149,12 @@
                             <strong>
                             <i class="fa {{ $v['icon'] }} fa-fw"></i>{{ $v['title'] }} {{ $v['pm'] }}{{ $v['stud_money'] }}</strong>
                             </span>
-                            <span class="small float-right text-muted">{{ $v['updated_at'] }}</span>
+                            <span class="small float-right text-muted">{{ substr($v['updated_at'],0,10) }}</span>
+                            <div class="dropdown-message small">{{ $v['description'] }}</div>
                         </a>
                         <div class="dropdown-divider"></div>
                     @endforeach
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item small" href="#">檢視所有收支表</a>
+                    <a class="dropdown-item small" href="{{ route('view_stud_money') }}"><i class="fa fa-eye"></i> 檢視所有收支表</a>
                 </div>
             </li>
             @endif

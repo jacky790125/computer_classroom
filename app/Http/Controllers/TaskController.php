@@ -190,7 +190,7 @@ class TaskController extends Controller
                 $att2['thing'] = "student_task";
                 $att2['thing_id'] = $k;
                 $att2['stud_money'] = $v;
-                $att2['description'] = "作業得分";
+                $att2['description'] = "作業「".$student_task->task->title."」得分";
                 if(!empty($v)) {
                     StudMoney::create($att2);
                 }
