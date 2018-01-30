@@ -14,7 +14,11 @@ class StudMessageController extends Controller
      */
     public function index()
     {
-        return view('stud_messages.index');
+        $messages = StudMessage::where('to','=',auth()->user()->username)->get();
+        $data = [
+            'messages'=>$messages,
+        ];
+        return view('stud_messages.index',$data);
     }
 
     /**
@@ -37,6 +41,39 @@ class StudMessageController extends Controller
     {
         StudMessage::create($request->all());
         return redirect()->route('stud_message.index');
+    }
+
+    public function read(StudMessage $stud_message)
+    {
+        $owner = $stud_message->to;
+        if($owner != auth()->user()->username){
+            $words = "你想做什麼！偷看別人信件是違法的行為！！";
+            return view('layouts.error',compact('words'));
+        }
+
+        $att['read'] = "1";
+        $stud_message->update($att);
+
+        $message['date'] = $stud_message->created_at;
+        $user = \App\User::where('username','=',$stud_message->from)->first();
+        $message['from'] = $user->name;
+        $message['title'] = $stud_message->title;
+        $message['content'] = $stud_message->content;
+        $message['username'] = $stud_message->from;
+
+        return view('stud_messages.read',compact('message'));
+    }
+
+    public function close()
+    {
+        echo "<html><body>
+			<script LANGUAGE=\"JavaScript\">\n
+			window.opener.history.go(0);\n
+       			window.close();
+			</script>
+			</body>
+			</html>";
+        exit;
     }
 
     /**

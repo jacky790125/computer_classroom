@@ -56,6 +56,7 @@ Route::group(['middleware' => 'admin'],function() {
 
     //訊息管理
     Route::get('admin/message', 'MessageController@index')->name('admin.message.index');
+    Route::post('admin/message/store', 'MessageController@store')->name('admin.message.store');
 
     //公告管理
     Route::get('admin/post', 'PostController@admin_post')->name('admin.post.index');
@@ -105,6 +106,8 @@ Route::group(['middleware' => 'auth'],function() {
     //訊息盒
     Route::get('stud_message/index', 'StudMessageController@index')->name('stud_message.index');
     Route::post('stud_message/store', 'StudMessageController@store')->name('stud_message.store');
+    Route::get('stud_message/read/{stud_message}', 'StudMessageController@read')->name('stud_message.read');
+    Route::get('stud_message/close', 'StudMessageController@close')->name('stud_message.close');
 });
 
 //公開的公告

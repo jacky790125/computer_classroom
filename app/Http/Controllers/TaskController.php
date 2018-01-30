@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\StudentTask;
+use App\StudMessage;
 use App\StudMoney;
 use App\Task;
 use App\User;
@@ -92,6 +93,7 @@ class TaskController extends Controller
             foreach($users as $user) {
                 $students[$i]['id'] = $user->id;
                 $students[$i]['year_class_num'] = $user->year_class_num;
+                $students[$i]['username'] = $user->username;
                 $i++;
             }
         }
@@ -101,7 +103,16 @@ class TaskController extends Controller
             $att1['user_id'] = $v['id'];
             $att1['year_class_num'] = $v['year_class_num'];
             StudentTask::create($att1);
+
+            $att2['title'] = "作業通知：".$request->input('title');
+            $att2['content'] ="作業說明：".$request->input('description');
+            $att2['from'] = auth()->user()->username;
+            $att2['to'] = $v['username'];
+            $att2['read'] = "0";
+            StudMessage::create($att2);
+
         }
+
 
         return redirect()->route('admin.task.index');
     }

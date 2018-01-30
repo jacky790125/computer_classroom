@@ -39,7 +39,7 @@
               </div>
               <div class="mr-5">訊息管理</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.account.index') }}">
+            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.message.index') }}">
               <span class="float-left">前往設定</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>
@@ -101,9 +101,9 @@
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-support"></i>
               </div>
-              <div class="mr-5">13 New Tickets!</div>
+              <div class="mr-5">連結管理</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="{{ route('link.admin_index') }}">
               <span class="float-left">前往設定</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>

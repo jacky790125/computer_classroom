@@ -49,6 +49,12 @@
                     <span class="nav-link-text">公告系統</span>
                 </a>
             </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-book"></i>
+                    <span class="nav-link-text">課程內容</span>
+                </a>
+            </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">
                 <a class="nav-link" href="{{ route('student_task.index') }}">
                     <i class="fa fa-fw fa-file-text-o"></i>
@@ -65,6 +71,18 @@
                 <a class="nav-link" href="{{ route('student_type.index') }}">
                     <i class="fa fa-hand-o-down"></i>
                     <span class="nav-link-text">打字練習</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-volume-up"></i>
+                    <span class="nav-link-text">大家討論</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-gamepad"></i>
+                    <span class="nav-link-text">遊戲兌換</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
@@ -93,35 +111,29 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-envelope"></i>
-                    <span class="d-lg-none">訊息
-              <span class="badge badge-pill badge-danger">12 New</span>
+                    <?php
+                    $not_read = get_stud_total_message();
+                    $messages = get_stud_message();
+                    ?>
+                    <span class="d-lg-none">新訊息
+              <span class="badge badge-pill badge-danger">{{ $not_read }}</span>
             </span>
                     <span class="indicator text-danger d-none d-lg-block">
-              <span class="badge badge-pill badge-danger">1</span>
+              <span class="badge badge-pill badge-danger">{{ $not_read }}</span>
             </span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="messagesDropdown">
                     <h6 class="dropdown-header">新訊息:</h6>
                     <div class="dropdown-divider"></div>
+                    @foreach($messages as $k => $v)
                     <a class="dropdown-item" href="#">
-                        <strong>David Miller</strong>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
+                        <strong>{{ $v['from'] }}</strong>
+                        <span class="small float-right text-muted">{{ $v['date'] }}</span>
+                        <div class="dropdown-message small">{{ $v['title'] }}</div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <strong>Jane Smith</strong>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
-                        <strong>John Doe</strong>
-                        <span class="small float-right text-muted">11:21 AM</span>
-                        <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item small" href="{{ route('stud_message.index') }}">檢視所有訊息</a>
+                    @endforeach
+                    <a class="dropdown-item small" href="{{ route('stud_message.index') }}"><i class="fa fa-eye"></i> 檢視所有訊息</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -159,15 +171,20 @@
             </li>
             @endif
             <li class="nav-item">
-                <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                <form action="http://www.google.com/search" target="_blank" method="get" class="form-inline my-2 my-lg-0 mr-lg-2">
                     <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Search for...">
+                        <input class="form-control" type="text" name="q" placeholder="搜尋本站...">
                         <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary" type="button" onclick="submit()">
                   <i class="fa fa-search"></i>
                 </button>
               </span>
                     </div>
+                    <input type=hidden name=ie>
+                    <input type=hidden name=oe>
+                    <input type=hidden name=hl>
+                    <input type=hidden name=domains value="info.hdes.chc.edu.tw">
+                    <input type=hidden name=sitesearch value="info.hdes.chc.edu.tw">
                 </form>
             </li>
 
