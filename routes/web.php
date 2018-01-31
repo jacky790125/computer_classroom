@@ -109,6 +109,10 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('stud_message/read/{stud_message}', 'StudMessageController@read')->name('stud_message.read');
     Route::get('stud_message/close', 'StudMessageController@close')->name('stud_message.close');
     Route::get('stud_message/delete/{stud_message}', 'StudMessageController@destroy')->name('stud_message.destroy');
+
+    //兌換遊戲
+    Route::get('game/index','GameController@index')->name('game.index');
+    Route::get('game/game01','GameController@game01')->name('game.game01');
 });
 
 //公開的公告
@@ -130,6 +134,9 @@ Route::get('student_type/index', 'StudentTypeController@index')->name('student_t
 
 //取得頭像
 Route::get('avatars/{user}', 'HomeController@getAvatar');
+
+//取得遊戲
+Route::get('game/{game_name}', 'GameController@getGame');
 
 //取得檔案
 Route::get('file/{student_task}', 'StudentTaskController@getFile');
