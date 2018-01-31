@@ -84,7 +84,7 @@ class AccountController extends Controller
                 $att['password'] = bcrypt(sprintf("%04s",$value['生日月日']));
                 $att['name'] = $value['姓名'];
                 $att['sex'] = $value['性別'];
-                $att['year_class_num'] = $value['學期'].$value['年級'] . sprintf("%02s",$value['班級']) . sprintf("%02s",$value['座號']);
+                $att['year_class_num'] = sprintf("%02s",$value['班級']) . sprintf("%02s",$value['座號']);
                 $att['group_id'] = $value['群組id'];
                 $att['active'] = "1";
                 User::create($att);

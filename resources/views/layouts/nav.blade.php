@@ -75,12 +75,6 @@
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
                 <a class="nav-link" href="#">
-                    <i class="fa fa-volume-up"></i>
-                    <span class="nav-link-text">大家討論</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="#">
                     <i class="fa fa-gamepad"></i>
                     <span class="nav-link-text">遊戲兌換</span>
                 </a>
