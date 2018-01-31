@@ -63,6 +63,7 @@ class MessageController extends Controller
             $att2['from'] = auth()->user()->username;
             $att2['to'] = $v['username'];
             $att2['read'] = "0";
+            $att2['ip'] = request()->ip();
             StudMessage::create($att2);
         }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\StudMessage;
+use App\User;
 use Illuminate\Http\Request;
 
 class StudMessageController extends Controller
@@ -39,6 +40,12 @@ class StudMessageController extends Controller
      */
     public function store(Request $request)
     {
+        $to = $request->input('to');
+        $user = User::where('username','=',$to)->first();
+        if(empty($user)){
+            $words = "無此帳號：".$to;
+            return view('layouts.error',compact('words'));
+        }
         StudMessage::create($request->all());
         return redirect()->route('stud_message.index');
     }
@@ -107,7 +114,7 @@ class StudMessageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -116,8 +123,9 @@ class StudMessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(StudMessage $stud_message)
     {
-        //
+        $stud_message->delete();
+        return redirect()->route('stud_message.index');
     }
 }

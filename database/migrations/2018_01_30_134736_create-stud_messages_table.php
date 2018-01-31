@@ -20,6 +20,7 @@ class CreateStudMessagesTable extends Migration
             $table->string('from');
             $table->string('to');
             $table->unsignedInteger('read');//已讀？
+            $table->string('ip')->nullable();
             $table->timestamps();
         });
     }

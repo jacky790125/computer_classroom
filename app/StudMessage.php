@@ -12,5 +12,6 @@ class StudMessage extends Model
         'from',
         'to',
         'read',
+        'ip',
     ];
 }

@@ -40,7 +40,7 @@
             </tr>
             <tr>
               <td colspan="2">
-                <textarea name="content" class="form-control" placeholder="訊息內文"></textarea>
+                <textarea name="content" class="form-control" placeholder="訊息內文請遵守網路禮儀，應負起相關法律責任。"></textarea>
               </td>
             </tr>
             <tr>
@@ -49,6 +49,7 @@
               </td>
             </tr>
             <input type="hidden" name="from" value="{{ auth()->user()->username }}">
+            <input type="hidden" name="ip" value="{{ request()->ip() }}">
             <input type="hidden" name="read" value="0">
             {{ Form::close() }}
             </tbody>
@@ -101,7 +102,7 @@
                   <td>
                     <a href="#" class="btn btn-primary" onclick="openwindow('{{ route('stud_message.read',$message->id) }}')">打開</a>
                     @if($message->read == "1")
-                    <a href="#" class="btn btn-danger">刪除</a>
+                    <a href="{{ route('stud_message.destroy',$message->id) }}" class="btn btn-danger" id="delete{{ $message->id }}" onclick="bbconfirm2('delete{{ $message->id }}','真的要刪？')">刪除</a>
                     @endif
                   </td>
                 </tr>

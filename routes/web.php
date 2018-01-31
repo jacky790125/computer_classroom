@@ -108,6 +108,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('stud_message/store', 'StudMessageController@store')->name('stud_message.store');
     Route::get('stud_message/read/{stud_message}', 'StudMessageController@read')->name('stud_message.read');
     Route::get('stud_message/close', 'StudMessageController@close')->name('stud_message.close');
+    Route::get('stud_message/delete/{stud_message}', 'StudMessageController@destroy')->name('stud_message.destroy');
 });
 
 //公開的公告
