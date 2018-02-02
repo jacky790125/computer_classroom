@@ -15,6 +15,10 @@
     <div class="col-12">
       <h1><img src="{{ asset('img/title/type.png') }}" alt="公告系統logo" width="60">學生打字</h1>
       <h2><i class="fa fa-list-ul"></i> 文章列表</h2>
+      <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>注意！</strong> 打字時間不足60秒，不予計分！
+      </div>
         <?php $i=1; ?>
       <table>
         <tr>

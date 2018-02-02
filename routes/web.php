@@ -112,7 +112,7 @@ Route::group(['middleware' => 'auth'],function() {
 
     //兌換遊戲
     Route::get('game/index','GameController@index')->name('game.index');
-    Route::get('game/game01','GameController@game01')->name('game.game01');
+    Route::get('game/{id}','GameController@html5_game')->name('game.html5_game');
 });
 
 //公開的公告
