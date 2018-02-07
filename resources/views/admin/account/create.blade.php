@@ -25,7 +25,7 @@
           <i class="fa fa-info-circle"></i> 帳號資訊
         </div>
         <div class="card-body">
-          <div class="col-6">
+          <div class="col-7">
            {{ Form::open(['route' => 'admin.account.store', 'method' => 'POST','name'=>'form1','id'=>'store_account','onsubmit'=>'return false;']) }}
           <table class="table table-light">
             <tr>
@@ -72,7 +72,7 @@
               </td>
             </tr>
             <tr>
-              <td>
+              <td nowrap>
                 <i class="fa fa-dot-circle-o"></i> 年班座號* ：
               </td>
               <td colspan="2">

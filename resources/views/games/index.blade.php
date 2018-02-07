@@ -16,6 +16,7 @@
       <h1><img src="{{ asset('img/title/game.png') }}" alt="遊戲logo" width="60">遊戲列表</h1>
     </div>
   </div>
+  @if(auth()->check())
   <div class="row">
     <div class="col-3">
       <div class="card mb-3">
@@ -57,8 +58,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
     <div class="col-3">
       <div class="card mb-3">
         <div class="card-header">
@@ -140,5 +139,10 @@
       </div>
     </div>
   </div>
+  @else
+    <div class="alert alert-danger" role="alert">
+      <strong>學生兌換遊戲請先由上方登入！</strong>
+    </div>
+  @endif
 </div>
 @endsection

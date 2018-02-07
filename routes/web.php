@@ -95,6 +95,8 @@ Route::group(['middleware' => 'admin'],function() {
     Route::post('book/admin/store','BookController@store')->name('book.admin_store');
     Route::post('book/admin/update/{book}','BookController@update')->name('book.admin_update');
     Route::get('book/admin/destroy/{book}','BookController@destroy')->name('book.admin_del');
+
+    Route::get('discuss/{discuss}/admin_destroy', 'DiscussController@admin_destroy')->name('discuss.admin_destroy');
 });
 
 //註冊會員才能看
@@ -118,13 +120,26 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('stud_message/delete/{stud_message}', 'StudMessageController@destroy')->name('stud_message.destroy');
 
     //兌換遊戲
-    Route::get('game/index','GameController@index')->name('game.index');
     Route::get('game/{id}','GameController@html5_game')->name('game.html5_game');
 
     //討論區
-    Route::get('discuss/index','DiscussController@index')->name('discuss.index');
+    Route::get('discuss/show/{discuss}', 'DiscussController@show')->name('discuss.show');
+    Route::get('discuss/create', 'DiscussController@create')->name('discuss.create');
+    Route::post('discuss/store', 'DiscussController@store')->name('discuss.store');
+
+
+    Route::get('discuss/{discuss}/destroy', 'DiscussController@destroy')->name('discuss.destroy');
+    Route::get('discuss/{discuss}/say_bad', 'DiscussController@say_bad')->name('discuss.say_bad');
+    Route::post('discuss/reply_store', 'DiscussController@reply_store')->name('discuss.reply_store');
+    Route::get('discuss/{discuss}/reply_destroy', 'DiscussController@reply_destroy')->name('discuss.reply_destroy');
+    Route::get('discuss/{discuss}/reply_say_bad', 'DiscussController@reply_say_bad')->name('discuss.reply_say_bad');
 
 });
+//兌換遊戲首頁
+Route::get('games/index','GameController@index')->name('game.index');
+
+//討論區
+Route::get('discuss/index','DiscussController@index')->name('discuss.index');
 
 //公開的公告
 Route::get('post/index', 'PostController@index')->name('post.index');

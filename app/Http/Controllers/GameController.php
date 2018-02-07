@@ -98,6 +98,9 @@ class GameController extends Controller
 
     public function html5_game($id)
     {
+        $cost = "";
+        $title ="";
+        $page = "";
         if($id=="01"){
             $cost = 90;
             $title = "水果忍者";
