@@ -12,10 +12,10 @@ game_state.main.prototype = {
         this.game.stage.backgroundColor = '#71c5cf';
 
         // Load the bird sprite
-        this.game.load.image('bird', '../games/flappy-bird/assets/bird.png');
+        this.game.load.image('bird', 'assets/bird.png');  
 
         // Load the pipe sprite
-        this.game.load.image('pipe', '../games/flappy-bird/assets/pipe.png');
+        this.game.load.image('pipe', 'assets/pipe.png');      
     },
 
     // Fuction called after 'preload' to setup the game 
