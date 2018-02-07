@@ -69,7 +69,7 @@
         {{ Form::close() }}
         @foreach($tasks as $task)
           <tr>
-            <td>
+            <td nowrap>
               <i class="fa fa-folder-open-o"></i> {{ substr($task->created_at,0,10) }}
             </td>
             <td>

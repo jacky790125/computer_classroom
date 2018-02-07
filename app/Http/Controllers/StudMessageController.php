@@ -67,6 +67,7 @@ class StudMessageController extends Controller
         $message['title'] = $stud_message->title;
         $message['content'] = $stud_message->content;
         $message['username'] = $stud_message->from;
+        $message['user_id'] = $user->id;
 
         return view('stud_messages.read',compact('message'));
     }

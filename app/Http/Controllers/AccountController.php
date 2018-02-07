@@ -57,7 +57,7 @@ class AccountController extends Controller
     public function store(Request $request)
     {
         $att['username'] = $request->input('username');
-        $att['password'] = bcrypt($request->input('password1'));
+        $att['password'] = bcrypt($request->input('new_password1'));
         $att['name'] = $request->input('name');
         $att['sex'] = $request->input('sex');
         $att['year_class_num'] = $request->input('year_class_num');

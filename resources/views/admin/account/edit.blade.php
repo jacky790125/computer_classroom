@@ -77,7 +77,7 @@
                   <i class="fa fa-dot-circle-o"></i> 年班座號* ：
                 </td>
                 <td>
-                  {{ Form::text('year_class_num', $user->year_class_num, ['id' => 'year_class_num', 'class' => 'form-control','maxlength'=>'9','placeholder' => '例：106160101','required'=>'required']) }}
+                  {{ Form::text('year_class_num', $user->year_class_num, ['id' => 'year_class_num', 'class' => 'form-control','maxlength'=>'9','placeholder' => '例：60101','required'=>'required']) }}
                 </td>
               </tr>
               <tr>

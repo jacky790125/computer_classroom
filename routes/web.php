@@ -89,6 +89,12 @@ Route::group(['middleware' => 'admin'],function() {
     Route::post('link/admin/store','LinkController@store')->name('link.admin_store');
     Route::post('link/admin/update/{link}','LinkController@update')->name('link.admin_update');
     Route::get('link/admin/destroy/{link}','LinkController@destroy')->name('link.admin_del');
+
+    //課程管理
+    Route::get('book/admin/index','BookController@index')->name('book.admin_index');
+    Route::post('book/admin/store','BookController@store')->name('book.admin_store');
+    Route::post('book/admin/update/{book}','BookController@update')->name('book.admin_update');
+    Route::get('book/admin/destroy/{book}','BookController@destroy')->name('book.admin_del');
 });
 
 //註冊會員才能看
@@ -97,6 +103,7 @@ Route::group(['middleware' => 'auth'],function() {
     Route::get('student_task/{student_task}/upload', 'StudentTaskController@upload')->name('student_task.upload');
     Route::post('student_task/{student_task}/store', 'StudentTaskController@store')->name('student_task.store');
     Route::get('student_task/{student_task}/view', 'StudentTaskController@view')->name('student_task.view');
+    Route::get('student_task/{student_task}/for_money', 'StudentTaskController@for_money')->name('student_task.for_money');
 
     //線上打字
     Route::get('student_type/typing/{article}', 'StudentTypeController@typing')->name('student_type.typing');
@@ -113,6 +120,10 @@ Route::group(['middleware' => 'auth'],function() {
     //兌換遊戲
     Route::get('game/index','GameController@index')->name('game.index');
     Route::get('game/{id}','GameController@html5_game')->name('game.html5_game');
+
+    //討論區
+    Route::get('discuss/index','DiscussController@index')->name('discuss.index');
+
 });
 
 //公開的公告
@@ -125,6 +136,9 @@ Route::get('student_task/select', 'StudentTaskController@open')->name('student_t
 Route::any('student_task/open', 'StudentTaskController@open')->name('student_task.open');
 Route::post('student_task/likes', 'StudentTaskController@likes')->name('student_task.likes');
 Route::post('student_task/views', 'StudentTaskController@views')->name('student_task.views');
+
+//課程
+Route::get('book/index', 'HomeController@book_index')->name('book_index');
 
 //好站連結
 Route::get('link/index', 'HomeController@link_index')->name('link_index');

@@ -18,26 +18,29 @@
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Setting">
                         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSetting" data-parent="#exampleAccordion">
                             <i class="fa fa-fw fa-cogs"></i>
-                            <span class="nav-link-text">系統管理</span>
+                            <span class="nav-link-text">0.系統管理</span>
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapseSetting">
                             <li>
-                                <a href="{{ route('admin.account.index') }}">帳號管理</a>
+                                <a href="{{ route('admin.account.index') }}">0-1.帳號管理</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.message.index') }}">訊息管理</a>
+                                <a href="{{ route('admin.message.index') }}">0-2.訊息管理</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.post.index') }}">公告管理</a>
+                                <a href="{{ route('admin.post.index') }}">0-3.公告管理</a>
                             </li>
                             <li>
-                                <a href="{{ route('admin.task.index') }}">作業管理</a>
+                                <a href="{{ route('book.admin_index') }}">0-4.課程管理</a>
                             </li>
                             <li>
-                                <a href="{{ route('student_type.admin_index') }}">打字管理</a>
+                                <a href="{{ route('admin.task.index') }}">0-5.作業管理</a>
                             </li>
                             <li>
-                                <a href="{{ route('link.admin_index') }}">連結管理</a>
+                                <a href="{{ route('student_type.admin_index') }}">0-6.打字管理</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('link.admin_index') }}">0-7.連結管理</a>
                             </li>
                         </ul>
                     </li>
@@ -45,44 +48,56 @@
             @endif
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Post">
                 <a class="nav-link" href="{{ route('post.index') }}">
-                    <i class="fa fa-fw fa-bullhorn"></i>
-                    <span class="nav-link-text">公告系統</span>
+                    <i class="fa fa-bullhorn"></i>
+                    <span class="nav-link-text">1.本站公告</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('book_index') }}">
                     <i class="fa fa-book"></i>
-                    <span class="nav-link-text">課程內容</span>
+                    <span class="nav-link-text">2.課程內容</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">
                 <a class="nav-link" href="{{ route('student_task.index') }}">
-                    <i class="fa fa-fw fa-file-text-o"></i>
-                    <span class="nav-link-text">作業上傳</span>
+                    <i class="fa fa-file-text-o"></i>
+                    <span class="nav-link-text">3.作業上傳</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-copy"></i>
+                    <span class="nav-link-text">4.學生測驗</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">
                 <a class="nav-link" href="{{ route('student_task.select') }}">
                     <i class="fa fa-folder-open"></i>
-                    <span class="nav-link-text">作業欣賞</span>
+                    <span class="nav-link-text">5.作業欣賞</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">
                 <a class="nav-link" href="{{ route('student_type.index') }}">
                     <i class="fa fa-hand-o-down"></i>
-                    <span class="nav-link-text">打字練習</span>
+                    <span class="nav-link-text">6.打字練習</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
                 <a class="nav-link" href="{{ route('game.index') }}">
                     <i class="fa fa-gamepad"></i>
-                    <span class="nav-link-text">遊戲兌換</span>
+                    <span class="nav-link-text">7.遊戲兌換</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
                 <a class="nav-link" href="{{ route('link_index') }}">
-                    <i class="fa fa-fw fa-link"></i>
-                    <span class="nav-link-text">好站連結</span>
+                    <i class="fa fa-link"></i>
+                    <span class="nav-link-text">8.好站連結</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                <a class="nav-link" href="{{ route('discuss.index') }}">
+                    <i class="fa fa-fax"></i>
+                    <span class="nav-link-text">9.大家討論</span>
                 </a>
             </li>
         </ul>

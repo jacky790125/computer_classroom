@@ -87,7 +87,7 @@
                     {{ $message->created_at }}
                   </td>
                   <td>
-                    {{ $user->name }}({{ $message->from }})
+                    <img src="{{ url('avatars/'.$user->id) }}" width="20" height="20" class="rounded-circle"> {{ $user->name }}({{ $message->from }})
                   </td>
                   <td nowrap>
                     {{ $message->title }}

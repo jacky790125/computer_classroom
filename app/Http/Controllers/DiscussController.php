@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
-use App\StudMessage;
-use App\User;
+use App\Discuss;
 use Illuminate\Http\Request;
 
-class MessageController extends Controller
+class DiscussController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,20 +14,13 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $groups = [];
-
-        $gs = Group::where('active','=','1')
-            ->where('name','like','1%')
-            ->get();
-
-        if(!empty($gs)) {
-            foreach ($gs as $g) {
-                if (!isset($groups[$g->id])) $groups[$g->id] = null;
-                $groups[$g->id] = $g->name . "(id:" . $g->id . ")";
-            }
-        }
-
-        return view('admin.messages.index',compact('groups'));
+        $discusses = Discuss::where('depend_on','=','0')
+            ->where('bad','<>','1')
+            ->paginate(10);
+        $data = [
+            'discusses'=>$discusses,
+        ];
+        return view('discusses.index',$data);
     }
 
     /**
@@ -50,27 +41,7 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $i =0;
-        $for = $request->input('for');
-        foreach($for as $v){
-            $users = User::where('group_id','=',$v)->get();
-            foreach($users as $user) {
-                $students[$i]['username'] = $user->username;
-                $i++;
-            }
-        }
-
-        foreach($students as $k=>$v) {
-            $att2['title'] = $request->input('title');
-            $att2['content'] = $request->input('content');
-            $att2['from'] = auth()->user()->username;
-            $att2['to'] = $v['username'];
-            $att2['read'] = "0";
-            $att2['ip'] = request()->ip();
-            StudMessage::create($att2);
-        }
-
-        return redirect()->route('admin.message.index');
+        //
     }
 
     /**

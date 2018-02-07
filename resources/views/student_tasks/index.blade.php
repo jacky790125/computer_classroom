@@ -88,6 +88,9 @@
           </td>
           <td>
             {{ $student_task->likes }}
+            @if($student_task->likes > 0 and ($student_task->likes-$student_task->to_money/5)>0)
+              <a href="{{ route('student_task.for_money',$student_task->id) }}" class="btn btn-warning">換$</a>
+            @endif
           </td>
           <td>
             {{ $student_task->views }}

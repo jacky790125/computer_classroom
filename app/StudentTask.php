@@ -16,6 +16,7 @@ class StudentTask extends Model
         'public',
         'views',
         'likes',
+        'to_money',
     ];
     public function task()
     {

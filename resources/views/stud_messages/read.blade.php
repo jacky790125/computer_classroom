@@ -30,7 +30,7 @@
             <tbody>
             <tr>
               <td>
-                {{ $message['from'] }}({{ $message['username'] }})
+                <img src="{{ url('avatars/'.$message['user_id']) }}" width="40" height="40" class="rounded-circle">{{ $message['from'] }}({{ $message['username'] }})
               </td>
               <td>
                 {{ $message['title'] }}

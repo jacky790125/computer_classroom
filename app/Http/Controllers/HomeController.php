@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use App\Link;
 use App\StudMoney;
 use App\User;
@@ -52,6 +53,15 @@ class HomeController extends Controller
             'links'=>$links,
         ];
         return view('links.index',$data);
+    }
+
+    public function book_index()
+    {
+        $books = Book::orderBy('id')->get();
+        $data = [
+            'books'=>$books,
+        ];
+        return view('books.index',$data);
     }
 
     public function personal_info_update(Request $request,User $user)

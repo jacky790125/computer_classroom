@@ -24,6 +24,7 @@ class CreateStudentTasksTable extends Migration
             $table->unsignedInteger('public')->nullable();//0不公開，1公開
             $table->unsignedInteger('views')->default('0');
             $table->unsignedInteger('likes')->default('0');
+            $table->unsignedInteger('to_money')->nullable();
             $table->timestamps();
         });
     }

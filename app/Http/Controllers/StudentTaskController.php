@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\StudentTask;
+use App\StudMoney;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -147,6 +148,30 @@ class StudentTaskController extends Controller
             'student_task'=>$student_task,
         ];
         return view('student_tasks.view',$data);
+    }
+
+    public function for_money(StudentTask $student_task)
+    {
+        if($student_task->user_id != auth()->user()->id){
+            $words = " 這項作業不是你的！";
+            return view('layouts.error',compact('words'));
+        }
+
+        $to_money = $student_task->likes - ($student_task->to_money/5);
+        if($to_money >0){
+            $att['to_money'] = $student_task->likes*5;
+            $student_task->update($att);
+
+            $att2['user_id'] = $student_task->user_id;
+            $att2['thing'] = "student_task_likes_for_money";
+            $att2['thing_id'] = $student_task->id;
+            $att2['stud_money'] = $to_money*5;
+            $att2['description'] = "作業「".$student_task->task->title."」讚點數(".$to_money.")換成資訊幣(".$att2['stud_money'].")";
+            StudMoney::create($att2);
+
+        }
+
+        return redirect()->route('student_task.index');
     }
 
     /**
