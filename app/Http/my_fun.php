@@ -33,9 +33,9 @@ if (! function_exists('get_stud_money')) {
 }
 
 if (! function_exists('get_stud_total_money')) {
-    function get_stud_total_money(){
+    function get_stud_total_money($user_id){
         $total_money = 0;
-        $stud_moneys = \App\StudMoney::where('user_id','=',auth()->user()->id)
+        $stud_moneys = \App\StudMoney::where('user_id','=',$user_id)
             ->orderBy('id','DESC')
             ->get();
         foreach($stud_moneys as $stud_money) {

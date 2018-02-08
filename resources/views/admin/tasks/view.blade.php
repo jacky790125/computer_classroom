@@ -72,10 +72,10 @@
         ?>
         <tr>
           <td>
-            {{ substr($student->year_class_num,4,3) }}
+            {{ substr($student->year_class_num,0,3) }}
           </td>
           <td>
-            {{ substr($student->year_class_num,7,2) }}
+            {{ substr($student->year_class_num,3,2) }}
           </td>
           <td class="{{ $text_color }}">
             {{ $student->name }}

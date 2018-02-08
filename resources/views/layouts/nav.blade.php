@@ -150,7 +150,7 @@
                     <i class="fa fa-usd"></i>
                     <?php
                     $stud_money_things = get_stud_money();
-                    $total_money=get_stud_total_money();
+                    $total_money=get_stud_total_money(auth()->user()->id);
                     $total = current($stud_money_things);
                     if(empty($total)) $total['total'] = 0;
                     ?>

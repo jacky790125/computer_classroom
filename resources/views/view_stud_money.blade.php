@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-12">
       <h1><img src="{{ asset('img/title/money.png') }}" alt="收支狀況logo" width="60">檢視資訊幣收支</h1>
-      <h2>餘：{{ get_stud_total_money() }} 元</h2>
+      <h2>餘：{{ get_stud_total_money(auth()->user()->id) }} 元</h2>
       <table class="table table-hover">
         <thead>
         <tr>

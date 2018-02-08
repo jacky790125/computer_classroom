@@ -53,24 +53,21 @@ class StudentTypeController extends Controller
             $words = "你打不到一分鐘！";
             return view('layouts.error',compact('words'));
         }
-        if($request->input('notype') < 60){
-            $words = "你打不到一分鐘！";
-            return view('layouts.error',compact('words'));
-        }
+
         $att['user_id'] = $request->input('user_id');
         $att['rightcount'] = $request->input('rightcount');
         $att['wrongcount'] = $request->input('wrongcount');
         $att['score'] = $request->input('score');
         $att['notype'] = $request->input('notype');
         $att['timer'] = $request->input('timer');
-        $att['article_id'] = $request->input('article_id');
+        $att['stud_type_article_id'] = $request->input('stud_type_article_id');
 
 
         StudType::create($att);
-        $article = StudTypeArticle::where('id','=',$att['article_id'])->first();
+        $article = StudTypeArticle::where('id','=',$att['stud_type_article_id'])->first();
         $att2['user_id'] = auth()->user()->id;
         $att2['thing'] = "student_type";
-        $att2['thing_id'] = $request->input('article_id');
+        $att2['thing_id'] = $request->input('stud_type_article_id');
         $att2['stud_money'] = $request->input('score');
         $att2['description'] = "打字「".$article->title."」得分";
 

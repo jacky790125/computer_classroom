@@ -14,11 +14,15 @@ class AccountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $groups = Group::all()->pluck('name', 'id')->toArray();
+        $group = (empty($request->input('group_id')))?"1":$request->input('group_id');
+        $users = User::where('group_id','=',$group)->orderBy('active')->orderBy('year_class_num')->get();
         $data = [
             'users'=>$users,
+            'groups'=>$groups,
+            'group'=>$group,
         ];
         return view('admin.account.index',$data);
     }
@@ -84,7 +88,7 @@ class AccountController extends Controller
                 $att['password'] = bcrypt(sprintf("%04s",$value['生日月日']));
                 $att['name'] = $value['姓名'];
                 $att['sex'] = $value['性別'];
-                $att['year_class_num'] = sprintf("%02s",$value['班級']) . sprintf("%02s",$value['座號']);
+                $att['year_class_num'] = $value['年級'].sprintf("%02s",$value['班級']) . sprintf("%02s",$value['座號']);
                 $att['group_id'] = $value['群組id'];
                 $att['active'] = "1";
                 User::create($att);

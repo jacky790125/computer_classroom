@@ -21,7 +21,7 @@ class CreateStudTypesTable extends Migration
             $table->unsignedInteger('score');
             $table->unsignedInteger('notype');
             $table->unsignedInteger('timer');
-            $table->unsignedInteger('article_id');
+            $table->unsignedInteger('stud_type_article_id');
             $table->timestamps();
         });
     }

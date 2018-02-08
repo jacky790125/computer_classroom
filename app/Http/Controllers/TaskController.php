@@ -89,7 +89,7 @@ class TaskController extends Controller
         $task = Task::create($att);
 
         foreach($for as $v){
-            $users = User::where('group_id','=',$v)->get();
+            $users = User::where('group_id','=',$v)->where('active','=','1')->get();
             foreach($users as $user) {
                 $students[$i]['id'] = $user->id;
                 $students[$i]['year_class_num'] = $user->year_class_num;
@@ -144,6 +144,7 @@ class TaskController extends Controller
         }
         //班級學生
         $students = User::where('group_id','=',$group_tab[$select]['id'])
+            ->where('active','=','1')
             ->orderBy('year_class_num')
             ->get();
         foreach($students as $student){

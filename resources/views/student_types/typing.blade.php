@@ -248,13 +248,12 @@ document.getElementById('input2').readOnly=true;
 指導老師姓名：<br><input type=text name=teachername value="" style="text-align:center;" maxlength=10 size=12>-->
 <form name=inputgotest method=post action="{{ route('student_type.store.typing') }}" id="inputgotest">
 	{{ csrf_field() }}
-<input type=hidden name=article_id value="">
 <input type=hidden name=rightcount value="0">
 <input type=hidden name=wrongcount value="0">
 <input type=hidden name=notype value="0">
 <input type=hidden name=score value="0">
 <input type=hidden name=timer value="0">
-<input type=hidden name=article_id value="{{ $article->id }}">
+<input type=hidden name=stud_type_article_id value="{{ $article->id }}">
 <input type=hidden name=user_id value="{{ auth()->user()->id }}">
 <br><br>
 <input type=submit value="登錄成績" class='btn btn-success'>

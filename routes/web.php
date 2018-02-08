@@ -19,7 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::get('/', 'HomeController@index')->name('index');
-Route::get('/index', 'HomeController@index')->name('index');
+Route::any('/index', 'HomeController@index')->name('index');
 
 
 Route::group(['middleware' => 'admin'],function(){
@@ -39,7 +39,7 @@ Route::group(['middleware' => 'admin'],function() {
     })->name('admin.index');
 
 //帳號管理
-    Route::get('admin/account', 'AccountController@index')->name('admin.account.index');
+    Route::any('admin/account/index', 'AccountController@index')->name('admin.account.index');
     Route::get('admin/account/group', 'AccountController@group_index')->name('admin.account.group');
     Route::get('admin/account/create', 'AccountController@create')->name('admin.account.create');
     Route::get('admin/account/edit/{user}', 'AccountController@edit')->name('admin.account.edit');

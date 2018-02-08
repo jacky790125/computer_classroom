@@ -24,7 +24,14 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <h2>群組</h2>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.account.index') }}">帳號管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('admin.account.group') }}">群組管理</a>
+                    </li>
+                </ul>
                 <table class="table table-light">
                     <tr>
                         <th>
@@ -56,7 +63,7 @@
                         {{ Form::close() }}
                     </tr>
                 </table>
-                <table class="table table-light" id="dataTable">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>

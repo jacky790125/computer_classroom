@@ -13,11 +13,15 @@ class StudType extends Model
         'notype',
         'score',
         'timer',
-        'article_id'
+        'stud_type_article_id'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class)->withDefault();
+    }
+    public function stud_type_article()
+    {
+        return $this->belongsTo(StudTypeArticle::class)->withDefault();
     }
 }

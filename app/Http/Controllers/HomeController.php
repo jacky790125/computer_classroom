@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Group;
 use App\Link;
+use App\Post;
 use App\StudMoney;
+use App\StudType;
+use App\StudTypeArticle;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -29,9 +33,73 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('index');
+        //最新公告2則
+        $posts = Post::orderBy('id','DESC')
+            ->paginate(3);
+
+        $groups_o = Group::all()->pluck('name', 'id')->toArray();
+        foreach($groups_o as $k=>$v){
+            if($k != 1 and $k != 2) {
+                $groups[$k] = $v;
+            }
+        }
+        $group = $request->input('group_id');
+
+        if(!empty($group)) {
+            $users = User::where('group_id','=',$group)
+                ->get();
+            foreach($users as $user){
+                $stud_money[$user->id] = get_stud_total_money($user->id);
+
+                $stud_type_coll = StudType::where('user_id','=',$user->id)
+                    ->orderBy('score','DESC')
+                    ->first();
+                if(empty($stud_type_coll)){
+                    $stud_type[$user->id] = 0;
+                    $user_data[$user->id]['article'] = null;
+                }else{
+                    $stud_type[$user->id] = $stud_type_coll->score;
+                    $user_data[$user->id]['article'] = $stud_type_coll->stud_type_article->title;
+                }
+
+
+
+                $user_data[$user->id]['username'] = $user->username;
+                $user_data[$user->id]['nickname'] = $user->nickname;
+            }
+            arsort($stud_money);
+            arsort($stud_type);
+
+            $i = 0;
+            foreach($stud_money as $k=>$v){
+                $top_money3[$k] = $v;
+                $i++;
+                if($i == 3) break;
+            }
+            $i = 0;
+            foreach($stud_type as $k=>$v){
+                $top_type3[$k] = $v;
+                $i++;
+                if($i == 3) break;
+            }
+        }else{
+            $top_money3=[];
+            $top_type3=[];
+            $user_data=[];
+        }
+
+
+        $data = [
+            'posts'=>$posts,
+            'groups'=>$groups,
+            'group'=>$group,
+            'top_money3'=>$top_money3,
+            'top_type3'=>$top_type3,
+            'user_data'=>$user_data,
+        ];
+        return view('index',$data);
     }
 
     public function admin()
@@ -115,4 +183,5 @@ class HomeController extends Controller
 
         return $response;
     }
+
 }
