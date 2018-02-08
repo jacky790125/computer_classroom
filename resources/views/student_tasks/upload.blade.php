@@ -62,7 +62,7 @@
         <input type="hidden" name="task_id" value="{{ $student_task->task_id }}">
         <br>
         <br>
-        <a href="#" class="btn btn-success" onclick="bbconfirm('student_task','確定要送出作業')"><i class="fa fa-plus"></i> 送出</a>
+        <a href="#" class="btn btn-success" onclick="bbconfirm3('student_task','確定要送出作業')"><i class="fa fa-plus"></i> 送出</a>
         {{ Form::close() }}
       @endif
     </div>

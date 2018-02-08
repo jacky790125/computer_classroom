@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page-title', '作業欣賞|和東資訊教學網')
+@section('page-title', '作品欣賞|和東資訊教學網')
 
 @section('content')
 <div class="container-fluid">
@@ -10,13 +10,13 @@
       <a href="{{ route('index') }}">儀表統計</a>
     </li>
       <li class="breadcrumb-item">
-          <a href="{{ route('student_task.select') }}">作業欣賞</a>
+          <a href="{{ route('student_task.select') }}">作品欣賞</a>
       </li>
     <li class="breadcrumb-item active">{{ $task->title }}</li>
   </ol>
   <div class="row">
     <div class="col-12">
-    <h1><img src="{{ asset('img/title/one.png') }}" alt="觀看作業logo" width="60">觀看作業</h1>
+    <h1><img src="{{ asset('img/title/one.png') }}" alt="觀看作業logo" width="60">觀看作品</h1>
         <table class="table" id="dataTable12">
             <thead>
             <tr>
@@ -28,7 +28,8 @@
                   <td>
                     <div class="card mb-3">
                       <div class="card-header">
-                          <i class="fa fa-user-circle "></i> {{ $student_task->user->username }}　<a href="#" id="submit{{ $student_task->id }}" class="btn btn-primary" onclick="return false"><i class="fa fa-thumbs-o-up"></i> 讚</a>　　　　<i class="fa fa-heart"></i> <i id="likes{{ $student_task->id }}">{{ $student_task->likes }}</i>　　<i class="fa fa-eye"></i> <i id="views{{ $student_task->id }}">{{ $student_task->views }}</i>
+                          <?php $name = (empty($student_task->user->nickname))?$student_task->user->username:$student_task->user->nickname;  ?>
+                          <img src="{{ url('avatars/'.$student_task->user_id) }}" width="30" height="30" class="rounded-circle">{{ $name }}　<a href="#" id="submit{{ $student_task->id }}" class="btn btn-primary" onclick="return false"><i class="fa fa-thumbs-o-up"></i> 讚</a>　　　　<i class="fa fa-heart"></i> <i id="likes{{ $student_task->id }}">{{ $student_task->likes }}</i>　　<i class="fa fa-eye"></i> <i id="views{{ $student_task->id }}">{{ $student_task->views }}</i>
                       </div>
                       <div class="card-body">
                         @if($student_task->task->type == "text")

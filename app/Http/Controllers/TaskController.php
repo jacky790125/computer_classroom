@@ -136,6 +136,7 @@ class TaskController extends Controller
             ->orderBy('year_class_num')
             ->get();
         foreach($student_tasks as $student_task){
+            $has_done[$student_task->user_id]['id'] = $student_task->id;
             $has_done[$student_task->user_id]['年班'] = $student_task->year_class_num;
             $has_done[$student_task->user_id]['作業'] = $student_task->report;
             $has_done[$student_task->user_id]['分數'] = $student_task->score;
@@ -148,6 +149,7 @@ class TaskController extends Controller
             ->orderBy('year_class_num')
             ->get();
         foreach($students as $student){
+            if(empty($has_done[$student->id]['id'])) $has_done[$student->id]['id']="";
             if(empty($has_done[$student->id]['作業'])) $has_done[$student->id]['作業']="";
             if(empty($has_done[$student->id]['分數'])) $has_done[$student->id]['分數']="";
             if(empty($has_done[$student->id]['評語'])) $has_done[$student->id]['評語']="";
@@ -265,6 +267,18 @@ class TaskController extends Controller
     {
         $task->delete();
         StudentTask::where('task_id','=',$task->id)->delete();
+        return redirect()->route('admin.task.index');
+    }
+
+    public function stud_remove(StudentTask $student_task)
+    {
+        $att['report'] = null;
+        $att['public'] = null;
+        $att['views'] = 0;
+        $att['likes'] = 0;
+        $att['to_money'] = null;
+        $student_task->update($att);
+
         return redirect()->route('admin.task.index');
     }
 }

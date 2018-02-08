@@ -115,6 +115,7 @@
                 </td>
                 <td>
                   <a href="{{ route('discuss.admin_destroy',$discuss->id) }}" id="admin_del{{ $discuss->id }}" class="btn btn-danger" onclick="bbconfirm2('admin_del{{ $discuss->id }}','刪除？')">刪除</a>
+                  <a href="{{ route('discuss.admin_reback',$discuss->id) }}" id="admin_reback{{ $discuss->id }}" class="btn btn-primary" onclick="bbconfirm2('admin_reback{{ $discuss->id }}','不是劣質文章？')">還原</a>
                 </td>
               </tr>
             @endforeach

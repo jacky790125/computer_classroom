@@ -122,6 +122,18 @@ class StudentTaskController extends Controller
 
     }
 
+    public function view_one(StudentTask $student_task)
+    {
+        if($student_task->public == "0"){
+            $words = " 這項作業不公開！";
+            return view('layouts.error',compact('words'));
+        }
+        $data = [
+            'student_task'=>$student_task,
+        ];
+        return view('student_tasks.view_one',$data);
+    }
+
 
 
     public function upload(StudentTask $student_task)

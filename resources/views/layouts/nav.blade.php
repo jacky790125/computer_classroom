@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="{{ route('/') }}">和東資訊教學網</a>
+    <a class="navbar-brand" href="#">和東資訊教學網</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -73,7 +73,7 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">
                 <a class="nav-link" href="{{ route('student_task.select') }}">
                     <i class="fa fa-folder-open"></i>
-                    <span class="nav-link-text">5.作業欣賞</span>
+                    <span class="nav-link-text">5.作品欣賞</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">

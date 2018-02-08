@@ -70,6 +70,7 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('admin/task/view_one/{student_task}', 'TaskController@view_one')->name('admin.task.view_one');
     Route::get('admin/task/add_student_task/{task_id}/{user_id}', 'TaskController@add_student_task')->name('add_student_task');
     Route::post('admin/task/stud_store', 'TaskController@stud_store')->name('admin.task.stud_store');
+    Route::get('admin/task/stud_remove/{student_task}', 'TaskController@stud_remove')->name('admin.task.stud_remove');
 
 
     //公告系統
@@ -97,6 +98,7 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('book/admin/destroy/{book}','BookController@destroy')->name('book.admin_del');
 
     Route::get('discuss/{discuss}/admin_destroy', 'DiscussController@admin_destroy')->name('discuss.admin_destroy');
+    Route::get('discuss/{discuss}/admin_reback', 'DiscussController@admin_reback')->name('discuss.admin_reback');
 });
 
 //註冊會員才能看
@@ -151,6 +153,8 @@ Route::get('student_task/select', 'StudentTaskController@open')->name('student_t
 Route::any('student_task/open', 'StudentTaskController@open')->name('student_task.open');
 Route::post('student_task/likes', 'StudentTaskController@likes')->name('student_task.likes');
 Route::post('student_task/views', 'StudentTaskController@views')->name('student_task.views');
+Route::get('student_task/view_one/{student_task}', 'StudentTaskController@view_one')->name('student_task.view_one');
+
 
 //課程
 Route::get('book/index', 'HomeController@book_index')->name('book_index');

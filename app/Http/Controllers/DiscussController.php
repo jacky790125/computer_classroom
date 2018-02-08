@@ -134,6 +134,14 @@ class DiscussController extends Controller
 
     }
 
+    public function admin_reback(Discuss $discuss)
+    {
+        $att['bad'] = null;
+        $att['say_bad'] = null;
+        $discuss->update($att);
+        return redirect()->route('discuss.index');
+    }
+
     public function reply_destroy(Discuss $discuss)
     {
         if(!empty($discuss->user_id != auth()->user()->id)){

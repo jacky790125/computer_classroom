@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Discuss;
 use App\Group;
 use App\Link;
 use App\Post;
+use App\StudentTask;
 use App\StudMoney;
 use App\StudType;
 use App\StudTypeArticle;
@@ -35,8 +37,14 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        //最新公告2則
+        //最新公告3則
         $posts = Post::orderBy('id','DESC')
+            ->paginate(3);
+
+        //最新作品3則
+        $student_tasks = StudentTask::where('report','<>',null)
+            ->where('public','=','1')
+            ->orderBy('updated_at','DESC')
             ->paginate(3);
 
         $groups_o = Group::all()->pluck('name', 'id')->toArray();
@@ -65,12 +73,44 @@ class HomeController extends Controller
                 }
 
 
+                $stud_discuss[$user->id] = Discuss::where('user_id','=',$user->id)->count();
+
+                $stud_game[$user->id] = StudMoney::where('user_id','=',$user->id)
+                    ->where('thing','=','gaming')->count();
+
+                $stud_like_coll = StudentTask::where('user_id','=',$user->id)
+                    ->orderBy('likes','DESC')->first();
+
+                $stud_like[$user->id] = $stud_like_coll->likes;
+
+                if(empty($stud_like_coll)){
+                    $user_data[$user->id]['like'] = null;
+                }else{
+                    $user_data[$user->id]['like'] = $stud_like_coll->id;
+                }
+
+                $stud_view_coll = StudentTask::where('user_id','=',$user->id)
+                    ->orderBy('views','DESC')->first();
+
+                $stud_view[$user->id] = $stud_view_coll->views;
+
+                if(empty($stud_view_coll)){
+                    $user_data[$user->id]['view'] = null;
+                }else{
+                    $user_data[$user->id]['view'] = $stud_like_coll->id;
+                }
+
+
 
                 $user_data[$user->id]['username'] = $user->username;
                 $user_data[$user->id]['nickname'] = $user->nickname;
             }
             arsort($stud_money);
             arsort($stud_type);
+            arsort($stud_discuss);
+            arsort($stud_game);
+            arsort($stud_like);
+            arsort($stud_view);
 
             $i = 0;
             foreach($stud_money as $k=>$v){
@@ -84,19 +124,52 @@ class HomeController extends Controller
                 $i++;
                 if($i == 3) break;
             }
+            $i = 0;
+            foreach($stud_discuss as $k=>$v){
+                $top_discuss3[$k] = $v;
+                $i++;
+                if($i == 3) break;
+            }
+            $i = 0;
+            foreach($stud_game as $k=>$v){
+                $top_game3[$k] = $v;
+                $i++;
+                if($i == 3) break;
+            }
+            $i = 0;
+            foreach($stud_like as $k=>$v){
+                $top_like10[$k] = $v;
+                $i++;
+                if($i == 10) break;
+            }
+            $i = 0;
+            foreach($stud_view as $k=>$v){
+                $top_view10[$k] = $v;
+                $i++;
+                if($i == 10) break;
+            }
         }else{
             $top_money3=[];
             $top_type3=[];
+            $top_discuss3=[];
+            $top_game3=[];
+            $top_like10=[];
+            $top_view10=[];
             $user_data=[];
         }
 
 
         $data = [
             'posts'=>$posts,
+            'student_tasks'=>$student_tasks,
             'groups'=>$groups,
             'group'=>$group,
             'top_money3'=>$top_money3,
             'top_type3'=>$top_type3,
+            'top_discuss3'=>$top_discuss3,
+            'top_game3'=>$top_game3,
+            'top_like10'=>$top_like10,
+            'top_view10'=>$top_view10,
             'user_data'=>$user_data,
         ];
         return view('index',$data);
