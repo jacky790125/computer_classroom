@@ -81,22 +81,23 @@ class HomeController extends Controller
                 $stud_like_coll = StudentTask::where('user_id','=',$user->id)
                     ->orderBy('likes','DESC')->first();
 
-                $stud_like[$user->id] = $stud_like_coll->likes;
 
                 if(empty($stud_like_coll)){
+                    $stud_like[$user->id] = 0;
                     $user_data[$user->id]['like'] = null;
                 }else{
+                    $stud_like[$user->id] = $stud_like_coll->likes;
                     $user_data[$user->id]['like'] = $stud_like_coll->id;
                 }
 
                 $stud_view_coll = StudentTask::where('user_id','=',$user->id)
                     ->orderBy('views','DESC')->first();
 
-                $stud_view[$user->id] = $stud_view_coll->views;
-
                 if(empty($stud_view_coll)){
+                    $stud_view[$user->id] = 0;
                     $user_data[$user->id]['view'] = null;
                 }else{
+                    $stud_view[$user->id] = $stud_view_coll->views;
                     $user_data[$user->id]['view'] = $stud_like_coll->id;
                 }
 

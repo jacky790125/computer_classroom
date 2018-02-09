@@ -73,6 +73,11 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('admin/task/stud_remove/{student_task}', 'TaskController@stud_remove')->name('admin.task.stud_remove');
 
 
+    //測驗管理
+    Route::get('admin/test', 'TestController@index')->name('admin.test.index');
+    Route::post('admin/test/store','TestController@store')->name('admin.test.store');
+
+
     //公告系統
     Route::get('post/create', 'PostController@create')->name('post.create');
     Route::post('post/store', 'PostController@store')->name('post.store');

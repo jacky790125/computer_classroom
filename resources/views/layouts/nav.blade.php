@@ -37,10 +37,13 @@
                                 <a href="{{ route('admin.task.index') }}">0-5.作業管理</a>
                             </li>
                             <li>
-                                <a href="{{ route('student_type.admin_index') }}">0-6.打字管理</a>
+                                <a href="{{ route('admin.test.index') }}">0-6.測驗管理</a>
                             </li>
                             <li>
-                                <a href="{{ route('link.admin_index') }}">0-7.連結管理</a>
+                                <a href="{{ route('student_type.admin_index') }}">0-7.打字管理</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('link.admin_index') }}">0-8.連結管理</a>
                             </li>
                         </ul>
                     </li>

@@ -103,7 +103,7 @@
               </div>
               <div class="mr-5">測驗管理</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.account.index') }}">
+            <a class="card-footer text-white clearfix small z-1" href="{{ route('admin.test.index') }}">
               <span class="float-left">前往設定</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>

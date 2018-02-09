@@ -38,8 +38,7 @@
         </tr>
         </thead>
         <tbody>
-        {{ Form::open(['route'=>'link.admin_store','method'=>'post','id'=>'store','onsubmit'=>'return false;']) }}
-        <tr>
+        {{ Form::open(['route'=>'link.admin_store','method'=>'post','id'=>'store','onsubmit'=>'return false;']) }}        <tr>
           <td>
 
           </td>
