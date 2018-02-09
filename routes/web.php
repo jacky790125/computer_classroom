@@ -74,8 +74,11 @@ Route::group(['middleware' => 'admin'],function() {
 
 
     //測驗管理
-    Route::get('admin/test', 'TestController@index')->name('admin.test.index');
-    Route::post('admin/test/store','TestController@store')->name('admin.test.store');
+    Route::any('admin/course', 'TestController@index')->name('admin.test.course_index');
+    Route::post('admin/course/store','TestController@course_store')->name('admin.test.course_store');
+    Route::patch('admin/course/{course}/update','TestController@course_update')->name('admin.test.course_update');
+    Route::get('admin/course/{course}/destroy', 'TestController@course_delete')->name('admin.test.course_delete');
+
 
 
     //公告系統

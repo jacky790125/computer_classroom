@@ -12,11 +12,16 @@ class TestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $courses = Course::all();
+        $course_menu = Course::all()->pluck('name', 'id')->toArray();
+        $course = ($request->input('course_id'))?$request->input('course_id'):"";
+
         $data = [
             'courses'=>$courses,
+            'course_menu'=>$course_menu,
+            'course'=>$course,
         ];
         return view('admin.tests.index',$data);
     }
@@ -37,11 +42,25 @@ class TestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function course_store(Request $request)
     {
         Course::create($request->all());
-        return redirect()->route('admin.test.index');
+        return redirect()->route('admin.test.course_index');
     }
+
+    public function course_update(Request $request,Course $course)
+    {
+        $course->update($request->all());
+        return redirect()->route('admin.test.course_index');
+    }
+
+    public function course_delete(Course $course)
+    {
+        $course->delete();
+        return redirect()->route('admin.test.course_index');
+    }
+
+
 
     /**
      * Display the specified resource.

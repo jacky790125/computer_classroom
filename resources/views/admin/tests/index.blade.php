@@ -24,10 +24,10 @@
     <div class="col-12">
       <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" href="{{ route('admin.test.index') }}">題庫管理</a>
+            <a class="nav-link active" href="{{ route('admin.test.course_index') }}">題庫管理</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">題目管理</a>
+            <a class="nav-link" href="#">試卷管理</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">分數管理</a>
@@ -37,7 +37,7 @@
   </div>
     <br>
   <div class="row">
-      <div class="col-6">
+      <div class="col-4">
           <div class="card mb-3">
               <div class="card-header">
                   課程分類
@@ -58,7 +58,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                      {{ Form::open(['route'=>'admin.test.store','method'=>'post','id'=>'store','onsubmit'=>'return false;']) }}
+                      {{ Form::open(['route'=>'admin.test.course_store','method'=>'post','id'=>'store','onsubmit'=>'return false;']) }}
                       <tr class="bg-info">
                           <td>
 
@@ -73,17 +73,20 @@
                       {{ Form::close() }}
                       <?php $i =1; ?>
                       @foreach($courses as $course)
+                          {{ Form::open(['route'=>['admin.test.course_update',$course->id],'method'=>'patch','id'=>'update'.$course->id,'onsubmit'=>'return false;']) }}
                           <tr>
                               <td>
                                   {{ $i }}
                               </td>
                               <td>
-                                  {{ $course->name }}
+                                  {{ Form::text('name',$course->name ,['id'=>'name','class' => 'form-control', 'placeholder' => '請輸入名稱','required'=>'required']) }}
                               </td>
                               <td>
-
+                                  <a href="#" class="btn btn-primary" onclick="bbconfirm('update{{ $course->id }}','確定儲存？')">儲存</a>
+                                  <a href="{{ route('admin.test.course_delete',$course->id) }}" class="btn btn-danger" id="del{{ $course->id }}" onclick="bbconfirm2('del{{ $course->id }}','確定刪除？')">刪除</a>
                               </td>
                           </tr>
+                          {{ Form::close() }}
                           <?php $i++; ?>
                       @endforeach
                       </tbody>
@@ -91,13 +94,15 @@
               </div>
           </div>
       </div>
-      <div class="col-6">
+      <div class="col-8">
           <div class="card mb-3">
               <div class="card-header">
                   題庫
               </div>
               <div class="card-body">
-
+                  {{ Form::open(['route' => 'admin.test.course_index', 'method' => 'POST']) }}
+                  {{ Form::select('course_id', $course_menu, $course, ['id' => 'course_id','placeholder'=>'請選擇','class' => 'form-control','onchange'=>'if(this.value != 0) { this.form.submit(); }']) }}
+                  {{ Form::close() }}
               </div>
           </div>
       </div>
