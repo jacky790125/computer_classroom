@@ -79,6 +79,7 @@ Route::group(['middleware' => 'admin'],function() {
     Route::patch('admin/course/{course}/update','TestController@course_update')->name('admin.test.course_update');
     Route::get('admin/course/{course}/destroy', 'TestController@course_delete')->name('admin.test.course_delete');
 
+    Route::post('admin/question/store','TestController@question_store')->name('admin.test.question_store');
 
 
     //公告系統

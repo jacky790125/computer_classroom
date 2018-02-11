@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\CourseQuestion;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
@@ -16,12 +17,12 @@ class TestController extends Controller
     {
         $courses = Course::all();
         $course_menu = Course::all()->pluck('name', 'id')->toArray();
-        $course = ($request->input('course_id'))?$request->input('course_id'):"";
+        $course_id = ($request->input('course_id'))?$request->input('course_id'):"";
 
         $data = [
             'courses'=>$courses,
             'course_menu'=>$course_menu,
-            'course'=>$course,
+            'course_id'=>$course_id,
         ];
         return view('admin.tests.index',$data);
     }
@@ -61,6 +62,36 @@ class TestController extends Controller
     }
 
 
+    public function question_store(Request $request)
+    {
+        $att['course_id'] = $request->input('course_id');
+        $att['title'] = $request->input('title');
+        $att['ans_A'] = $request->input('ans_A');
+        $att['ans_B'] = $request->input('ans_B');
+        $att['ans_C'] = $request->input('ans_C');
+        $att['ans_D'] = $request->input('ans_D');
+        $course_question = CourseQuestion::create($att);
+
+        $files = $request->file('file');
+        foreach($files as $k=>$v){
+            $info = [
+                //'mime-type' => $file->getMimeType(),
+                //'original_filename' => $file->getClientOriginalName(),
+                'extension' => $v->getClientOriginalExtension(),
+                //'size' => $file->getClientSize(),
+            ];
+            $path = "public/questions/" . $course_question->id . "/";
+            $filename = $k.".".$info['extension'];
+
+            $v->storeAs($path,$filename);
+
+            $att2[$k] = $path.$filename;
+        }
+        $course_question->update($att2);
+
+        return redirect()->route('admin.test.course_index');
+
+    }
 
     /**
      * Display the specified resource.
