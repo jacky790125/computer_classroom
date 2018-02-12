@@ -80,6 +80,9 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('admin/course/{course}/destroy', 'TestController@course_delete')->name('admin.test.course_delete');
 
     Route::post('admin/question/store','TestController@question_store')->name('admin.test.question_store');
+    Route::any('admin/question', 'TestController@question_index')->name('admin.test.question');
+    Route::post('admin/question/update/{course_question}','TestController@question_update')->name('admin.test.question_update');
+    Route::get('admin/question/{img}/{id}/delete', 'TestController@question_delete_img')->name('admin.test.question_delete_img');
 
 
     //公告系統

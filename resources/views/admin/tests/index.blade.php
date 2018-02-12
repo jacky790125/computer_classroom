@@ -24,13 +24,16 @@
     <div class="col-12">
       <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" href="{{ route('admin.test.course_index') }}">題庫管理</a>
+              <a class="nav-link active" href="{{ route('admin.test.course_index') }}">課程管理</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">試卷管理</a>
+              <a class="nav-link" href="{{ route('admin.test.question') }}">題庫管理</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">分數管理</a>
+              <a class="nav-link" href="#">試卷管理</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">分數管理</a>
           </li>
       </ul>
     </div>
