@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\CourseQuestion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 class TestController extends Controller
 {
@@ -18,11 +20,17 @@ class TestController extends Controller
         $courses = Course::all();
         $course_menu = Course::all()->pluck('name', 'id')->toArray();
         $course_id = ($request->input('course_id'))?$request->input('course_id'):"";
+        if(empty($course_id)){
+            $num = "";
+        }else{
+            $num = CourseQuestion::where('course_id','=',$course_id)->count();
+        }
 
         $data = [
             'courses'=>$courses,
             'course_menu'=>$course_menu,
             'course_id'=>$course_id,
+            'num'=>$num,
         ];
         return view('admin.tests.index',$data);
     }
@@ -106,7 +114,7 @@ class TestController extends Controller
             $course_question->update($att2);
         }
 
-        return redirect()->route('admin.test.course_index');
+        return redirect()->route('admin.test.course_index',['course_id'=>$att['course_id']]);
 
     }
 
@@ -138,7 +146,7 @@ class TestController extends Controller
             $course_question->update($att2);
         }
 
-        return redirect()->route('admin.test.question');
+        return redirect()->route('admin.test.question',['course_id'=>$course_question->course_id]);
 
     }
 
@@ -146,8 +154,25 @@ class TestController extends Controller
     {
         $att[$img] = null;
         $course_question = CourseQuestion::where('id','=',$id)->first();
+
+        if($img == "title_img") $file = '../storage/app/'.$course_question->title_img;
+        if($img == "ans_A_img") $file = '../storage/app/'.$course_question->ans_A_img;
+        if($img == "ans_B_img") $file = '../storage/app/'.$course_question->ans_B_img;
+        if($img == "ans_C_img") $file = '../storage/app/'.$course_question->ans_C_img;
+        if($img == "ans_D_img") $file = '../storage/app/'.$course_question->ans_D_img;
+
+        if(file_exists($file)) unlink($file);
+
         $course_question->update($att);
-        return redirect()->route('admin.test.question');
+
+        return redirect()->route('admin.test.question',['course_id'=>$course_question->course_id]);
+    }
+
+    public function question_view_img($img,$id)
+    {
+        $course_question = CourseQuestion::where('id','=',$id)->first();
+        echo "<img src=".url('question/show_img/'.$course_question->id.'/'.$img)." width=100%>";
+
     }
 
 
@@ -194,5 +219,24 @@ class TestController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getImg($id,$img)
+    {
+        $course_question = CourseQuestion::where('id','=',$id)->first();
+        if($img == "title_img") $file = $course_question->title_img;
+        if($img == "ans_A_img") $file = $course_question->ans_A_img;
+        if($img == "ans_B_img") $file = $course_question->ans_B_img;
+        if($img == "ans_C_img") $file = $course_question->ans_C_img;
+        if($img == "ans_D_img") $file = $course_question->ans_D_img;
+
+        $path = storage_path('app/'.$file);
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 }

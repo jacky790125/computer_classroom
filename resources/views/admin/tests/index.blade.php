@@ -103,14 +103,14 @@
                   題庫
               </div>
               <div class="card-body">
-                  {{ Form::open(['route' => 'admin.test.course_index', 'method' => 'POST']) }}
+                  {{ Form::open(['route' => 'admin.test.course_index', 'method' => 'GET']) }}
                   {{ Form::select('course_id', $course_menu, $course_id, ['id' => 'course_id','placeholder'=>'請選擇','class' => 'form-control','onchange'=>'if(this.value != 0) { this.form.submit(); }']) }}
                   {{ Form::close() }}
                   @if(!empty($course_id))
                   <table class="table table-hover">
                       <thead>
                       <tr>
-                          <th colspan="2"><h4>新增題目</h4></th>
+                          <th colspan="2"><h4>新增題目({{$num}})</h4></th>
                       </tr>
                       </thead>
                       <tbody>

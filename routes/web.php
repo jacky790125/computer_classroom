@@ -83,6 +83,7 @@ Route::group(['middleware' => 'admin'],function() {
     Route::any('admin/question', 'TestController@question_index')->name('admin.test.question');
     Route::post('admin/question/update/{course_question}','TestController@question_update')->name('admin.test.question_update');
     Route::get('admin/question/{img}/{id}/delete', 'TestController@question_delete_img')->name('admin.test.question_delete_img');
+    Route::get('admin/question/{img}/{id}/view', 'TestController@question_view_img')->name('admin.test.question_view_img');
 
 
     //公告系統
@@ -147,6 +148,9 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('discuss/reply_store', 'DiscussController@reply_store')->name('discuss.reply_store');
     Route::get('discuss/{discuss}/reply_destroy', 'DiscussController@reply_destroy')->name('discuss.reply_destroy');
     Route::get('discuss/{discuss}/reply_say_bad', 'DiscussController@reply_say_bad')->name('discuss.reply_say_bad');
+
+    //測驗題目的圖片
+    Route::get('question/show_img/{id}/{img}', 'TestController@getImg')->name('question_show_img');
 
 });
 //兌換遊戲首頁
