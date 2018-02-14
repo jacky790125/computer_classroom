@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\CourseQuestion;
+use App\Group;
+use App\Test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -173,6 +175,70 @@ class TestController extends Controller
         $course_question = CourseQuestion::where('id','=',$id)->first();
         echo "<img src=".url('question/show_img/'.$course_question->id.'/'.$img)." width=100%>";
 
+    }
+
+    public function test_index(Request $request)
+    {
+        $course_menu = Course::all()->pluck('name', 'id')->toArray();
+        $course_id = ($request->input('course_id'))?$request->input('course_id'):"";
+        if(empty($course_id)){
+            $groups = [];
+            $course_questions = [];
+        }else{
+            $gs = Group::where('active','=','1')
+                ->where('name','like','1%')
+                ->get();
+
+            if(!empty($gs)) {
+                foreach ($gs as $g) {
+                    if (!isset($groups[$g->id])) $groups[$g->id] = null;
+                    $groups[$g->id] = $g->name . "(id:" . $g->id . ")";
+                }
+            }
+
+            $course_questions = CourseQuestion::where('course_id','=',$course_id)
+                ->get();
+        }
+
+        $tests = Test::all();
+
+        $data = [
+            'course_menu'=>$course_menu,
+            'course_id'=>$course_id,
+            'groups'=>$groups,
+            'course_questions'=>$course_questions,
+            'tests'=>$tests,
+        ];
+        return view('admin.tests.test',$data);
+    }
+
+    public function test_store(Request $request)
+    {
+        $att['title'] = $request->input('title');
+        $att['score'] = $request->input('score');
+        $att['enable'] = $request->input('enable');
+        $att['for'] = "";
+        $att['questions'] = "";
+        $for = $request->input('for');
+        foreach( $for as $k =>$v){
+            $att['for'] .= $v.',';
+        }
+        $att['for'] = substr($att['for'],0,-1);
+
+        $question = $request->input('question');
+        foreach( $question as $k =>$v){
+            $att['questions'] .= $v.',';
+        }
+        $att['questions'] = substr($att['questions'],0,-1);
+
+        Test::create($att);
+        return redirect()->route('admin.test_index',['course_id'=>$request->input('course_id')]);
+    }
+
+    public function test_delete(Test $test)
+    {
+        $test->delete();
+        return redirect()->route('admin.test_index');
     }
 
 

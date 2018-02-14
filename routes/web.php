@@ -85,6 +85,9 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('admin/question/{img}/{id}/delete', 'TestController@question_delete_img')->name('admin.test.question_delete_img');
     Route::get('admin/question/{img}/{id}/view', 'TestController@question_view_img')->name('admin.test.question_view_img');
 
+    Route::get('admin/test', 'TestController@test_index')->name('admin.test_index');
+    Route::post('admin/store', 'TestController@test_store')->name('admin.test_store');
+    Route::get('admin/test/{test}/delete', 'TestController@test_delete')->name('admin.test_delete');
 
     //公告系統
     Route::get('post/create', 'PostController@create')->name('post.create');
