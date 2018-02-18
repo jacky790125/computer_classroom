@@ -118,7 +118,10 @@
                           </td>
                       </tr>
                       <tr>
-                      <td colspan="3"><a href="#" class="btn btn-info" onclick="bbconfirm('update_question{{ $question->id }}','確定修改？')"><i class="fa fa-edit"> 題目({{ $i }})儲存修改</i></a></td>
+                      <td colspan="3">
+                          <a href="#" class="btn btn-info" onclick="bbconfirm('update_question{{ $question->id }}','確定修改？')"><i class="fa fa-edit"> 題目({{ $i }})儲存修改</i></a>
+                          <a href="{{ route('admin.test.question_delete',$question->id) }}" id="del{{ $question->id }}" class="btn btn-danger" onclick="bbconfirm2('del{{ $question->id }}','確定刪除題目？')"> 刪除</a>
+                      </td>
                       </tr>
                           {{ Form::close() }}
                           <?php $i++; ?>

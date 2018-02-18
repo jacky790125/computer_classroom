@@ -137,6 +137,12 @@
                               題目
                           </td>
                           <td>
+                              每題幾分？
+                          </td>
+                          <td>
+                              啟用？
+                          </td>
+                          <td>
                               動作
                           </td>
                       </tr>
@@ -156,6 +162,16 @@
                           </td>
                           <td>
                               {{ $test->questions }}
+                          </td>
+                          <td>
+                              {{ $test->score }}
+                          </td>
+                          <td>
+                              @if($test->enable == "1")
+                                  啟用
+                              @else
+                                  停用
+                              @endif
                           </td>
                           <td>
                               <a href="{{ route('admin.test_delete',$test->id) }}" class="btn btn-danger" id="del{{ $test->id }}" onclick="bbconfirm2('del{{ $test->id }}','確定刪除？')">刪除</a>

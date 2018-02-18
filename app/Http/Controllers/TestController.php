@@ -152,6 +152,12 @@ class TestController extends Controller
 
     }
 
+    public function question_delete(CourseQuestion $course_question)
+    {
+        $course_question->delete();
+        return redirect()->route('admin.test.question',['course_id'=>$course_question->course_id]);
+    }
+
     public function question_delete_img($img,$id)
     {
         $att[$img] = null;
@@ -232,7 +238,7 @@ class TestController extends Controller
         $att['questions'] = substr($att['questions'],0,-1);
 
         Test::create($att);
-        return redirect()->route('admin.test_index',['course_id'=>$request->input('course_id')]);
+        return redirect()->route('admin.test_index');
     }
 
     public function test_delete(Test $test)
