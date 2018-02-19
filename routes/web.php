@@ -155,6 +155,9 @@ Route::group(['middleware' => 'auth'],function() {
 
     //測驗題目的圖片
     Route::get('question/show_img/{id}/{img}', 'TestController@getImg')->name('question_show_img');
+    Route::get('student_test/index', 'TestController@student_test_index')->name('student_test.index');
+    Route::post('student_test/test', 'TestController@student_test_test')->name('student_test.test');
+
 
 });
 //兌換遊戲首頁

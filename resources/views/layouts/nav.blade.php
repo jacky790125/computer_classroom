@@ -68,7 +68,7 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('student_test.index') }}">
                     <i class="fa fa-copy"></i>
                     <span class="nav-link-text">4.學生測驗</span>
                 </a>

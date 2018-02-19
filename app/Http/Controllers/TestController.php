@@ -7,6 +7,7 @@ use App\CourseQuestion;
 use App\Group;
 use App\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 
@@ -245,6 +246,62 @@ class TestController extends Controller
     {
         $test->delete();
         return redirect()->route('admin.test_index');
+    }
+
+    public function student_test_index()
+    {
+        $tests = Test::orderBy('id','DESC')->get();
+        $i = 1;
+        foreach($tests as $test){
+            $group_array = explode(',',$test->for);
+            if(in_array(auth()->user()->group_id,$group_array)){
+                $get_test[$i]=$test;
+                $i++;
+            }
+        }
+        $data = [
+            'get_test'=>$get_test,
+        ];
+        return view('student_tests.index',$data);
+    }
+
+    public function student_test_test(Request $request)
+    {
+        $test = Test::where('id','=',$request->input('test_id'))->first();
+        $question_array = explode(',',$test->questions);
+        $questions = CourseQuestion::whereIn('id', $question_array)->get();
+        foreach($questions as $question){
+            $question_data[$question->id]['title'] = $question->title;
+            $question_data[$question->id]['ans_1'] = "A"."-".$question->ans_A;
+            $question_data[$question->id]['ans_2'] = "B"."-".$question->ans_B;
+            $question_data[$question->id]['ans_3'] = "C"."-".$question->ans_C;
+            $question_data[$question->id]['ans_4'] = "D"."-".$question->ans_D;
+            for($i=1;$i<=4;$i++){
+                $r = rand(1,4);
+                $temp = $question_data[$question->id]['ans_'.$i];
+                $question_data[$question->id]['ans_'.$i] = $question_data[$question->id]['ans_'.$r];;
+                $question_data[$question->id]['ans_'.$r] = $temp;
+            }
+        }
+        $k=1;
+        $num = count($question_array);
+        foreach($question_array as $key =>$value){
+            session(['q'.$k=>$k.'-'.$value]);
+            $k++;
+        }
+        for($i=1;$i<=$num;$i++){
+            $r = rand(1,$num);
+            $temp = session('q'.$i);
+            session(['q'.$i => session('q'.$r)]);
+            session(['q'.$r => $temp]);
+        }
+
+        $data = [
+            'test'=>$test,
+            'num'=>$num,
+            'question_data'=>$question_data,
+        ];
+        return view('student_tests.test',$data);
     }
 
 
