@@ -155,8 +155,9 @@ Route::group(['middleware' => 'auth'],function() {
 
     //測驗題目的圖片
     Route::get('question/show_img/{id}/{img}', 'TestController@getImg')->name('question_show_img');
-    Route::get('student_test/index', 'TestController@student_test_index')->name('student_test.index');
     Route::post('student_test/test', 'TestController@student_test_test')->name('student_test.test');
+    Route::post('student_test/store', 'TestController@student_test_store')->name('student_test.store');
+    Route::get('student_test/view/{test_score}', 'TestController@student_test_view')->name('student_test.view');
 
 
 });
@@ -177,7 +178,8 @@ Route::any('student_task/open', 'StudentTaskController@open')->name('student_tas
 Route::post('student_task/likes', 'StudentTaskController@likes')->name('student_task.likes');
 Route::post('student_task/views', 'StudentTaskController@views')->name('student_task.views');
 Route::get('student_task/view_one/{student_task}', 'StudentTaskController@view_one')->name('student_task.view_one');
-
+//學生測驗首頁
+Route::get('student_test/index', 'TestController@student_test_index')->name('student_test.index');
 
 //課程
 Route::get('book/index', 'HomeController@book_index')->name('book_index');

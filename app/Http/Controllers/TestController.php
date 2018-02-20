@@ -6,6 +6,7 @@ use App\Course;
 use App\CourseQuestion;
 use App\Group;
 use App\Test;
+use App\TestScore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -251,12 +252,17 @@ class TestController extends Controller
     public function student_test_index()
     {
         $tests = Test::orderBy('id','DESC')->get();
+
         $i = 1;
+        $get_test = [];
+
         foreach($tests as $test){
             $group_array = explode(',',$test->for);
-            if(in_array(auth()->user()->group_id,$group_array)){
-                $get_test[$i]=$test;
-                $i++;
+            if(auth()->check()) {
+                if (in_array(auth()->user()->group_id, $group_array)) {
+                    $get_test[$i] = $test;
+                    $i++;
+                }
             }
         }
         $data = [
@@ -302,6 +308,40 @@ class TestController extends Controller
             'question_data'=>$question_data,
         ];
         return view('student_tests.test',$data);
+    }
+
+    public function student_test_store(Request $request)
+    {
+        $att['test_id'] = $request->input('test_id');
+        $att['user_id'] = auth()->user()->id;
+        $questions = $request->input('q');
+        ksort($questions);
+        $answers = "";
+        $num = 0;
+        foreach($questions as $k=>$v){
+            $answers .= $v.",";
+            if($v == "A") $num++;
+        }
+        $att['answers'] = substr($answers,0,-1);
+        $att['total_score'] = $request->input('score') * $num;
+
+        TestScore::create($att);
+        return redirect()->route('student_test.index');
+    }
+
+    public function student_test_view(TestScore $test_score)
+    {
+        $total_score = $test_score->total_score;
+        $answer_array = explode(',',$test_score->answers);
+        $question_array = explode(',',$test_score->test->questions);
+        $test_title = $test_score->test->title;
+        $data = [
+            'total_score'=>$total_score,
+            'answer_array'=>$answer_array,
+            'question_array'=>$question_array,
+            'test_title'=>$test_title,
+        ];
+        return view('student_tests.view',$data);
     }
 
 
