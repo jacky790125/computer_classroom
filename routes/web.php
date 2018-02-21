@@ -90,6 +90,8 @@ Route::group(['middleware' => 'admin'],function() {
     Route::post('admin/store', 'TestController@test_store')->name('admin.test_store');
     Route::get('admin/test/{test}/delete', 'TestController@test_delete')->name('admin.test_delete');
 
+    Route::any('admin/score', 'TestController@score_index')->name('admin.score_index');
+
     //公告系統
     Route::get('post/create', 'PostController@create')->name('post.create');
     Route::post('post/store', 'PostController@store')->name('post.store');
@@ -155,6 +157,7 @@ Route::group(['middleware' => 'auth'],function() {
 
     //測驗題目的圖片
     Route::get('question/show_img/{id}/{img}', 'TestController@getImg')->name('question_show_img');
+    Route::get('question/view_img/{img}', 'TestController@viewImg')->name('question_view_img');
     Route::post('student_test/test', 'TestController@student_test_test')->name('student_test.test');
     Route::post('student_test/store', 'TestController@student_test_store')->name('student_test.store');
     Route::get('student_test/view/{test_score}', 'TestController@student_test_view')->name('student_test.view');

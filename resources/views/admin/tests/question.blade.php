@@ -33,7 +33,7 @@
               <a class="nav-link" href="{{ route('admin.test_index') }}">試卷管理</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">分數管理</a>
+            <a class="nav-link" href="{{ route('admin.score_index') }}">分數管理</a>
           </li>
       </ul>
     </div>

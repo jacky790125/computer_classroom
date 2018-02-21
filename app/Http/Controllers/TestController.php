@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\CourseQuestion;
 use App\Group;
+use App\StudMoney;
 use App\Test;
 use App\TestScore;
 use Illuminate\Http\Request;
@@ -282,6 +283,11 @@ class TestController extends Controller
             $question_data[$question->id]['ans_2'] = "B"."-".$question->ans_B;
             $question_data[$question->id]['ans_3'] = "C"."-".$question->ans_C;
             $question_data[$question->id]['ans_4'] = "D"."-".$question->ans_D;
+            $question_data[$question->id]['img_title'] = $question->title_img;
+            $question_data[$question->id]['img_A'] = $question->ans_A_img;
+            $question_data[$question->id]['img_B'] = $question->ans_B_img;
+            $question_data[$question->id]['img_C'] = $question->ans_C_img;
+            $question_data[$question->id]['img_D'] = $question->ans_D_img;
             for($i=1;$i<=4;$i++){
                 $r = rand(1,4);
                 $temp = $question_data[$question->id]['ans_'.$i];
@@ -326,6 +332,17 @@ class TestController extends Controller
         $att['total_score'] = $request->input('score') * $num;
 
         TestScore::create($att);
+
+        $test = Test::where('id','=',$request->input('test_id'))->first();
+
+        $att2['user_id'] = auth()->user()->id;
+        $att2['thing'] = "student_test";
+        $att2['thing_id'] = $request->input('test_id');
+        $att2['stud_money'] = $request->input('score') * $num;
+        $att2['description'] = "測驗「".$test->title."」得分";
+
+        StudMoney::create($att2);
+
         return redirect()->route('student_test.index');
     }
 
@@ -342,6 +359,28 @@ class TestController extends Controller
             'test_title'=>$test_title,
         ];
         return view('student_tests.view',$data);
+    }
+
+    public function score_index(Request $request)
+    {
+        $test_menu = Test::orderBy('id','DESC')->pluck('title', 'id')->toArray();
+        $test_id = (empty($request->input('test_id')))?null:$request->input('test_id');
+        if(!empty($test_id)){
+            $test = Test::where('id','=',$test_id)->first();
+            $class_array = explode(',',$test->for);
+        }else{
+            $class_array = [];
+        }
+
+        $group_id = (empty($request->input('group_id')))?null:$request->input('group_id');
+
+        $data=[
+            'test_menu'=>$test_menu,
+            'test_id'=>$test_id,
+            'group_id'=>$group_id,
+            'class_array'=>$class_array,
+        ];
+        return view('admin.tests.score',$data);
     }
 
 
@@ -400,6 +439,19 @@ class TestController extends Controller
         if($img == "ans_D_img") $file = $course_question->ans_D_img;
 
         $path = storage_path('app/'.$file);
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
+    }
+
+    public function viewImg($img)
+    {
+        $img = str_replace('-','/',$img);
+        $path = storage_path('app/'.$img);
         $file = File::get($path);
         $type = File::mimeType($path);
 

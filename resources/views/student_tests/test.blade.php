@@ -17,13 +17,25 @@
       @for($i=1;$i<=$num;$i++)
       <div class="card mb-3">
         <div class="card-header">
-          <h2 id="t{{ $i }}">第 ({{ $i }}) 題</h2>
+          <h2 id="t{{ $i }}"><img src="{{ asset('img/red.png') }}">第 ({{ $i }}) 題</h2>
         </div>
         <div class="card-body">
           <?php
             $q = explode('-',session('q'.$i));
           ?>
-          <h3 id="q{{ $i }}">{{ $question_data[$q[1]]['title'] }}</h3>
+          <table>
+            <tr>
+              <td>
+                <h3 id="q{{ $i }}">{{ $question_data[$q[1]]['title'] }}</h3>
+              </td>
+            @if(!empty($question_data[$q[1]]['img_title']))
+            <?php $img= str_replace('/','-',$question_data[$q[1]]['img_title']); ?>
+              <td>
+                <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+              </td>
+            @endif
+            </tr>
+          </table>
           <input type="hidden" name="hidden" id="q1{{ $i }}" value="0">
           <table class="table table-hover" id="a{{ $i }}">
             <tr id="a1{{ $i }}" onclick="changecolor1('{{ $i }}');">
@@ -34,6 +46,10 @@
                     (1){{ substr($question_data[$q[1]]['ans_1'],2) }}
                   </label>
                 </div>
+                @if(!empty($question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_1'],0,1)]))
+                  <?php $img= str_replace('/','-',$question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_1'],0,1)]); ?>
+                  <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+                @endif
               </td>
             </tr>
             <tr id="a2{{ $i }}" onclick="changecolor2('{{ $i }}');">
@@ -44,6 +60,10 @@
                     (2){{ substr($question_data[$q[1]]['ans_2'],2) }}
                   </label>
                 </div>
+                @if(!empty($question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_2'],0,1)]))
+                      <?php $img= str_replace('/','-',$question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_2'],0,1)]); ?>
+                  <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+                @endif
               </td>
             </tr>
             <tr id="a3{{ $i }}" onclick="changecolor3('{{ $i }}');">
@@ -54,6 +74,10 @@
                     (3){{ substr($question_data[$q[1]]['ans_3'],2) }}
                   </label>
                 </div>
+                @if(!empty($question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_3'],0,1)]))
+                      <?php $img= str_replace('/','-',$question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_3'],0,1)]); ?>
+                  <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+                @endif
               </td>
             </tr>
             <tr id="a4{{ $i }}" onclick="changecolor4('{{ $i }}');">
@@ -64,6 +88,10 @@
                     (4){{ substr($question_data[$q[1]]['ans_4'],2) }}
                   </label>
                 </div>
+                @if(!empty($question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_4'],0,1)]))
+                      <?php $img= str_replace('/','-',$question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_4'],0,1)]); ?>
+                  <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+                @endif
               </td>
             </tr>
           </table>
@@ -167,6 +195,12 @@
               }
               document.getElementById('total2').innerText = document.getElementById('total').value;
           }
+
+          function openwindow(url_str){
+              window.open (url_str,"視窗","menubar=0,status=0,directories=0,location=0,top=20,left=20,toolbar=0,scrollbars=1,resizable=1,Width=500,Height=300");
+          }
+
+
       </SCRIPT>
     </div>
   </div>
