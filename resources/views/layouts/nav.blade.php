@@ -118,7 +118,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" onclick="hi()"> Hi
-                    <i class="fa fa-fw fa-user-circle-o"></i>{{ auth()->user()->name }}</a>
+                    <i class="fa fa-fw fa-user-circle-o"></i> {{ auth()->user()->name }}</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -199,20 +199,23 @@
                     <input type=hidden name=sitesearch value="info.hdes.chc.edu.tw">
                 </form>
             </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/hdes999/" target="_blank">
+                        <i class="fa fa-facebook-square"></i> 和東粉絲團</a>
+                </li>
                 @if (auth()->check())
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#personalModal">
-                        <i class="fa fa-fw fa-cog"></i>個人資訊</a>
+                        <i class="fa fa-fw fa-cog"></i> 個人資訊</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-fw fa-sign-out"></i>登出</a>
+                        <i class="fa fa-fw fa-sign-out"></i> 登出</a>
                 </li>
                 @else
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('login') }}">
-                        <i class="fa fa-fw fa-sign-in"></i>登入</a>
+                        <i class="fa fa-fw fa-sign-in"></i> 登入</a>
                 </li>
                 @endif
             </li>
