@@ -142,6 +142,10 @@ class AccountController extends Controller
     public function update(Request $request,User $user)
     {
         $user->update($request->all());
+        if(empty($request->input('stop_saying'))){
+            $att['stop_saying'] = null;
+            $user->update($att);
+        }
         return redirect()->route('admin.account.edit',$user->id);
     }
 

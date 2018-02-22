@@ -74,6 +74,9 @@
             @endforeach
           </table>
         </div>
+        @if(auth()->user()->stop_saying=="1")
+          <a href="#" class="btn btn-danger">你被禁言</a>
+        @else
         <div class="card-footer">
           {{ Form::open(['route' => 'discuss.reply_store', 'method' => 'POST','id'=>'store','onsubmit'=>'return false;']) }}
           <table width="100%">
@@ -94,6 +97,7 @@
           <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
           {{ Form::close() }}
         </div>
+        @endif
       </div>
       <div class="alert alert-danger">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

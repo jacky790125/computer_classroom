@@ -15,8 +15,12 @@
       <div class="col-12">
         <h1><img src="{{ asset('img/title/discuss.png') }}" alt="大家討論logo" width="60">大家討論</h1>
         @if(auth()->check())
+          @if(@auth()->user()->stop_saying=="1")
+            <p class="text-right"><a href="#" class="btn btn-danger">你被禁言</a></p>
+          @else
           <p class="text-right"><a href="{{ route('discuss.create') }}" class="btn btn-success"><i class="fa fa-plus"> 新增討論主題</i></a></p>
-          <table class="table table-hover">
+          @endif
+            <table class="table table-hover">
             <thead>
             <tr>
               <th width="160">

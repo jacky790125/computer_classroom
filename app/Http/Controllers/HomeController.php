@@ -47,6 +47,129 @@ class HomeController extends Controller
             ->orderBy('updated_at','DESC')
             ->paginate(3);
 
+        //存款最多
+        $user = User::orderBy('money','DESC')->first();
+        if(empty($user->nickname)){
+            $name = $user->username;
+        }else{
+            $name = $user->nickname;
+        }
+        $top_money['id'] = $user->id;
+        $top_money['name'] = $name;
+        $top_money['money'] = $user->money;
+
+        //打字最快
+        $type = StudType::orderBy('score','DESC')->first();
+        if(!empty($type)) {
+            if (empty($type->user->nickname)) {
+                $name = $type->user->username;
+            } else {
+                $name = $type->user->nickname;
+            }
+            $top_type['id'] = $type->user_id;
+            $top_type['name'] = $name;
+            $top_type['type'] = $type->score;
+        }else{
+            $top_type['id'] = "";
+            $top_type['name'] = "";
+            $top_type['type'] = "";
+        }
+
+        //文章最多
+        $discusses = Discuss::all();
+        if(!empty($discusses)) {
+            foreach ($discusses as $discuss) {
+                if (empty($discuss->user->nickname)) {
+                    $name = $discuss->user->username;
+                } else {
+                    $name = $discuss->user->nickname;
+                }
+                if (empty($user_discuss[$discuss->user_id . "-" . $name])) $user_discuss[$discuss->user_id . "-" . $name] = 0;
+                $user_discuss[$discuss->user_id . "-" . $name]++;
+            }
+            if(!empty($user_discuss)) {
+                arsort($user_discuss);
+                $k = explode('-', key($user_discuss));
+                $top_discuss['id'] = $k[0];
+                $top_discuss['name'] = $k[1];
+                $top_discuss['num'] = $user_discuss[$k[0] . '-' . $k[1]];
+            }else{
+                $top_discuss['id'] = "";
+                $top_discuss['name'] = "";
+                $top_discuss['num'] = "";
+            }
+        }else{
+            $top_discuss['id'] = "";
+            $top_discuss['name'] = "";
+            $top_discuss['num'] = "";
+        }
+
+        //最愛遊戲
+        $games = StudMoney::where('thing','=','gaming')->get();
+        if(!empty($games)) {
+            foreach ($games as $game) {
+                if (empty($game->user->nickname)) {
+                    $name = $game->user->username;
+                } else {
+                    $name = $game->user->nickname;
+                }
+                if (empty($user_game[$game->user_id . "-" . $name])) $user_game[$game->user_id . "-" . $name] = 0;
+                $user_game[$game->user_id . "-" . $name]++;
+            }
+            if(!empty($user_game)){
+                arsort($user_game);
+                $k = explode('-', key($user_game));
+                $top_game['id'] = $k[0];
+                $top_game['name'] = $k[1];
+                $top_game['num'] = $user_game[$k[0] . '-' . $k[1]];
+            }else{
+                $top_game['id'] = "";
+                $top_game['name'] = "";
+                $top_game['num'] = "";
+            }
+        }else{
+            $top_game['id'] = "";
+            $top_game['name'] = "";
+            $top_game['num'] = "";
+        }
+
+        //作品最讚
+        $like = StudentTask::orderBy('likes','DESC')->first();
+        if(!empty($like)) {
+            if (empty($like->user->nickname)) {
+                $name = $like->user->username;
+            } else {
+                $name = $like->user->nickname;
+            }
+            $top_like['id'] = $like->user_id;
+            $top_like['name'] = $name;
+            $top_like['like'] = $like->likes;
+        }else{
+            $top_like['id'] = "";
+            $top_like['name'] = "";
+            $top_like['like'] = "";
+        }
+
+        //作品最多人看
+        $view = StudentTask::orderBy('views','DESC')->first();
+        if(!empty($view)) {
+            if (empty($view->user->nickname)) {
+                $name = $view->user->username;
+            } else {
+                $name = $view->user->nickname;
+            }
+            $top_view['id'] = $view->user_id;
+            $top_view['name'] = $name;
+            $top_view['view'] = $view->views;
+        }else{
+            $top_view['id'] = "";
+            $top_view['name'] = "";
+            $top_view['view'] = "";
+        }
+
+
+
+
         $groups_o = Group::all()->pluck('name', 'id')->toArray();
         foreach($groups_o as $k=>$v){
             if($k != 1 and $k != 2) {
@@ -174,6 +297,12 @@ class HomeController extends Controller
             'top_like10'=>$top_like10,
             'top_view10'=>$top_view10,
             'user_data'=>$user_data,
+            'top_money'=>$top_money,
+            'top_type'=>$top_type,
+            'top_discuss'=>$top_discuss,
+            'top_game'=>$top_game,
+            'top_like'=>$top_like,
+            'top_view'=>$top_view,
         ];
         return view('index',$data);
     }

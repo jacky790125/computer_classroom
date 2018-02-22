@@ -43,6 +43,13 @@ if (! function_exists('get_stud_total_money')) {
                 $total_money = $total_money + $stud_money->stud_money;
             }
         }
+        if(auth()->check()) {
+            $stud_money = auth()->user()->money;
+            if ($stud_money != $total_money) {
+                $att['money'] = $total_money;
+                \App\User::where('id', '=', auth()->user()->id)->update($att);
+            }
+        }
         return $total_money;
     }
 }

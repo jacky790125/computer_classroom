@@ -25,7 +25,7 @@
           <i class="fa fa-pencil-square"></i> 編輯帳號
         </div>
         <div class="card-body">
-          <div class="col-6">
+          <div class="col-8">
            {{ Form::open(['route' => ['admin.account.update',$user->id], 'method' => 'POST','name'=>'form1','id'=>'update_account','onsubmit'=>'return false;']) }}
             <table class="table table-light">
               <tr>
@@ -112,11 +112,16 @@
                         $active0 = "true";
                         $active2 = "";
                     }
+                    if($user->stop_saying == "1"){
+                        $stop_saying = "checked";
+                    }else{
+                        $stop_saying = "";
+                    }
                     ?>
                   <i class="fa fa-dot-circle-o"></i> 帳號停用 ？
                 </td>
                 <td>
-                  {{ Form::radio('active', '1',$active1) }}啟用　　{{ Form::radio('active', '2',$active2) }}學生轉出　　{{ Form::radio('active', '0',$active0) }}停用
+                  {{ Form::radio('active', '1',$active1) }}啟用　　{{ Form::radio('active', '2',$active2) }}學生轉出　　{{ Form::radio('active', '0',$active0) }}停用　　<input type="checkbox" name="stop_saying" value="1" {{ $stop_saying }}>禁言
                 </td>
               </tr>
               <tr>

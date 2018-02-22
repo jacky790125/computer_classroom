@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('group_id')->nullable();
             $table->unsignedInteger('active');//0停用,null or 1啟用 or 2轉出
             $table->unsignedInteger('money')->nullable();
+            $table->unsignedInteger('stop_saying')->nullable();
             $table->string('avatar')->nullable();//個人頭像
             $table->rememberToken();
             $table->timestamps();
