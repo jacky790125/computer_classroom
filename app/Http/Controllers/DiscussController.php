@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Discuss;
+use App\StudMoney;
 use Illuminate\Http\Request;
 
 class DiscussController extends Controller
@@ -47,16 +48,32 @@ class DiscussController extends Controller
      */
     public function store(Request $request)
     {
-        Discuss::create($request->all());
+        $discuss = Discuss::create($request->all());
+        $att2['user_id'] = auth()->user()->id;
+        $att2['thing'] = "discuss";
+        $att2['thing_id'] = $discuss->id;
+        $att2['stud_money'] = "-10";
+        $att2['description'] = "發表主題討論「".$discuss->title."」";
+
+        StudMoney::create($att2);
+
         return redirect()->route('discuss.index');
     }
 
     public function reply_store(Request $request)
     {
-        Discuss::create($request->all());
+        $dis = Discuss::create($request->all());
         $discuss = Discuss::where('id','=',$request->input('depend_on'))->first();
         $att['reply'] = $discuss->reply+1;
         $discuss->update($att);
+
+        $att2['user_id'] = auth()->user()->id;
+        $att2['thing'] = "discuss_reply";
+        $att2['thing_id'] = $dis->id;
+        $att2['stud_money'] = "-5";
+        $att2['description'] = "回覆主題討論「".$discuss->title."」";
+
+        StudMoney::create($att2);
         return redirect()->route('discuss.show',$request->input('depend_on'));
     }
 
