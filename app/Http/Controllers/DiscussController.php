@@ -48,6 +48,12 @@ class DiscussController extends Controller
      */
     public function store(Request $request)
     {
+        $total_money = get_stud_total_money(auth()->user()->id);
+        if($total_money < 10){
+            $words = "你的資訊幣不夠喔！你可以靠「作業得分」、「打字」、別人「按讚」來增加喔！";
+            return view('layouts.error',compact('words'));
+        }
+
         $discuss = Discuss::create($request->all());
         $att2['user_id'] = auth()->user()->id;
         $att2['thing'] = "discuss";
@@ -62,6 +68,12 @@ class DiscussController extends Controller
 
     public function reply_store(Request $request)
     {
+        $total_money = get_stud_total_money(auth()->user()->id);
+        if($total_money < 5){
+            $words = "你的資訊幣不夠喔！你可以靠「作業得分」、「打字」、別人「按讚」來增加喔！";
+            return view('layouts.error',compact('words'));
+        }
+
         $dis = Discuss::create($request->all());
         $discuss = Discuss::where('id','=',$request->input('depend_on'))->first();
         $att['reply'] = $discuss->reply+1;

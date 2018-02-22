@@ -82,7 +82,7 @@
                 <img src="{{ url('avatars/'.auth()->user()->id) }}" width="30" height="30" class="rounded-circle">
               </td>
               <td>
-                {{ Form::text('content', null, ['id' => 'content', 'class' => 'form-control', 'placeholder' => '撰寫留言','required'=>'required']) }}
+                {{ Form::text('content', null, ['id' => 'content', 'class' => 'form-control', 'placeholder' => '撰寫留言(扣5資訊幣)','required'=>'required']) }}
               </td>
               <td width="20">
                 <a href="#" class="btn btn-primary" onclick="bbconfirm('store','確定回文？')">送出</a>

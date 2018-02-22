@@ -25,7 +25,7 @@
       <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-plus"></i> 主題：
-          {{ Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'placeholder' => '標題','required'=>'required']) }}
+          {{ Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'placeholder' => '標題(扣10資訊幣)','required'=>'required']) }}
         </div>
         <div class="card-body">
           <textarea name="content" class="form-control" placeholder="請輸入內文" required="required"></textarea>
