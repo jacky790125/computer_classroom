@@ -57,21 +57,69 @@
                 選擇班級
               </div>
               <div class="card-body">
-                  <ul class="nav nav-pills">
+
                       @foreach($class_array as $k=>$v)
                           <?php
                           $group = \App\Group::where('id','=',$v)->first();
                           if($group->id == $group_id){
-                              $active= "class='active'";
+                              $btn= "btn-info";
                           }else{
-                              $active = "";
+                              $btn = "btn-default";
                           }
                           ?>
-                      <li>
-                          <a href="{{ route('admin.score_index',['test_id'=>$test_id,'group_id'=>$group->id]) }}" {{ $active }} data-toggle="tab">{{ $group->name }}</a>
-                      </li>
+                          <a href="{{ route('admin.score_index',['test_id'=>$test_id,'group_id'=>$group->id]) }}" class="btn {{ $btn }}">{{ $group->name }}</a>
                       @endforeach
-                  </ul>
+              </div>
+          </div>
+          <div class="card mb-3">
+              <div class="card-header">
+                  學生列表
+              </div>
+              <div class="card-body">
+                  <table class="table table-hover">
+                      <thead>
+                      <tr>
+                          <th>
+                              座號
+                          </th>
+                          <th>
+                              姓名
+                          </th>
+                          <th>
+                              成績
+                          </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      @foreach($students as $k=>$v)
+                      <tr>
+                          <td>
+                            {{ $v['num'] }}
+                          </td>
+                          <td>
+                              @if($v['sex'] == "1")
+                                  <img src="{{ asset('img/boy.gif') }}">
+                                  <span class="text-primary">{{ $v['name'] }}</span>
+                              @elseif($v['sex'] == "2")
+                                  <img src="{{ asset('img/girl.gif') }}">
+                                  <span class="text-danger">{{ $v['name'] }}</span>
+                              @else
+                                  {{ $v['name'] }}
+                              @endif
+                          </td>
+                          <td>
+                            @if(!empty($score[$k]))
+                                @if($score[$k] < 60)
+                                      <p class="btn btn-danger">{{ $score[$k] }}</p>
+                                @else
+                                      {{ $score[$k] }}
+                                @endif
+                            @endif
+                          </td>
+                      </tr>
+                      @endforeach
+                      </tbody>
+                  </table>
               </div>
           </div>
           @endif

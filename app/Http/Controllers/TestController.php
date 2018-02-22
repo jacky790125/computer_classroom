@@ -8,6 +8,7 @@ use App\Group;
 use App\StudMoney;
 use App\Test;
 use App\TestScore;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -366,19 +367,45 @@ class TestController extends Controller
         $test_menu = Test::orderBy('id','DESC')->pluck('title', 'id')->toArray();
         $test_id = (empty($request->input('test_id')))?null:$request->input('test_id');
         if(!empty($test_id)){
+            $test_scores = TestScore::where('test_id','=',$test_id)->get();
+            foreach($test_scores as $test_score){
+                $score[$test_score->user_id] = $test_score->total_score;
+            }
+
             $test = Test::where('id','=',$test_id)->first();
             $class_array = explode(',',$test->for);
+
+            $group_id = (empty($request->input('group_id')))?$class_array[0]:$request->input('group_id');
+
+
+            $group = Group::where('id','=',$group_id)->first();
+
+            $users = User::where('group_id','=',$group->id)
+                ->where('active','=','1')
+                ->orderBy('year_class_num')
+                ->get();
+            foreach($users as $user){
+                $students[$user->id]['num'] = substr($user->year_class_num,3,2);
+                $students[$user->id]['name'] = $user->name;
+                $students[$user->id]['sex'] = $user->sex;
+            }
+
         }else{
             $class_array = [];
+            $group_id = "";
+            $score = [];
+            $students = [];
         }
 
-        $group_id = (empty($request->input('group_id')))?null:$request->input('group_id');
+
 
         $data=[
             'test_menu'=>$test_menu,
             'test_id'=>$test_id,
             'group_id'=>$group_id,
             'class_array'=>$class_array,
+            'score'=>$score,
+            'students'=>$students,
         ];
         return view('admin.tests.score',$data);
     }

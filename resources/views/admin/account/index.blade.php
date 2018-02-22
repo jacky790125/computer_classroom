@@ -75,7 +75,15 @@
                 <td>{{ $user->group_id }} - {{ $group_name }}</td>
                 <td>{{ $user->year_class_num }}</td>
                 <td>{{ $user->username }}</td>
-                <td>{{ $user->name }}</td>
+                <td>
+                  @if($user->sex == "1")
+                    <img src="{{ asset('img/boy.gif') }}"><span class="text-primary">{{ $user->name }}</span>
+                  @elseif($user->sex =="2")
+                    <img src="{{ asset('img/girl.gif') }}"><span class="text-danger">{{ $user->name }}</span>
+                  @else
+                    <img src="{{ asset('img/user.png') }}" height="25">{{ $user->name }}
+                  @endif
+                </td>
                 @if($user->active == 1)
                   <td><span class="text-success">啟用</span></td>
                 @elseif($user->active == 2)

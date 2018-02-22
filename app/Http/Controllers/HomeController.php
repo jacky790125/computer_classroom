@@ -51,6 +51,8 @@ class HomeController extends Controller
         foreach($groups_o as $k=>$v){
             if($k != 1 and $k != 2) {
                 $groups[$k] = $v;
+            }else{
+                $groups = [];
             }
         }
         $group = $request->input('group_id');
