@@ -48,7 +48,7 @@ class HomeController extends Controller
             ->paginate(3);
 
         //存款最多
-        $user = User::orderBy('money','DESC')->first();
+        $user = User::where('id','<>','1')->orderBy('money','DESC')->first();
         if(empty($user->nickname)){
             $name = $user->username;
         }else{
@@ -76,7 +76,7 @@ class HomeController extends Controller
         }
 
         //文章最多
-        $discusses = Discuss::all();
+        $discusses = Discuss::where('id','<>','1')->get();
         if(!empty($discusses)) {
             foreach ($discusses as $discuss) {
                 if (empty($discuss->user->nickname)) {
@@ -105,7 +105,7 @@ class HomeController extends Controller
         }
 
         //最愛遊戲
-        $games = StudMoney::where('thing','=','gaming')->get();
+        $games = StudMoney::where('id','<>','1')->where('thing','=','gaming')->get();
         if(!empty($games)) {
             foreach ($games as $game) {
                 if (empty($game->user->nickname)) {

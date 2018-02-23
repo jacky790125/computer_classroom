@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\StudMessage;
+use App\StudMoney;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -128,5 +129,23 @@ class StudMessageController extends Controller
     {
         $stud_message->delete();
         return redirect()->route('stud_message.index');
+    }
+
+    public function give(Request $request)
+    {
+        $user = User::where('username','=',$request->input('username'))->first();
+        if(empty($user)){
+            $words = "無此帳號：".$request->input('username');
+            return view('layouts.error',compact('words'));
+        }
+
+        $att2['user_id'] = $user->id;
+        $att2['thing'] = "admin_give";
+        $att2['stud_money'] = $request->input('stud_money');
+        $att2['description'] = $request->input('description');
+
+        StudMoney::create($att2);
+
+        return redirect()->route('admin.message.index');
     }
 }

@@ -118,6 +118,8 @@ Route::group(['middleware' => 'admin'],function() {
 
     Route::get('discuss/{discuss}/admin_destroy', 'DiscussController@admin_destroy')->name('discuss.admin_destroy');
     Route::get('discuss/{discuss}/admin_reback', 'DiscussController@admin_reback')->name('discuss.admin_reback');
+
+    Route::post('give', 'StudMessageController@give')->name('stud_message.give');
 });
 
 //註冊會員才能看

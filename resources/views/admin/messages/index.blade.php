@@ -46,6 +46,45 @@
         {{ Form::close() }}
         </tbody>
       </table>
+
+      <div class="card mb-3">
+        <div class="card-header">
+          <h4>給予獎懲</h4>
+        </div>
+        <div class="card-body">
+          {{ Form::open(['route'=>'stud_message.give','method'=>'post','id'=>'give','onsubmit'=>'return false;']) }}
+          <table class="table">
+            <thead>
+            <tr>
+              <th>
+                對方帳號
+              </th>
+              <th>
+                金額
+              </th>
+              <th>
+                事由
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                {{ Form::text('username',null,['id'=>'username','class' => 'form-control', 'placeholder' => '請輸入對方帳號','required'=>'required']) }}
+              </td>
+              <td>
+                {{ Form::text('stud_money',null,['id'=>'stud_money','class' => 'form-control', 'placeholder' => '請輸入金額','required'=>'required']) }}
+              </td>
+              <td>
+                {{ Form::text('description',null,['id'=>'description','class' => 'form-control', 'placeholder' => '請輸入事由','required'=>'required']) }}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <a href="#" class="btn btn-success" onclick="bbconfirm('give','真的送出？')">送出</a>
+          {{ Form::close() }}
+        </div>
+      </div>
     </div>
   </div>
 </div>
