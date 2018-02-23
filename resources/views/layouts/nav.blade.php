@@ -118,7 +118,11 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" onclick="hi()"> Hi
-                    <i class="fa fa-fw fa-user-circle-o"></i> {{ auth()->user()->name }}</a>
+                    <i class="fa fa-fw fa-user-circle-o"></i> {{ auth()->user()->name }}
+                    @if(!empty(auth()->user()->nickname))
+                    ({{ auth()->user()->nickname }})
+                    @endif
+                </a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
