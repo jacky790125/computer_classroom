@@ -256,7 +256,7 @@ document.getElementById('input2').readOnly=true;
 <input type=hidden name=stud_type_article_id value="{{ $article->id }}">
 <input type=hidden name=user_id value="{{ auth()->user()->id }}">
 <br><br>
-<input type=submit value="登錄成績" class='btn btn-success'>
+<input type=submit value="登錄成績" class='btn btn-success' id="b_submit">
 </form>
 </div>
 </td></tr>
@@ -298,6 +298,11 @@ function show_secs()  // show the time user spent on the side
   	Chcekall();
   }
 }
+
+$("#b_submit").click(function(){
+    $("#b_submit").hide();
+});
+
  </script>
 
 

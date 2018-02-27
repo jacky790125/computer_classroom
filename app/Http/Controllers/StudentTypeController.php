@@ -25,6 +25,8 @@ class StudentTypeController extends Controller
 
     public function typing(StudTypeArticle $article)
     {
+        $type_key = "type".auth()->user()->id;
+        session([$type_key => null]);
         $words = mb_str_split($article->content);
         $i = 0;
         $j = 0;
@@ -62,25 +64,31 @@ class StudentTypeController extends Controller
         $att['timer'] = $request->input('timer');
         $att['stud_type_article_id'] = $request->input('stud_type_article_id');
 
+        $type_key = "type".auth()->user()->id;
+        if(!session($type_key)) {
+            session([$type_key => '1']);
+            StudType::create($att);
+            $article = StudTypeArticle::where('id', '=', $att['stud_type_article_id'])->first();
+            $att2['user_id'] = auth()->user()->id;
+            $att2['thing'] = "student_type";
+            $att2['thing_id'] = $request->input('stud_type_article_id');
+            $att2['stud_money'] = $request->input('score');
+            $att2['description'] = "打字「" . $article->title . "」得分";
 
-        StudType::create($att);
-        $article = StudTypeArticle::where('id','=',$att['stud_type_article_id'])->first();
-        $att2['user_id'] = auth()->user()->id;
-        $att2['thing'] = "student_type";
-        $att2['thing_id'] = $request->input('stud_type_article_id');
-        $att2['stud_money'] = $request->input('score');
-        $att2['description'] = "打字「".$article->title."」得分";
+            StudMoney::create($att2);
 
-        StudMoney::create($att2);
-
-        echo "<html><body>
+            echo "<html><body>
 			<script LANGUAGE=\"JavaScript\">\n
 			window.opener.history.go(0);\n
        			window.close();
 			</script>
 			</body>
 			</html>";
-        exit;
+            exit;
+        }else{
+            $words = "你想做什麼？";
+            return view('layouts.error',compact('words'));
+        }
     }
 
     public function admin_index()

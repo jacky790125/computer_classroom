@@ -45,6 +45,9 @@
                             <li>
                                 <a href="{{ route('link.admin_index') }}">0-8.連結管理</a>
                             </li>
+                            <li>
+                                <a href="{{ route('money.admin_index') }}">0-9.貨幣管理</a>
+                            </li>
                         </ul>
                     </li>
                 @endif
@@ -92,15 +95,15 @@
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="{{ route('link_index') }}">
-                    <i class="fa fa-link"></i>
-                    <span class="nav-link-text">8.好站連結</span>
+                <a class="nav-link" href="{{ route('discuss.index') }}">
+                    <i class="fa fa-fax"></i>
+                    <span class="nav-link-text">8.大家討論</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="{{ route('discuss.index') }}">
-                    <i class="fa fa-fax"></i>
-                    <span class="nav-link-text">9.大家討論</span>
+                <a class="nav-link" href="{{ route('link_index') }}">
+                    <i class="fa fa-link"></i>
+                    <span class="nav-link-text">9.好站連結</span>
                 </a>
             </li>
         </ul>
@@ -186,23 +189,6 @@
                 </div>
             </li>
             @endif
-            <li class="nav-item">
-                <form action="http://www.google.com/search" target="_blank" method="get" class="form-inline my-2 my-lg-0 mr-lg-2">
-                    <div class="input-group">
-                        <input class="form-control" type="text" name="q" placeholder="搜尋本站...">
-                        <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" onclick="submit()">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-                    </div>
-                    <input type=hidden name=ie>
-                    <input type=hidden name=oe>
-                    <input type=hidden name=hl>
-                    <input type=hidden name=domains value="info.hdes.chc.edu.tw">
-                    <input type=hidden name=sitesearch value="info.hdes.chc.edu.tw">
-                </form>
-            </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://www.facebook.com/hdes999/" target="_blank">
                         <i class="fa fa-facebook-square"></i> 和東粉絲團</a>
@@ -302,12 +288,12 @@
                 </div>
                 <br>
                 <div>
-                    <i class="fa fa-dot-circle-o"></i> 電子郵件：
+                    <i class="fa fa-dot-circle-o"></i> 電子郵件(可不填)：
                     {{ Form::email('email', auth()->user()->email,['class' => 'form-control','placeholder' => '例：example.gmail.com']) }}
                 </div>
                 <br>
                 <div>
-                    <i class="fa fa-dot-circle-o"></i> 個人網站：
+                    <i class="fa fa-dot-circle-o"></i> 個人網站(可不填)：
                     {{ Form::text('website', auth()->user()->website, ['id' => 'website', 'class' => 'form-control', 'placeholder' => '例：http://www.example.com.tw( 含 http:// 或 https://)']) }}
                 </div>
                 <script>

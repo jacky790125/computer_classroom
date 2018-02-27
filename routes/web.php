@@ -20,6 +20,7 @@ Auth::routes();
 
 //Route::get('/', 'HomeController@index')->name('index');
 Route::any('/index', 'HomeController@index')->name('index');
+Route::any('/index2', 'HomeController@index2')->name('index2');
 
 
 Route::group(['middleware' => 'admin'],function(){
@@ -120,6 +121,13 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('discuss/{discuss}/admin_reback', 'DiscussController@admin_reback')->name('discuss.admin_reback');
 
     Route::post('give', 'StudMessageController@give')->name('stud_message.give');
+
+    //貨幣管理
+    Route::get('money/admin/index', 'MoneyController@index')->name('money.admin_index');
+    Route::get('money/admin/{stud_money}/{page}', 'MoneyController@delete')->name('money.admin_delete');
+    Route::post('money/admin/destroy_check', 'MoneyController@destroy_check')->name('money.admin_destroy_check');
+
+
 });
 
 //註冊會員才能看
