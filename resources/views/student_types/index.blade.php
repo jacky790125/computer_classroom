@@ -21,12 +21,12 @@
         2.你打字的能力，如果可以在四分鐘內打完的文章，將不能練習該文章！<br>
         3.打字時間末滿五分鐘，將不以登記成績。(首次一分)
       </div>
-      <h4>你目前的最快打字速度為：{{ $stud_type }}，你可以打的文章字數為：{{ $stud_type*5 }} 字以上</h4>
+      <h4>你目前的最快打字速度為：{{ $stud_type }}，你可以打的文章字數為：{{ $stud_type*4 }} 字以上</h4>
         <?php $i=1; ?>
       <table>
         <tr>
           @foreach($articles as $article)
-            <?php $disable = ($article->words < $stud_type*5)?"disabled":""; ?>
+            <?php $disable = ($article->words < $stud_type*4)?"disabled":""; ?>
             <td width="300"><a href="#" class="btn btn-info {{ $disable }}" onclick="openwindow('{{ route('student_type.typing',$article->id) }}')">({{ $i }}) {{ $article->title }}</a><font color=red>({{ $article->words }}字)</font></td>
             @if($i%4 == 0)
         </tr><tr>
