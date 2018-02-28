@@ -40,7 +40,7 @@
                 <th>
                   <a href="#" id="a{{ $post->id }}" class="btn btn-primary btn-xs"><i class="fa fa-share"></i> {{ $post->title }}</a>
                 </th>
-                <th>{{ $post->user->name }}</th>
+                <th>{{ $post->user->nickname }}</th>
                 <th><p id="view{{ $post->id }}">{{ $post->view }}</p></th>
               </tr>
               <tr class="bg-light" id="content{{ $post->id }}" style="display: none">

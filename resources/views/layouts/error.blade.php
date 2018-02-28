@@ -15,7 +15,6 @@
     <div class="col-12">
       <h1><img src="{{ asset('img/title/error.png') }}" alt="儀表統計logo" width="60">有東西錯了</h1>
       <h1 class="text-danger">{{ $words }}</h1>
-      <a href="#" class="btn btn-secondary" onclick="history.back();">返回</a>
     </div>
   </div>
 </div>

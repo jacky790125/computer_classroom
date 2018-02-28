@@ -14,7 +14,10 @@ class MoneyController extends Controller
      */
     public function index()
     {
-        $moneys = StudMoney::orderBy('id','DESC')
+        $moneys = StudMoney::where('stud_money','>','0')
+            ->orderBy('user_id')
+            ->orderBy('created_at','DESC')
+            ->orderBy('id','DESC')
             ->paginate(50);
         $data = [
             'moneys'=>$moneys,

@@ -17,13 +17,17 @@
       <h2><i class="fa fa-list-ul"></i> 文章列表</h2>
       <div class="alert alert-danger">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>注意！</strong> 打字時間不足60秒，不予計分！
+        <strong>注意！</strong><br>1.本程式的用意是練習使用桌機鍵盤打字，請不要使用平台電腦或是手機。<br>
+        2.你打字的能力，如果可以在四分鐘內打完的文章，將不能練習該文章！<br>
+        3.打字時間末滿五分鐘，將不以登記成績。(首次一分)
       </div>
+      <h4>你目前的最快打字速度為：{{ $stud_type }}，你可以打的文章字數為：{{ $stud_type*5 }} 字以上</h4>
         <?php $i=1; ?>
       <table>
         <tr>
           @foreach($articles as $article)
-            <td width="300"><a href="#" class="btn btn-info" onclick="openwindow('{{ route('student_type.typing',$article->id) }}')">({{ $i }}) {{ $article->title }}</a><font color=red>({{ $article->words }}字)</font></td>
+            <?php $disable = ($article->words < $stud_type*5)?"disabled":""; ?>
+            <td width="300"><a href="#" class="btn btn-info {{ $disable }}" onclick="openwindow('{{ route('student_type.typing',$article->id) }}')">({{ $i }}) {{ $article->title }}</a><font color=red>({{ $article->words }}字)</font></td>
             @if($i%4 == 0)
         </tr><tr>
           @endif

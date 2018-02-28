@@ -17,14 +17,45 @@ class StudentTypeController extends Controller
     public function index()
     {
         $articles = StudTypeArticle::orderBy('words')->get();
+        $types = StudType::where('user_id','=',auth()->user()->id)
+        ->orderBy('score','DESC')->first();
+        if(empty($types)){
+            $stud_type = 0;
+        }else{
+            $stud_type = $types->score;
+        }
+
         $data =[
             'articles' => $articles,
+            'stud_type' => $stud_type,
         ];
         return view('student_types.index',$data);
     }
 
     public function typing(StudTypeArticle $article)
     {
+        $iphone        = strstr($_SERVER['HTTP_USER_AGENT'], "iPhone");
+        $ipad          = strstr($_SERVER['HTTP_USER_AGENT'], "iPad");
+        $android       = strstr($_SERVER['HTTP_USER_AGENT'], "Android");
+        $windows_phone = strstr($_SERVER['HTTP_USER_AGENT'], "Windows Phone");
+        $black_berry   = strstr($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
+        if ($iphone) {
+            $words = "用 iphone 哀鳳 不好，請使用桌機練習打字！";
+        } elseif ($ipad) {
+            $words = "用 ipad 哀配 不好，請使用桌機練習打字！";
+        } elseif ($android) {
+            $words = "用 android 安卓 不好，請使用桌機練習打字！";
+        } elseif ($windows_phone) {
+            $words = "用 windows phone 微軟手機 不好，請使用桌機練習打字！";
+        } elseif ($black_berry) {
+            $words = "用 black berry 黑莓機 不好，請使用桌機練習打字！";
+        } else {
+            $words = "";
+        }
+        if(!empty($words)){
+            return view('layouts.error',compact('words'));
+        }
+
         $type_key = "type".auth()->user()->id;
         session([$type_key => null]);
         $words = mb_str_split($article->content);
@@ -51,9 +82,18 @@ class StudentTypeController extends Controller
 
     public function store_typing(Request $request)
     {
-        if($request->input('timer') < 60){
-            $words = "你打不到一分鐘！";
-            return view('layouts.error',compact('words'));
+        $types = StudType::where('user_id','=',auth()->user()->id)
+            ->orderBy('score','DESC')->first();
+        if(empty($types)){
+            $stud_type = 0;
+        }else{
+            $stud_type = $types->score;
+        }
+        if($stud_type != "0"){
+            if($request->input('timer') < 300){
+                $words = "你打不到五分鐘！";
+                return view('layouts.error',compact('words'));
+            }
         }
 
         $att['user_id'] = $request->input('user_id');
@@ -93,7 +133,7 @@ class StudentTypeController extends Controller
 
     public function admin_index()
     {
-        $articles = StudTypeArticle::orderBy('id')->get();
+        $articles = StudTypeArticle::orderBy('words')->get();
         $data = [
             'articles'=> $articles,
         ];

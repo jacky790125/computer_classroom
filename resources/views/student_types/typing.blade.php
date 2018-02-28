@@ -124,6 +124,10 @@ document.getElementById('input2').readOnly=false;
 <style type="text/css">
 	span {display:inline-block;}
 </style>
+<script type="text/javascript">
+    if (window.name=='') {location.href='http://info.hdes.chc.edu.tw';};
+</script>
+
 </head>
 <body oncontextmenu="return false;" onkeydown="if(((event.shiftKey)&&(event.keyCode==121)) || event.altKey || event.keyCode==116 || (event.altKey && event.keyCode==115) || (event.keyCode==78 && event.ctrlKey) || ((event.ctrlKey)&&(event.keyCode==86))) return false;"  ondrag="return false;" onpaste="return false;" onselectstart ="return false;" onselect="document.selection.empty();" oncopy="document.selection.empty();" onbeforecopy="return false;">
 <script language=javascript>

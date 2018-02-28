@@ -37,7 +37,7 @@
               <td>
                   <a href="#" id="a{{ $post->id }}" class="btn btn-primary btn-xs"><i class="fa fa-share"></i> {{ $post->title }}</a>
               </td>
-            <td>{{ $post->user->name }}</td>
+            <td>{{ $post->user->nickname }}</td>
             <td><p id="view{{ $post->id }}">{{ $post->view }}</p></td>
           </tr>
           <tr class="bg-light" id="content{{ $post->id }}" style="display: none">
