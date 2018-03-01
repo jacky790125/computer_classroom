@@ -41,9 +41,6 @@
           <th>
             時間點
           </th>
-          <th>
-            刪除
-          </th>
         </tr>
         </thead>
         <tbody>
@@ -70,13 +67,6 @@
             </td>
             <td>
               {{ $money->created_at }}
-            </td>
-            <td>
-              <?php
-                $page = \Illuminate\Support\Facades\Input::input('page');
-                if(empty($page)) $page = 1;
-                ?>
-              <a href="{{ url('money/admin/index')."?page=".$page }}" class="btn btn-danger" id="del{{ $money->id }}" onclick="bbconfirm2('del{{ $money->id }}','確定刪除？')">刪除</a>
             </td>
           </tr>
         @endforeach

@@ -123,9 +123,8 @@ Route::group(['middleware' => 'admin'],function() {
 
     Route::post('give', 'StudMessageController@give')->name('stud_message.give');
 
-    //貨幣管理
+    //屆次打字
     Route::get('money/admin/index', 'MoneyController@index')->name('money.admin_index');
-    Route::get('money/admin/{stud_money}/{page}', 'MoneyController@delete')->name('money.admin_delete');
     Route::post('money/admin/destroy_check', 'MoneyController@destroy_check')->name('money.admin_destroy_check');
 
 

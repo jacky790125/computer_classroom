@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\StudMoney;
+use App\StudType;
 use Illuminate\Http\Request;
 
 class MoneyController extends Controller
@@ -15,8 +16,8 @@ class MoneyController extends Controller
     public function index()
     {
         $moneys = StudMoney::where('stud_money','>','0')
-            ->orderBy('user_id')
             ->orderBy('created_at','DESC')
+            ->orderBy('user_id')
             ->orderBy('id','DESC')
             ->paginate(50);
         $data = [
@@ -25,17 +26,13 @@ class MoneyController extends Controller
         return view('admin.money.index',$data);
     }
 
-    public function delete(StudMoney $stud_money,$page)
-    {
-        $stud_money->delete();
-        return redirect()->route('money.admin_index',$page);
-    }
-
     public function destroy_check(Request $request)
     {
         $stud_money = $request->input('stud_money');
         foreach($stud_money as $k => $v){
-            StudMoney::where('id','=',$v)->delete();
+            $stud_money = StudMoney::where('id','=',$v)->first();
+            $stud_money->delete();
+            StudType::where('id','=',$stud_money->thing_id)->delete();
         }
         return redirect()->route('money.admin_index');
     }

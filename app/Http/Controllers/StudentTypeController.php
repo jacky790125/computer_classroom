@@ -118,11 +118,11 @@ class StudentTypeController extends Controller
         $type_key = "type".auth()->user()->id;
         if(!session($type_key)) {
             session([$type_key => '1']);
-            StudType::create($att);
+            $type_stu = StudType::create($att);
             $article = StudTypeArticle::where('id', '=', $att['stud_type_article_id'])->first();
             $att2['user_id'] = auth()->user()->id;
             $att2['thing'] = "student_type";
-            $att2['thing_id'] = $request->input('stud_type_article_id');
+            $att2['thing_id'] = $type_stu->id;
             $att2['stud_money'] = $request->input('score');
             $att2['description'] = "打字「" . $article->title . "」得分";
 
