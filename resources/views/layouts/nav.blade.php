@@ -101,6 +101,12 @@
                     <span class="nav-link-text">9.好站連結</span>
                 </a>
             </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
+                <a class="nav-link" href="{{ route('link_index') }}">
+                    <i class="fa fa-user"></i>
+                    <span class="nav-link-text">來訪次數：<img src="https://www.f-counter.net/j/29/1519910245/" alt="計數器"></span>
+                </a>
+            </li>
         </ul>
         <ul class="navbar-nav sidenav-toggler">
             <li class="nav-item">
