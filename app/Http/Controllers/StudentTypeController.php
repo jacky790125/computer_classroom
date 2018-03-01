@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\StudMoney;
 use App\StudType;
 use App\StudTypeArticle;
+use App\User;
 use Illuminate\Http\Request;
 
 class StudentTypeController extends Controller
@@ -147,6 +149,32 @@ class StudentTypeController extends Controller
             'articles'=> $articles,
         ];
         return view('admin.student_types.index',$data);
+    }
+
+    public function admin_show(Request $request)
+    {
+        $groups_o = Group::all()->pluck('name', 'id')->toArray();
+        foreach($groups_o as $k=>$v){
+            if($k != 1 and $k != 2) {
+                $groups[$k] = $v;
+            }else{
+                $groups = [];
+            }
+        }
+        $group = $request->input('group_id');
+
+        if(!empty($group)){
+            $users = User::where('group_id','=',$group)->orderBy('year_class_num')->get();
+        }else{
+            $users =[];
+        }
+
+        $data = [
+            'groups'=>$groups,
+            'group'=>$group,
+            'users'=>$users,
+        ];
+        return view('admin.student_types.show',$data);
     }
 
     public function admin_store(Request $request)

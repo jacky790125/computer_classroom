@@ -104,6 +104,7 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('student_type/admin/index', 'StudentTypeController@admin_index')->name('student_type.admin_index');
     Route::post('student_type/admin/store', 'StudentTypeController@admin_store')->name('student_type.admin_store');
     Route::get('student_type/admin/delete/{stud_type_article}', 'StudentTypeController@admin_delete')->name('student_type.admin_delete');
+    Route::any('student_type/admin/show', 'StudentTypeController@admin_show')->name('student_type.admin_show');
 
     //連結管理
     Route::get('link/admin/index','LinkController@index')->name('link.admin_index');
