@@ -35,7 +35,7 @@
                 {{ Form::text('to',null,['id'=>'to','class' => 'form-control', 'placeholder' => '請輸入收件者','required'=>'required']) }}
               </td>
               <td>
-                {{ Form::text('title',null,['id'=>'title','class' => 'form-control', 'placeholder' => '請輸入標題','required'=>'required']) }}
+                {{ Form::text('title',null,['id'=>'title','class' => 'form-control', 'placeholder' => '請輸入標題(寄一次10元)','required'=>'required']) }}
               </td>
             </tr>
             <tr>

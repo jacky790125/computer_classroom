@@ -1,17 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#">和東資訊教學網</a>
+    <a class="navbar-brand" href="{{ route('index') }}">和東資訊教學網</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <h5>
-                <a class="nav-link" href="{{ route('index') }}">
-                    <i class="fa fa-fw fa-dashboard"></i>
-                    <span class="nav-link-text">儀表統計</span>
-                </a>
-                </h5>
+
             </li>
             @if (auth()->check())
                 @if(auth()->user()->group_id == 1)
@@ -269,7 +264,7 @@
             </div>
             <div class="modal-body">
                 {{ Form::open(['route' => ['personal_info.update',auth()->user()->id], 'method' => 'POST','name'=>'form1','id'=>'personal_info.update','files' => true]) }}
-                <div><i class="fa fa-dot-circle-o"></i> 頭像(1MB內)：
+                <div><i class="fa fa-dot-circle-o"></i> 頭像(1MB內，改一次100元)：
                     <input type="file" name="avatar" id="avatar_input">
                     <img id="avatar_review" class="rounded-circle" src="{{ url('avatars/'.auth()->user()->id) }}" alt="你的圖像" width="60" height="60" />
 
@@ -284,7 +279,7 @@
                 <br>
                 <div>
                     <i class="fa fa-dot-circle-o"></i> 暱稱：
-                    {{ Form::text('nickname', auth()->user()->nickname, ['id' => 'nickname', 'class' => 'form-control', 'placeholder' => '暱稱']) }}
+                    {{ Form::text('nickname', auth()->user()->nickname, ['id' => 'nickname', 'class' => 'form-control', 'placeholder' => '暱稱(改一次200元)']) }}
                 </div>
                 <br>
                 <div>

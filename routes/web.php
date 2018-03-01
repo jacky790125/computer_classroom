@@ -214,3 +214,6 @@ Route::get('file/{student_task}', 'StudentTaskController@getFile');
 
 //下載檔案
 Route::get('download_file/{student_task}', 'StudentTaskController@downloadFile')->name('download_student_task');
+
+//錯誤
+Route::get('error/{word}', 'ErrorController@index')->name('error');

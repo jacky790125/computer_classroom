@@ -602,6 +602,12 @@ class HomeController extends Controller
     {
         //處理檔案上傳
         if ($request->hasFile('avatar')) {
+            $total_money = get_stud_total_money(auth()->user()->id);
+            if($total_money < 100){
+                $words = "你改頭像要100元，但資訊幣不夠喔！你可以靠「作業得分」、「打字」、別人「按讚」來增加喔！";
+                return redirect()->route('error',$words);
+            }
+
             $file = $request->file('avatar');
             $folder = 'avatars';
 
@@ -613,18 +619,43 @@ class HomeController extends Controller
             ];
             if ($info['size'] > 1100000) {
                 $words = "頭像檔案太大，不得大於1MB！";
-                return view('layouts.error',compact('words'));
+                return redirect()->route('error',$words);
             } else {
                 $filename = auth()->user()->username.".".$info['extension'];
                 $file->storeAs('public/' . $folder, $filename);
             }
             $att['avatar'] = $filename;
+
+            $att2['user_id'] = auth()->user()->id;
+            $att2['thing'] = "change_avatar";
+            $att2['stud_money'] = "-100";
+            $att2['description'] = "更換「頭像」扣分";
+            StudMoney::create($att2);
+
+            $user->update($att);
         }
+
+        $total_money = get_stud_total_money(auth()->user()->id);
+        if(auth()->user()->nickname != $request->input('nickname') and  $total_money < 200){
+            $words = "你改暱稱要200元，但資訊幣不夠喔！你可以靠「作業得分」、「打字」、別人「按讚」來增加喔！";
+            return redirect()->route('error',$words);
+        }elseif(auth()->user()->nickname != $request->input('nickname')){
+            $att['nickname'] = $request->input('nickname');
+
+            $att2['user_id'] = auth()->user()->id;
+            $att2['thing'] = "change_nickname";
+            $att2['stud_money'] = "-200";
+            $att2['description'] = "更換「暱稱」扣分";
+            StudMoney::create($att2);
+
+            $user->update($att);
+
+        }
+
         //處理密碼是否更新
         if (password_verify($request->input('old_password'), $user->password) and !empty($request->input('password1'))){
             $att['password'] = bcrypt($request->input('password1'));
         }
-        $att['nickname'] = $request->input('nickname');
         $att['email'] = $request->input('email');
         $att['website'] = $request->input('website');
         $user->update($att);

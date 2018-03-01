@@ -51,7 +51,7 @@ class DiscussController extends Controller
         $total_money = get_stud_total_money(auth()->user()->id);
         if($total_money < 10){
             $words = "你的資訊幣不夠喔！你可以靠「作業得分」、「打字」、別人「按讚」來增加喔！";
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }
 
         $discuss = Discuss::create($request->all());
@@ -71,7 +71,7 @@ class DiscussController extends Controller
         $total_money = get_stud_total_money(auth()->user()->id);
         if($total_money < 5){
             $words = "你的資訊幣不夠喔！你可以靠「作業得分」、「打字」、別人「按讚」來增加喔！";
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }
 
         $dis = Discuss::create($request->all());
@@ -147,7 +147,7 @@ class DiscussController extends Controller
     {
         if(!empty($discuss->user_id != auth()->user()->id)){
             $words = " 這不是你的文章，你想做什麼？！";
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }else{
             $discuss->delete();
             Discuss::where('depend_on','=',$discuss->id)->delete();
@@ -175,7 +175,7 @@ class DiscussController extends Controller
     {
         if(!empty($discuss->user_id != auth()->user()->id)){
             $words = " 這不是你的回文，你想做什麼？！";
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }else{
             $discuss->delete();
         }

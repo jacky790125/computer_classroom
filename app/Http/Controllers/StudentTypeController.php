@@ -17,12 +17,16 @@ class StudentTypeController extends Controller
     public function index()
     {
         $articles = StudTypeArticle::orderBy('words')->get();
-        $types = StudType::where('user_id','=',auth()->user()->id)
-        ->orderBy('score','DESC')->first();
-        if(empty($types)){
-            $stud_type = 0;
+        if(auth()->check()) {
+            $types = StudType::where('user_id', '=', auth()->user()->id)
+                ->orderBy('score', 'DESC')->first();
+            if (empty($types)) {
+                $stud_type = 0;
+            } else {
+                $stud_type = $types->score;
+            }
         }else{
-            $stud_type = $types->score;
+            $stud_type=null;
         }
 
         $data =[
@@ -53,7 +57,7 @@ class StudentTypeController extends Controller
             $words = "";
         }
         if(!empty($words)){
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }
 
         $type_key = "type".auth()->user()->id;
@@ -91,8 +95,13 @@ class StudentTypeController extends Controller
         }
         if($stud_type != "0"){
             if($request->input('timer') < 300){
-                $words = "你打不到五分鐘！";
-                return view('layouts.error',compact('words'));
+                $words = "你打不到五分鐘！不列入成績！";
+                return redirect()->route('error',$words);
+            }
+        }else{
+            if($request->input('timer') < 60){
+                $words = "首次打字你打不到一分鐘！不列入成績！";
+                return redirect()->route('error',$words);
             }
         }
 
@@ -127,7 +136,7 @@ class StudentTypeController extends Controller
             exit;
         }else{
             $words = "你想做什麼？";
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }
     }
 

@@ -45,9 +45,23 @@ class StudMessageController extends Controller
         $user = User::where('username','=',$to)->first();
         if(empty($user)){
             $words = "無此帳號：".$to;
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }
+
+        $total_money = get_stud_total_money(auth()->user()->id);
+        if($total_money < 10){
+            $words = "你寄件要10元，但資訊幣不夠喔！你可以靠「作業得分」、「打字」、別人「按讚」來增加喔！";
+            return redirect()->route('error',$words);
+        }
+
         StudMessage::create($request->all());
+
+        $att2['user_id'] = auth()->user()->id;
+        $att2['thing'] = "send_message";
+        $att2['stud_money'] = "-10";
+        $att2['description'] = "「寄信」要扣分";
+        StudMoney::create($att2);
+
         return redirect()->route('stud_message.index');
     }
 
@@ -56,7 +70,7 @@ class StudMessageController extends Controller
         $owner = $stud_message->to;
         if($owner != auth()->user()->username){
             $words = "你想做什麼！偷看別人信件是違法的行為！！";
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }
 
         $att['read'] = "1";
@@ -136,7 +150,7 @@ class StudMessageController extends Controller
         $user = User::where('username','=',$request->input('username'))->first();
         if(empty($user)){
             $words = "無此帳號：".$request->input('username');
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }
 
         $att2['user_id'] = $user->id;

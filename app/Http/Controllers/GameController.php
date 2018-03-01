@@ -177,7 +177,7 @@ class GameController extends Controller
         $total_money = get_stud_total_money(auth()->user()->id);
         if($total_money < $cost){
             $words = "你的資訊幣不夠喔！你可以靠「作業得分」、「打字」、別人「按讚」來增加喔！";
-            return view('layouts.error',compact('words'));
+            return redirect()->route('error',$words);
         }
 
         $att2['user_id'] = auth()->user()->id;
