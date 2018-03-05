@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page-title', '貨幣管理|和東資訊教學網')
+@section('page-title', '歷次打字|和東資訊教學網')
 
 @section('content')
 <div class="container-fluid">
