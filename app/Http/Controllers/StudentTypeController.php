@@ -129,8 +129,8 @@ class StudentTypeController extends Controller
             StudMoney::create($att2);
 
             echo "<html><body>
-			<script LANGUAGE=\"JavaScript\">\n
-			window.opener.history.go(0);\n
+			<script LANGUAGE=\"JavaScript\">
+			opener.location.reload();
        			window.close();
 			</script>
 			</body>

@@ -89,8 +89,10 @@
           <h3><i class="fa fa-bank"></i> 最新作品 Top 3</h3>
         </div>
         <div class="card-body">
+          <table class="table">
+            <tr>
           @foreach($student_tasks as $student_task)
-          <div class="col-lg-4">
+          <td>
             <div class="card mb-3">
               <div class="card-header">
                 <h4>{{ $student_task->task->title }}</h4>
@@ -102,35 +104,34 @@
                   {!! nl2br($student_task->report) !!}
                 @elseif($student_task->task->type == "img")
                   <img src="{{ url('file/'.$student_task->id) }}" width="200">
-                  <br>
-                  <a href="{{ route('download_student_task',$student_task->id) }}" class="btn btn-primary"><i class="fa fa-download"></i> 按我下載</a>
+
                 @elseif($student_task->task->type == "aud")
                   <audio src="{{ url('file/'.$student_task->id) }}" controls>
                     沒有支援這個聲音播放，請更換瀏覽器
                   </audio>
-                  <br>
-                  <a href="{{ route('download_student_task',$student_task->id) }}" class="btn btn-primary"><i class="fa fa-download"></i> 按我下載</a>
                 @elseif($student_task->task->type == "mov")
                   <video src="{{ url('file/'.$student_task->id) }}" controls>
                     沒有支援這個影片播放，請更換瀏覽器
                   </video>
-                  <br>
-                  <a href="{{ route('download_student_task',$student_task->id) }}" class="btn btn-primary"><i class="fa fa-download"></i> 按我下載</a>
                 @elseif($student_task->task->type == "scratch2")
                   <object id="flashplayer" style="display: inline; visibility: visible; position: relative; z-index: 1000;" type="application/x-shockwave-flash" data="{{ asset('Scratch.swf') }}" height="160" width="200">
                     <param name="allowScriptAccess" value="sameDomain">
                     <param name="allowFullScreen" value="true">
                     <param name="flashvars" value="project={{ url('file/'.$student_task->id) }}&autostart=false">
                   </object>
-                  <br>
-                  <a href="{{ route('download_student_task',$student_task->id) }}" class="btn btn-primary"><i class="fa fa-download"></i> 按我下載</a>
                 @elseif($student_task->task->type == "file")
+                  檔案無法預覽
+                  <br>
                   <a href="{{ route('download_student_task',$student_task->id) }}" class="btn btn-primary"><i class="fa fa-download"></i> 按我下載</a>
                 @endif
               </div>
             </div>
-          </div>
+
+          </td>
           @endforeach
+            </tr>
+          </table>
+
           <a href="{{ route('student_task.select') }}">更多作品...</a>
         </div>
       </div>
