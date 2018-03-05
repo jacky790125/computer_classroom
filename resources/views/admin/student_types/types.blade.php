@@ -12,11 +12,11 @@
     <li class="breadcrumb-item">
       <a href="{{ route('admin.index') }}">系統管理</a>
     </li>
-    <li class="breadcrumb-item active">歷次打字</li>
+    <li class="breadcrumb-item active">打字管理</li>
   </ol>
   <div class="row">
     <div class="col-12">
-      <h1><img src="{{ asset('img/title/link.png') }}" alt="好站連結logo" width="60">貨幣管理</h1>
+      <h1><img src="{{ asset('img/title/link.png') }}" alt="好站連結logo" width="60">歷次打字</h1>
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link" href="{{ route('student_type.admin_index') }}">新增文章</a>
