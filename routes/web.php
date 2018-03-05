@@ -105,6 +105,10 @@ Route::group(['middleware' => 'admin'],function() {
     Route::post('student_type/admin/store', 'StudentTypeController@admin_store')->name('student_type.admin_store');
     Route::get('student_type/admin/delete/{stud_type_article}', 'StudentTypeController@admin_delete')->name('student_type.admin_delete');
     Route::any('student_type/admin/show', 'StudentTypeController@admin_show')->name('student_type.admin_show');
+    //屆次打字
+    Route::get('student_type/admin/types', 'StudentTypeController@types')->name('student_type.admin_types');
+    Route::post('student_type/admin/destroy_check', 'StudentTypeController@destroy_check')->name('student_type.admin_destroy_check');
+
 
     //連結管理
     Route::get('link/admin/index','LinkController@index')->name('link.admin_index');
@@ -123,9 +127,6 @@ Route::group(['middleware' => 'admin'],function() {
 
     Route::post('give', 'StudMessageController@give')->name('stud_message.give');
 
-    //屆次打字
-    Route::get('money/admin/index', 'MoneyController@index')->name('money.admin_index');
-    Route::post('money/admin/destroy_check', 'MoneyController@destroy_check')->name('money.admin_destroy_check');
 
 
 });

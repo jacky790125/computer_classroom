@@ -203,6 +203,31 @@ class StudentTypeController extends Controller
         return redirect()->route('student_type.admin_index');
     }
 
+
+    public function types()
+    {
+        $moneys = StudMoney::where('thing','=','student_type')
+            ->orderBy('created_at','DESC')
+            ->orderBy('user_id')
+            ->orderBy('id','DESC')
+            ->paginate(50);
+        $data = [
+            'moneys'=>$moneys,
+        ];
+        return view('admin.student_types.types',$data);
+    }
+
+    public function destroy_check(Request $request)
+    {
+        $stud_money = $request->input('stud_money');
+        foreach($stud_money as $k => $v){
+            $stud_money = StudMoney::where('id','=',$v)->first();
+            $stud_money->delete();
+            StudType::where('id','=',$stud_money->thing_id)->delete();
+        }
+        return redirect()->route('money.admin_index');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

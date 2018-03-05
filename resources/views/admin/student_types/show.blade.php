@@ -17,7 +17,17 @@
   <div class="row">
     <div class="col-12">
       <h1><img src="{{ asset('img/title/article.png') }}" alt="打字管理logo" width="60">打字管理</h1>
-      <a href="{{ route('student_type.admin_index') }}" class="btn btn-info">新增文章</a>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('student_type.admin_index') }}">新增文章</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ route('student_type.admin_show') }}">各班打字</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('student_type.admin_types') }}">歷次打字</a>
+        </li>
+      </ul>
       <h2><i class="fa fa-plus-circle"></i> 學生成績</h2>
       <div class="card mb-3">
         <div class="card-header">

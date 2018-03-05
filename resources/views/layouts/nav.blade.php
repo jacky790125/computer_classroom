@@ -40,9 +40,6 @@
                             <li>
                                 <a href="{{ route('link.admin_index') }}">0-8.連結管理</a>
                             </li>
-                            <li>
-                                <a href="{{ route('money.admin_index') }}">0-9.屆次打字</a>
-                            </li>
                         </ul>
                     </li>
                 @endif

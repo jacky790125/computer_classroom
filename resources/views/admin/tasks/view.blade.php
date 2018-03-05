@@ -82,7 +82,7 @@
           </td>
           <td>
             @if(!empty($has_done[$student->id]['作業']) and $has_done[$student->id]['作業'] != "未指派！")
-              <a href="#" class="btn btn-primary" onclick="window.open('{{ url('admin/task/view_one/'.$has_done[$student->id]['序號']) }}', '作品', config='height=600,width=800');"><i class="fa fa-check-square"></i> 觀看作品</a>
+              <button class="btn btn-primary" onclick="window.open('{{ url('admin/task/view_one/'.$has_done[$student->id]['序號']) }}', '作品', config='height=600,width=800');"><i class="fa fa-check-square"></i> 觀看作品</button>
               <a href="{{ route('admin.task.stud_remove',$has_done[$student->id]['id']) }}" class="btn btn-danger" id="del{{ $student->id }}" onclick="bbconfirm2('del{{ $student->id }}','確定移除上傳')"?>刪除上傳</a>
             @endif
             @if($has_done[$student->id]['作業']=="未指派！")
