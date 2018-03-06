@@ -96,8 +96,8 @@ class StudentTypeController extends Controller
             $stud_type = $types->score;
         }
         if($stud_type != "0"){
-            if($request->input('timer') < 240){
-                $words = "你打不到四分鐘！不列入成績！";
+            if($request->input('timer') < 180){
+                $words = "你打不到三分鐘！不列入成績！";
                 return redirect()->route('error',$words);
             }
         }else{
