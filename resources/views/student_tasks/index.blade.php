@@ -67,7 +67,11 @@
           </td>
           <td>
             @if(empty($student_task->report))
+              @if(str_replace("-",'',substr($student_task->created_at,0,10)) < date('Ymd'))
+              <a href="#" class="btn btn-secondary disabled"><i class="fa fa-plus"></i> 逾時</a>
+              @else
               <a href="{{ route('student_task.upload',$student_task->id) }}" class="btn btn-success"><i class="fa fa-plus"></i> 我要交作業</a>
+              @endif
             @else
               <a href="{{ route('student_task.view',$student_task->id) }}" class="btn btn-primary"><i class="fa fa-eye"></i> 我要看作業</a>
             @endif
