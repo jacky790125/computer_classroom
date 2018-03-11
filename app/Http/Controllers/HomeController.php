@@ -49,14 +49,22 @@ class HomeController extends Controller
 
         //存款最多
         $user = User::where('id','<>','1')->orderBy('money','DESC')->first();
-        if(empty($user->nickname)){
-            $name = $user->username;
+        if(empty($user)){
+           $name="";
+            $top_money['id'] = "";
+            $top_money['name'] = "";
+            $top_money['money'] = "";
         }else{
-            $name = $user->nickname;
+            if(empty($user->nickname)){
+                $name = $user->username;
+            }else{
+                $name = $user->nickname;
+            }
+            $top_money['id'] = $user->id;
+            $top_money['name'] = $name;
+            $top_money['money'] = $user->money;
         }
-        $top_money['id'] = $user->id;
-        $top_money['name'] = $name;
-        $top_money['money'] = $user->money;
+
 
         //打字最快
         $type = StudType::orderBy('score','DESC')->first();
@@ -312,14 +320,22 @@ class HomeController extends Controller
 
         //存款最多
         $user = User::where('id','<>','1')->orderBy('money','DESC')->first();
-        if(empty($user->nickname)){
-            $name = $user->username;
+        if(empty($user)){
+            $name = "";
+            $top_money['id'] = "";
+            $top_money['name'] = "";
+            $top_money['money'] = "";
         }else{
-            $name = $user->nickname;
+            if(empty($user->nickname)){
+                $name = $user->username;
+            }else{
+                $name = $user->nickname;
+            }
+            $top_money['id'] = $user->id;
+            $top_money['name'] = $name;
+            $top_money['money'] = $user->money;
         }
-        $top_money['id'] = $user->id;
-        $top_money['name'] = $name;
-        $top_money['money'] = $user->money;
+
 
         //打字最快
         $type = StudType::orderBy('score','DESC')->first();

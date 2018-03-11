@@ -177,6 +177,7 @@ Route::group(['middleware' => 'auth'],function() {
 });
 //兌換遊戲首頁
 Route::get('games/index','GameController@index')->name('game.index');
+Route::get('games/do10','GameController@do10')->name('game.do10');
 
 //討論區
 Route::get('discuss/index','DiscussController@index')->name('discuss.index');

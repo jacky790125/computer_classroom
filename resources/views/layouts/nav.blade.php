@@ -80,11 +80,20 @@
                     <span class="nav-link-text">6.打字練習</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="{{ route('game.index') }}">
-                    <i class="fa fa-gamepad"></i>
-                    <span class="nav-link-text">7.遊戲兌換</span>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Setting">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSetting2" data-parent="#exampleAccordion">
+                    <i class="fa fa-fw fa-gamepad"></i>
+                    <span class="nav-link-text">7.遊樂場</span>
                 </a>
+                <ul class="sidenav-second-level collapse" id="collapseSetting2">
+                    <li>
+                        <a class="nav-link" href="{{ route('game.index') }}">1.遊戲兌換</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ route('game.do10') }}">2.十賭九輸</a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
                 <a class="nav-link" href="{{ route('discuss.index') }}">

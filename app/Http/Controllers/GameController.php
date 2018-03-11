@@ -194,4 +194,9 @@ class GameController extends Controller
         ];
         return view('games.html5_game',$data);
     }
+
+    public function do10()
+    {
+        return view('games.do10');
+    }
 }
