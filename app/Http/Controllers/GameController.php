@@ -197,14 +197,49 @@ class GameController extends Controller
 
     public function do10()
     {
+        session(['do10' => '']);
         return view('games.do10');
     }
 
     public function do10_done(Request $request)
     {
+        if(empty($request->input('set_number'))){
+            $words = "你沒有選數字啦！";
+            return redirect()->route('error',$words);
+        }
+
+        $total_money = get_stud_total_money(auth()->user()->id);
+        if($total_money < $request->input('set_money')){
+            $words = "你的資訊幣不夠喔！";
+            return redirect()->route('error',$words);
+        }
+
+        if(session('do10') != "1") {
+
+            $number = rand(0, 9);
+
+            $att2['user_id'] = auth()->user()->id;
+            $att2['thing'] = "gaming do10";
+            if ($number == $request->input('set_number')) {
+                $att2['stud_money'] = $request->input('set_money') * 10;
+                $att2['description'] = "玩「十賭九輸」贏了十倍點數！";
+            } else {
+                $att2['stud_money'] = "-" . $request->input('set_money');
+                $att2['description'] = "玩「十賭九輸」扣了點數！";
+            }
+
+            StudMoney::create($att2);
+
+            session(['do10' => '1']);
+        }else{
+            $words = "不要使用F5或是重新整理頁面喔！";
+            return redirect()->route('error',$words);
+        }
+
         $data = [
             'set_number'=>$request->input('set_number'),
             'set_money'=>$request->input('set_money'),
+            'number'=>$number,
         ];
         return view('games.do10_done',$data);
     }

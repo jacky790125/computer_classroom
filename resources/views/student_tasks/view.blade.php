@@ -59,7 +59,7 @@
     <div class="col-4">
       <h1><img src="{{ asset('img/title/teacher_pen.png') }}" alt="觀看作業logo" width="60">作業批改</h1>
       <h2><i class="fa fa-pencil"></i> 老師評比</h2>
-      <p>得分：</p>
+      <p>得分：{{ $student_task->score }}</p>
       <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-reorder"></i> 評語

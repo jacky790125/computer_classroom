@@ -84,14 +84,11 @@
       <h1><img src="{{ asset('img/title/game.png') }}" alt="遊戲logo" width="60">十賭九輸</h1>
     </div>
   </div>
-  <?php
-    $number = rand(0,9);
-    ?>
   <div class="row">
     <div class="col-12">
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-reorder"></i> 開獎：你猜的是「{{ $set_number }}」，下注「{{ $set_money }} 資訊幣」
+          <i class="fa fa-reorder"></i> 開獎：你猜的是「{{ $set_number }}」，下注「{{ $set_money }} 資訊幣」<a href="{{ route('game.do10') }}" class="btn btn-dark">返回再一次</a>
         </div>
         <div class="card-body">
           @if($number == $set_number)

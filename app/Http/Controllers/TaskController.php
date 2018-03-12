@@ -98,11 +98,22 @@ class TaskController extends Controller
             }
         }
 
+        $create_task = [];
+        $create_message = [];
+
         foreach($students as $v){
             $att1['task_id'] = $task->id;
             $att1['user_id'] = $v['id'];
             $att1['year_class_num'] = $v['year_class_num'];
-            StudentTask::create($att1);
+            $one_task = [
+                'task_id'=>$att1['task_id'],
+                'user_id'=>$att1['user_id'],
+                'year_class_num'=>$att1['year_class_num'],
+            ];
+            array_push($create_task, $one_task);
+
+
+
 
             $att2['title'] = "作業通知：".$request->input('title');
             $att2['content'] ="作業說明：".$request->input('description');
@@ -110,9 +121,23 @@ class TaskController extends Controller
             $att2['to'] = $v['username'];
             $att2['read'] = "0";
             $att2['ip'] = request()->ip();
-            StudMessage::create($att2);
+
+            $one_message = [
+                'title'=>$att2['title'],
+                'content'=>$att2['content'],
+                'from'=>$att2['from'],
+                'to'=>$att2['to'],
+                'read'=>$att2['read'],
+                'ip'=>$att2['ip'],
+            ];
+            array_push($create_message, $one_message);
+
+
 
         }
+
+        StudentTask::insert($create_task);
+        StudMessage::insert($create_message);
 
 
         return redirect()->route('admin.task.index');
