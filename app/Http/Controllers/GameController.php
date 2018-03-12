@@ -199,4 +199,13 @@ class GameController extends Controller
     {
         return view('games.do10');
     }
+
+    public function do10_done(Request $request)
+    {
+        $data = [
+            'set_number'=>$request->input('set_number'),
+            'set_money'=>$request->input('set_money'),
+        ];
+        return view('games.do10_done',$data);
+    }
 }

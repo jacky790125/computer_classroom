@@ -153,6 +153,7 @@ Route::group(['middleware' => 'auth'],function() {
 
     //兌換遊戲
     Route::get('game/{id}','GameController@html5_game')->name('game.html5_game');
+    Route::post('game/do10_done','GameController@do10_done')->name('do10_done');
 
     //討論區
     Route::get('discuss/show/{discuss}', 'DiscussController@show')->name('discuss.show');
