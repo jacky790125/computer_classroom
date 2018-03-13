@@ -86,6 +86,7 @@ class TaskController extends Controller
         $att['type'] = $request->input('type');
         $att['title'] = $request->input('title');
         $att['description'] = $request->input('description');
+        $att['close'] = $request->input('close');
         $task = Task::create($att);
 
         foreach($for as $v){
@@ -140,6 +141,17 @@ class TaskController extends Controller
         StudMessage::insert($create_message);
 
 
+        return redirect()->route('admin.task.index');
+    }
+
+    public function update_task(Task $task)
+    {
+        if($task->close == "1"){
+            $att['close'] = null;
+        }else{
+            $att['close'] = "1";
+        }
+        $task->update($att);
         return redirect()->route('admin.task.index');
     }
 

@@ -19,6 +19,7 @@ class CreateTasksTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('for');
+            $table->unsignedInteger('close')->nullable();//1停用,0是個啟用
             $table->timestamps();
         });
     }

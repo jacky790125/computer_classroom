@@ -203,7 +203,7 @@ class GameController extends Controller
 
     public function do10_done(Request $request)
     {
-        if(empty($request->input('set_number'))){
+        if(empty($request->input('set_number')) and $request->input('set_number') != "0"){
             $words = "你沒有選數字啦！";
             return redirect()->route('error',$words);
         }

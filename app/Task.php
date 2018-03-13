@@ -11,6 +11,7 @@ class Task extends Model
         'title',
         'description',
         'for',
+        'close',
     ];
     public function student_tasks()
     {

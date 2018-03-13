@@ -65,6 +65,7 @@ Route::group(['middleware' => 'admin'],function() {
 
     //作業管理
     Route::get('admin/task', 'TaskController@index')->name('admin.task.index');
+    Route::post('admin/task/{task}', 'TaskController@update_task')->name('admin.task.update');
     Route::post('admin/task', 'TaskController@store')->name('admin.task.store');
     Route::get('admin/task/destroy{task}', 'TaskController@destroy')->name('admin.task.destroy');
     Route::get('admin/task/view/{select}/{for}/{task_id}', 'TaskController@view')->name('admin.task.view');

@@ -41,6 +41,9 @@
           <th>
             對象
           </th>
+          <th>
+            停用?
+          </th>
           <th width="250">
             動作
           </th>
@@ -63,6 +66,9 @@
             {{ Form::select('for[]', $groups, null, ['id' => 'for', 'class' => 'form-control','multiple'=>'multiple','placeholder'=>'請多選群組']) }}
           </td>
           <td>
+            <input type="checkbox" name="close" value="1">停用
+          </td>
+          <td>
             <a href="#" class="btn btn-success" onclick="bbconfirm('store_task','確定新增作業？')"><i class="fa fa-plus"></i> 新增作業</a>
           </td>
         </tr>
@@ -83,6 +89,20 @@
             </td>
             <td>
               id：{{ $task->for }}
+            </td>
+            <td>
+              <?php
+                if($task->close==1){
+                    $c = "btn-warning";
+                    $t = "已停";
+                }else{
+                    $c = "btn-success";
+                    $t = "可用";
+                }
+              ?>
+                {{ Form::open(['route' => ['admin.task.update',$task->id], 'method' => 'POST','id'=>'update'.$task->id,'onsubmit'=>'return false;']) }}
+              <a href="#" class="btn {{ $c }}" onclick="bbconfirm('update{{ $task->id }}','確定？')">{{ $t }}</a>
+                {{ Form::close() }}
             </td>
             <td>
               <?php
