@@ -591,7 +591,9 @@ class HomeController extends Controller
 
     public function view_stud_money()
     {
-        $stud_moneys = StudMoney::where('user_id','=',auth()->user()->id)->orderBy('id','DESC')->get();
+        $stud_moneys = StudMoney::where('user_id','=',auth()->user()->id)
+            ->orderBy('id','DESC')
+            ->paginate(30);
 
         return view('view_stud_money',compact('stud_moneys'));
     }

@@ -54,6 +54,9 @@
         @endforeach
         </tbody>
       </table>
+      <nav class="nav-item" aria-label="Page navigation">
+        {{ $stud_moneys->links('vendor.pagination.bootstrap-4') }}
+      </nav>
     </div>
   </div>
 </div>
