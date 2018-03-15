@@ -134,7 +134,7 @@ Route::group(['middleware' => 'admin'],function() {
 
 //註冊會員才能看
 Route::group(['middleware' => 'auth'],function() {
-    Route::get('computer', 'ComputerController@index')->name('computer.index');
+    Route::get('computer/{thing}', 'ComputerController@index')->name('computer.index');
     Route::post('personal_info_update/{user}','HomeController@personal_info_update')->name('personal_info.update');
     Route::get('student_task/{student_task}/upload', 'StudentTaskController@upload')->name('student_task.upload');
     Route::post('student_task/{student_task}/store', 'StudentTaskController@store')->name('student_task.store');

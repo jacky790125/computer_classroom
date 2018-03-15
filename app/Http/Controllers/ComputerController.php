@@ -11,9 +11,21 @@ class ComputerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($thing)
     {
-        return view('computers.index');
+        $com = [
+            'monitor'=>'螢幕',
+            'speaker'=>'喇叭',
+            'keyboard'=>'鍵盤',
+            'mouse'=>'滑鼠',
+            'case'=>'主機',
+            'show'=>'請選購電腦配備',
+        ];
+        $data = [
+            'thing'=>$thing,
+            'com'=>$com,
+        ];
+        return view('computers.index',$data);
     }
 
     /**

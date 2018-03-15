@@ -135,7 +135,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('computer.index') }}" class="nav-link"><i class="fa fa-fw fa-desktop"></i> 我的小資資</a>
+                <a href="{{ url('computer/show') }}" class="nav-link"><i class="fa fa-fw fa-desktop"></i> 我的小資資</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
