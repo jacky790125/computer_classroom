@@ -93,7 +93,7 @@
             </tr><tr>
               @endif
               <td>
-                <img src="{{ asset('img/computer/case/02cpu/0'.$i.'.png') }}" width="128">
+                <img src="{{ asset('img/computer/case/02CPU/0'.$i.'.png') }}" width="128">
               </td>
               @endfor
             </tr>
