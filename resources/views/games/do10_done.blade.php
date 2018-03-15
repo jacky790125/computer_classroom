@@ -108,7 +108,7 @@
                 @if($number == $set_number)
                   <img src="{{ asset('img/good.gif') }}" width="300">
                 @else
-                  <img src="{{ asset('img/seeyou.jpeg') }}" width="300">
+                  <img src="{{ asset('img/seeyou/'.$number.'.jpg') }}" width="300">
                 @endif
               </td>
             </tr>

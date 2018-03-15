@@ -11,10 +11,29 @@
     <script src="{{ asset('sb_admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <title>@yield('page-title')</title>
     @include('layouts.head_css')
+
+    <style type="text/css">
+        body {
+            cursor: url('{{ asset('cursor/02/left_ptr.cur') }}'), default;
+        }
+        a{
+            cursor: url('{{ asset('cursor/02/pointer.cur') }}'), default;
+        }
+
+        input[type="text"],textarea{
+            cursor: url('{{ asset('cursor/02/xterm.cur') }}'), default;
+        }
+        input[type="radio"],input[type="checkbox"]{
+            cursor: url('{{ asset('cursor/02/center_ptr.cur') }}'), default;
+        }
+        select{
+            cursor: url('{{ asset('cursor/02/plus.cur') }}'),default;
+        }
+
+    </style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top" onselectstart="return false;" ondragstart="return false;" oncontextmenu="return false;">
-<!-- Navigation-->
 
 @include('layouts.nav')
 <div class="content-wrapper">
