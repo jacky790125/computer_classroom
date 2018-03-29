@@ -19,8 +19,10 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::get('/', 'HomeController@index')->name('index');
-Route::any('/index', 'HomeController@index')->name('index');
+Route::any('/index', 'PostController@index')->name('index');
 Route::any('/index2', 'HomeController@index2')->name('index2');
+Route::any('/index3', 'HomeController@index3')->name('index3');
+Route::any('/index4', 'HomeController@index4')->name('index4');
 
 
 Route::group(['middleware' => 'admin'],function(){
@@ -134,7 +136,6 @@ Route::group(['middleware' => 'admin'],function() {
 
 //註冊會員才能看
 Route::group(['middleware' => 'auth'],function() {
-    Route::get('computer/{thing}', 'ComputerController@index')->name('computer.index');
     Route::post('personal_info_update/{user}','HomeController@personal_info_update')->name('personal_info.update');
     Route::get('student_task/{student_task}/upload', 'StudentTaskController@upload')->name('student_task.upload');
     Route::post('student_task/{student_task}/store', 'StudentTaskController@store')->name('student_task.store');
@@ -222,3 +223,5 @@ Route::get('download_file/{student_task}', 'StudentTaskController@downloadFile')
 
 //錯誤
 Route::get('error/{word}', 'ErrorController@index')->name('error');
+
+Route::get('computer/{thing}', 'ComputerController@index')->name('computer.index');

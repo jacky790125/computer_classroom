@@ -157,6 +157,7 @@
           </table>
         </div>
       </div>
+      <a href="https://www.moedict.tw/%E5%8D%81%E8%B3%AD%E4%B9%9D%E8%BC%B8" target="_blank"><img src="{{ asset('img/do102.png') }}"></a>
     </div>
   </div>
   @else

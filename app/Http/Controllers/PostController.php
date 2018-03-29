@@ -45,7 +45,7 @@ class PostController extends Controller
         $att['user_id'] = auth()->user()->id;
         $att['view'] = "0";
         Post::create($att);
-        return redirect()->route('post.index');
+        return redirect()->route('index');
     }
 
     //ajax view值+1
@@ -107,7 +107,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         $post->update($request->all());
-        return redirect()->route('post.index');
+        return redirect()->route('index');
     }
 
     /**
@@ -119,7 +119,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('post.index');
+        return redirect()->route('index');
     }
 
     public function admin_post()

@@ -6,15 +6,27 @@
 <div class="container-fluid">
   <!-- Breadcrumbs-->
   <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <a href="{{ route('index') }}">儀表統計</a>
-    </li>
-    <li class="breadcrumb-item active">公告系統</li>
+    <li class="breadcrumb-item">儀表統計</li>
+    <li class="breadcrumb-item active">最新公告</li>
   </ol>
   <div class="row">
     <div class="col-12">
       <h1><img src="{{ asset('img/title/post.png') }}" alt="公告系統logo" width="60">公告系統</h1>
-    @if(auth()->check())
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ route('index') }}">最新公告</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('index2') }}">最新作品</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('index3') }}">最新校排名</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('index4') }}">最新班排名</a>
+        </li>
+      </ul>
+      @if(auth()->check())
         @if(auth()->user()->group_id == "1")
         <div class="text-right">
           <a class="btn btn-success btn-xs" href="{{ route('post.create') }}" role="button"><i class="fa fa-plus"></i> 新增公告</a>

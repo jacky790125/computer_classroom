@@ -45,9 +45,9 @@
                 @endif
             @endif
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Post">
-                <a class="nav-link" href="{{ route('post.index') }}">
-                    <i class="fa fa-bullhorn"></i>
-                    <span class="nav-link-text">1.本站公告</span>
+                <a class="nav-link" href="{{ url('computer/show') }}">
+                    <i class="fa fa-desktop"></i>
+                    <span class="nav-link-text">1.我的小資資</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
@@ -133,9 +133,6 @@
                     ({{ auth()->user()->nickname }})
                     @endif
                 </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ url('computer/show') }}" class="nav-link"><i class="fa fa-fw fa-desktop"></i> 我的小資資</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
