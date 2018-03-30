@@ -364,6 +364,11 @@ class TestController extends Controller
 
     public function score_index(Request $request)
     {
+        $class_array = [];
+        $group_id = "";
+        $score = [];
+        $students = [];
+
         $test_menu = Test::orderBy('id','DESC')->pluck('title', 'id')->toArray();
         $test_id = (empty($request->input('test_id')))?null:$request->input('test_id');
         if(!empty($test_id)){
@@ -390,13 +395,7 @@ class TestController extends Controller
                 $students[$user->id]['sex'] = $user->sex;
             }
 
-        }else{
-            $class_array = [];
-            $group_id = "";
-            $score = [];
-            $students = [];
         }
-
 
 
         $data=[
