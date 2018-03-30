@@ -26,6 +26,7 @@
           <a class="nav-link" href="{{ route('index4') }}">最新班排名</a>
         </li>
       </ul>
+      <br>
       @if(auth()->check())
         @if(auth()->user()->group_id == "1")
         <div class="text-right">
