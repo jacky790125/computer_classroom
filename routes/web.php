@@ -73,7 +73,7 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('admin/task/view/{select}/{for}/{task_id}', 'TaskController@view')->name('admin.task.view');
     Route::get('admin/task/view_one/{student_task}', 'TaskController@view_one')->name('admin.task.view_one');
     Route::get('admin/task/add_student_task/{task_id}/{user_id}', 'TaskController@add_student_task')->name('add_student_task');
-    Route::post('admin/task/stud_store', 'TaskController@stud_store')->name('admin.task.stud_store');
+    Route::post('stud_store', 'TaskController@stud_store')->name('admin.task.stud_store');
     Route::get('admin/task/stud_remove/{student_task}', 'TaskController@stud_remove')->name('admin.task.stud_remove');
 
 
