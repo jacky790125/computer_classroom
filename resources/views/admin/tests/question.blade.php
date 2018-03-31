@@ -67,7 +67,7 @@
                           </td>
                           <td>
                               @if(!empty($question->title_img))
-                                  <a href="#" onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'title_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></a> <a href="{{ route('admin.test.question_delete_img',['img'=>'title_img','id'=>$question->id]) }}" id="del_title_img{{ $question->id }}" onclick="bbconfirm2('del_title_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
+                                  <button onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'title_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button> <a href="{{ route('admin.test.question_delete_img',['img'=>'title_img','id'=>$question->id]) }}" id="del_title_img{{ $question->id }}" onclick="bbconfirm2('del_title_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
                               @endif
                               <input type="file" name="file[title_img]">
                           </td>
@@ -79,7 +79,7 @@
                           </td>
                           <td>
                               @if(!empty($question->ans_A_img))
-                                  <a href="#" onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'ans_A_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></a> <a href="{{ route('admin.test.question_delete_img',['img'=>'ans_A_img','id'=>$question->id]) }}" id="del_ans_A_img{{ $question->id }}" onclick="bbconfirm2('del_ans_A_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
+                                  <button onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'ans_A_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button> <a href="{{ route('admin.test.question_delete_img',['img'=>'ans_A_img','id'=>$question->id]) }}" id="del_ans_A_img{{ $question->id }}" onclick="bbconfirm2('del_ans_A_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
                               @endif
                               <input type="file" name="file[ans_A_img]">
                           </td>
@@ -90,7 +90,7 @@
                           </td>
                           <td>
                               @if(!empty($question->ans_B_img))
-                                  <a href="#" onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'ans_B_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></a> <a href="{{ route('admin.test.question_delete_img',['img'=>'ans_B_img','id'=>$question->id]) }}" id="del_ans_B_img{{ $question->id }}" onclick="bbconfirm2('del_ans_B_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
+                                  <button onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'ans_B_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button> <a href="{{ route('admin.test.question_delete_img',['img'=>'ans_B_img','id'=>$question->id]) }}" id="del_ans_B_img{{ $question->id }}" onclick="bbconfirm2('del_ans_B_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
                               @endif
                               <input type="file" name="file[ans_B_img]">
                           </td>
@@ -101,7 +101,7 @@
                           </td>
                           <td>
                               @if(!empty($question->ans_C_img))
-                                  <a href="#" onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'ans_C_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></a> <a href="{{ route('admin.test.question_delete_img',['img'=>'ans_C_img','id'=>$question->id]) }}" id="del_ans_C_img{{ $question->id }}" onclick="bbconfirm2('del_ans_C_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
+                                  <button onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'ans_C_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button> <a href="{{ route('admin.test.question_delete_img',['img'=>'ans_C_img','id'=>$question->id]) }}" id="del_ans_C_img{{ $question->id }}" onclick="bbconfirm2('del_ans_C_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
                               @endif
                               <input type="file" name="file[ans_C_img]">
                           </td>
@@ -112,7 +112,7 @@
                           </td>
                           <td>
                               @if(!empty($question->ans_D_img))
-                                  <a href="#" onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'ans_D_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></a> <a href="{{ route('admin.test.question_delete_img',['img'=>'ans_D_img','id'=>$question->id]) }}" id="del_ans_D_img{{ $question->id }}" onclick="bbconfirm2('del_ans_D_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
+                                  <button onclick="openwindow('{{ route('admin.test.question_view_img',['img'=>'ans_D_img','id'=>$question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button> <a href="{{ route('admin.test.question_delete_img',['img'=>'ans_D_img','id'=>$question->id]) }}" id="del_ans_D_img{{ $question->id }}" onclick="bbconfirm2('del_ans_D_img{{ $question->id }}','要刪除照片？')"><img src="{{ asset('img/p_del.png') }}"></a>
                               @endif
                               <input type="file" name="file[ans_D_img]">
                           </td>

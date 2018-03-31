@@ -33,11 +33,11 @@
     <div class="col-lg-12">
       <div class="card mb-3">
         <div class="card-header">
-          <h3><i class="fa fa-users"></i> 群組各項排名</h3>
+          <h3><i class="fa fa-users"></i> 班級各項排名</h3>
         </div>
         <div class="card-body">
           {{ Form::open(['route' => 'index4', 'method' => 'POST']) }}
-          {{ Form::select('group_id', $groups, $group, ['id' => 'group_id','placeholder'=>'-->請先選擇群組','class' => 'form-control','onchange'=>'if(this.value != 0) { this.form.submit(); }']) }}
+          {{ Form::select('group_id', $groups, $group, ['id' => 'group_id','placeholder'=>'-->請先選擇班級','class' => 'form-control','onchange'=>'if(this.value != 0) { this.form.submit(); }']) }}
           {{ Form::close() }}
         </div>
       </div>
@@ -47,7 +47,7 @@
       <!-- Example Bar Chart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-bar-chart"></i> 存款 Top 3
+          <i class="fa fa-bar-chart"></i> 班級存款 Top 10
         </div>
         <div class="card-body">
         @if($group)
@@ -61,9 +61,13 @@
             </thead>
             <tbody>
             <?php $i = 1; ?>
-            @foreach($top_money3 as $k => $v)
+            @foreach($top_money5 as $k => $v)
             <tr>
-              <td>{{ $i }} @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif</td>
+              <td>{{ $i }}
+                @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                @if($i == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                @if($i == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+              </td>
               <?php $name = (empty($user_data[$k]['nickname']))?$user_data[$k]['username']:$user_data[$k]['nickname'];  ?>
               <td class="text-primary"><img src="{{ url('avatars/'.$k) }}" width="30" height="30" class="rounded-circle">{{ $name }}</td>
               <td>{{ $v }} 元</td>
@@ -80,7 +84,7 @@
       <!-- Example Pie Chart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-pie-chart"></i> 打字 Top 3
+          <i class="fa fa-pie-chart"></i> 班級打字 Top 10
         </div>
         <div class="card-body">
           @if($group)
@@ -95,9 +99,14 @@
               </thead>
               <tbody>
               <?php $i = 1; ?>
-              @foreach($top_type3 as $k => $v)
+              @foreach($top_type5 as $k => $v)
                 <tr>
-                  <td>{{ $i }} @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif</td>
+                  <td>
+                    {{ $i }}
+                    @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                    @if($i == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                    @if($i == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                  </td>
                     <?php $name = (empty($user_data[$k]['nickname']))?$user_data[$k]['username']:$user_data[$k]['nickname'];  ?>
                   <td class="text-primary"><img src="{{ url('avatars/'.$k) }}" width="30" height="30" class="rounded-circle">{{ $name }}</td>
                   <td>{{ $v }} 字/分</td>
@@ -115,7 +124,7 @@
       <!-- Example Bar Chart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-files-o"></i> 發表文章 Top 3
+          <i class="fa fa-files-o"></i> 班級發表文章 Top 10
         </div>
         <div class="card-body">
           @if($group)
@@ -129,9 +138,14 @@
               </thead>
               <tbody>
               <?php $i = 1; ?>
-              @foreach($top_discuss3 as $k => $v)
+              @foreach($top_discuss5 as $k => $v)
                 <tr>
-                  <td>{{ $i }} @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif</td>
+                  <td>
+                    {{ $i }}
+                    @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                    @if($i == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                    @if($i == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                  </td>
                     <?php $name = (empty($user_data[$k]['nickname']))?$user_data[$k]['username']:$user_data[$k]['nickname'];  ?>
                   <td class="text-primary"><img src="{{ url('avatars/'.$k) }}" width="30" height="30" class="rounded-circle">{{ $name }}</td>
                   <td>{{ $v }} 篇</td>
@@ -148,7 +162,7 @@
       <!-- Example Bar Chart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-gamepad"></i> 遊戲次數 Top 3
+          <i class="fa fa-gamepad"></i> 班級遊戲次數 Top 10
         </div>
         <div class="card-body">
           @if($group)
@@ -162,9 +176,13 @@
               </thead>
               <tbody>
               <?php $i = 1; ?>
-              @foreach($top_game3 as $k => $v)
+              @foreach($top_game5 as $k => $v)
                 <tr>
-                  <td>{{ $i }} @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif</td>
+                  <td>{{ $i }}
+                    @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                    @if($i == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                    @if($i == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                  </td>
                     <?php $name = (empty($user_data[$k]['nickname']))?$user_data[$k]['username']:$user_data[$k]['nickname'];  ?>
                   <td class="text-primary"><img src="{{ url('avatars/'.$k) }}" width="30" height="30" class="rounded-circle">{{ $name }}</td>
                   <td>{{ $v }} 次</td>
@@ -183,7 +201,7 @@
       <!-- Example Bar Chart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-thumbs-up"></i> 作品按讚 Top 10
+          <i class="fa fa-thumbs-up"></i> 班級作品按讚 Top 10
         </div>
         <div class="card-body">
           @if($group)
@@ -197,9 +215,13 @@
               </thead>
               <tbody>
               <?php $i = 1; ?>
-              @foreach($top_like10 as $k => $v)
+              @foreach($top_like5 as $k => $v)
                 <tr>
-                  <td>{{ $i }} @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif</td>
+                  <td>{{ $i }}
+                    @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                    @if($i == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                    @if($i == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                  </td>
                     <?php $name = (empty($user_data[$k]['nickname']))?$user_data[$k]['username']:$user_data[$k]['nickname'];  ?>
                   <td class="text-primary"><img src="{{ url('avatars/'.$k) }}" width="30" height="30" class="rounded-circle">{{ $name }}</td>
                   <td><a href="#" class="btn btn-info" onclick="openwindow('{{ url('student_task/view_one/'.$user_data[$k]['like']) }}')">{{ $v }} 次</a></td>
@@ -216,7 +238,7 @@
       <!-- Example Bar Chart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-eye"></i> 作品觀看 Top 10
+          <i class="fa fa-eye"></i> 班級作品觀看 Top 10
         </div>
         <div class="card-body">
           @if($group)
@@ -230,9 +252,13 @@
               </thead>
               <tbody>
               <?php $i = 1; ?>
-              @foreach($top_view10 as $k => $v)
+              @foreach($top_view5 as $k => $v)
                 <tr>
-                  <td>{{ $i }} @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif</td>
+                  <td>{{ $i }}
+                    @if($i == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                    @if($i == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                    @if($i == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                  </td>
                     <?php $name = (empty($user_data[$k]['nickname']))?$user_data[$k]['username']:$user_data[$k]['nickname'];  ?>
                   <td class="text-primary"><img src="{{ url('avatars/'.$k) }}" width="30" height="30" class="rounded-circle">{{ $name }}</td>
                   <td><a href="#" class="btn btn-info" onclick="openwindow('{{ url('student_task/view_one/'.$user_data[$k]['view']) }}')">{{ $v }} 次</a></td>

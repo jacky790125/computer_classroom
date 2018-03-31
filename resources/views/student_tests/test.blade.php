@@ -31,7 +31,12 @@
             @if(!empty($question_data[$q[1]]['img_title']))
             <?php $img= str_replace('/','-',$question_data[$q[1]]['img_title']); ?>
               <td>
-                <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+                <?php list($width,$height,$type,$attr)=getimagesize('../storage/app/'.$question_data[$q[1]]['img_title']); ?>
+                  @if($width > 300)
+                    <img src="{{ url('question/view_img/'.$img) }}" width="300"></a>
+                  @else
+                    <img src="{{ url('question/view_img/'.$img) }}"></a>
+                  @endif
               </td>
             @endif
             </tr>
@@ -48,7 +53,7 @@
                 </div>
                 @if(!empty($question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_1'],0,1)]))
                   <?php $img= str_replace('/','-',$question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_1'],0,1)]); ?>
-                  <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+                  <img src="{{ url('question/view_img/'.$img) }}" width="100"></a>
                 @endif
               </td>
             </tr>
@@ -62,7 +67,7 @@
                 </div>
                 @if(!empty($question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_2'],0,1)]))
                       <?php $img= str_replace('/','-',$question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_2'],0,1)]); ?>
-                  <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+                  <img src="{{ url('question/view_img/'.$img) }}" width="100"></a>
                 @endif
               </td>
             </tr>
@@ -76,7 +81,7 @@
                 </div>
                 @if(!empty($question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_3'],0,1)]))
                       <?php $img= str_replace('/','-',$question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_3'],0,1)]); ?>
-                  <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+                  <img src="{{ url('question/view_img/'.$img) }}" width="100"></a>
                 @endif
               </td>
             </tr>
@@ -90,7 +95,7 @@
                 </div>
                 @if(!empty($question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_4'],0,1)]))
                       <?php $img= str_replace('/','-',$question_data[$q[1]]['img_'.substr($question_data[$q[1]]['ans_4'],0,1)]); ?>
-                  <img src="{{ url('question/view_img/'.$img) }}" width="500"></a>
+                  <img src="{{ url('question/view_img/'.$img) }}" width="100"></a>
                 @endif
               </td>
             </tr>

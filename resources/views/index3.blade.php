@@ -30,49 +30,242 @@
   </div>
   <br>
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
+      <!-- Example Bar Chart Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <h3><i class="fa fa-address-card-o"></i> 全部排名</h3>
+          <i class="fa fa-bar-chart"></i> 全校存款 Top 10
         </div>
         <div class="card-body">
-          <table class="table">
+          <table class="table table-hover">
             <thead>
             <tr>
-              <th>存款最多</th>
-              <th>打字最快</th>
-              <th>文章最多</th>
-              <th>最愛遊戲</th>
-              <th>作品最讚</th>
-              <th>最多人看</th>
+              <th>名次</th>
+              <th>學生名稱</th>
+              <th>存款</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>
-                <img src="{{ url('avatars/'.$top_money['id']) }}" width="30" height="30" class="rounded-circle">{{ $top_money['name'] }} <a href="#" class="btn btn-info">{{ $top_money['money'] }} 元</a>
-              </td>
-              <td>
-                <img src="{{ url('avatars/'.$top_type['id']) }}" width="30" height="30" class="rounded-circle">{{ $top_type['name'] }} <a href="#" class="btn btn-info">{{ $top_type['type'] }} 字/分</a>
-              </td>
-              <td>
-                <img src="{{ url('avatars/'.$top_discuss['id']) }}" width="30" height="30" class="rounded-circle">{{ $top_discuss['name'] }} <a href="#" class="btn btn-info">{{ $top_discuss['num'] }} 篇</a>
-              </td>
-              <td>
-                <img src="{{ url('avatars/'.$top_game['id']) }}" width="30" height="30" class="rounded-circle">{{ $top_game['name'] }} <a href="#" class="btn btn-info">{{ $top_game['num'] }} 次</a>
-              </td>
-              <td>
-                <img src="{{ url('avatars/'.$top_like['id']) }}" width="30" height="30" class="rounded-circle">{{ $top_like['name'] }} <a href="#" class="btn btn-info">{{ $top_like['like'] }} 次</a>
-              </td>
-              <td>
-                <img src="{{ url('avatars/'.$top_view['id']) }}" width="30" height="30" class="rounded-circle">{{ $top_view['name'] }} <a href="#" class="btn btn-info">{{ $top_view['view'] }} 次</a>
-              </td>
-            </tr>
+            @foreach($top_money10 as $k => $v)
+              <tr>
+                <td>
+                  {{ $k }}
+                  @if($k == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                  @if($k == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                  @if($k == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                </td>
+                <td>
+                  <img src="{{ url('avatars/'.$v['id']) }}" width="30" height="30" class="rounded-circle">{{ $v['name'] }}
+                </td>
+                <td>
+                  {{ $v['money'] }} 元
+                </td>
+              </tr>
+            @endforeach
             </tbody>
           </table>
         </div>
       </div>
     </div>
+
+    <div class="col-lg-6">
+      <!-- Example Bar Chart Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-bar-chart"></i> 全校打字 Top 10
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>名次</th>
+              <th>學生名稱</th>
+              <th>打字速度</th>
+              <th>文章</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($top_type10 as $k => $v)
+              <tr>
+                <td>
+                  {{ $k }}
+                  @if($k == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                  @if($k == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                  @if($k == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                </td>
+                <td>
+                  <img src="{{ url('avatars/'.$v['id']) }}" width="30" height="30" class="rounded-circle">{{ $v['name'] }}
+                </td>
+                <td>
+                  {{ $v['type'] }} 字/分
+                </td>
+                <td>
+                  {{ $v['article'] }}
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <!-- Example Bar Chart Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-bar-chart"></i> 全校發表文章 Top 10
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>名次</th>
+              <th>學生名稱</th>
+              <th>發表篇數</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($top_discuss10 as $k => $v)
+              <tr>
+                <td>
+                  {{ $k }}
+                  @if($k == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                  @if($k == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                  @if($k == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                </td>
+                <td>
+                  <img src="{{ url('avatars/'.$v['id']) }}" width="30" height="30" class="rounded-circle">{{ $v['name'] }}
+                </td>
+                <td>
+                  {{ $v['num'] }} 篇
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-6">
+      <!-- Example Bar Chart Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-bar-chart"></i> 全校遊戲次數 Top 10
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>名次</th>
+              <th>學生名稱</th>
+              <th>次數</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($top_game10 as $k => $v)
+              <tr>
+                <td>
+                  {{ $k }}
+                  @if($k == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                  @if($k == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                  @if($k == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                </td>
+                <td>
+                  <img src="{{ url('avatars/'.$v['id']) }}" width="30" height="30" class="rounded-circle">{{ $v['name'] }}
+                </td>
+                <td>
+                  {{ $v['num'] }} 次
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-6">
+      <!-- Example Bar Chart Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-bar-chart"></i> 全校作品按讚 Top 10
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>名次</th>
+              <th>學生名稱</th>
+              <th>次數</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($top_like10 as $k => $v)
+              <tr>
+                <td>
+                  {{ $k }}
+                  @if($k == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                  @if($k == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                  @if($k == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                </td>
+                <td>
+                  <img src="{{ url('avatars/'.$v['id']) }}" width="30" height="30" class="rounded-circle">{{ $v['name'] }}
+                </td>
+                <td>
+                  {{ $v['like'] }} 次
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-6">
+      <!-- Example Bar Chart Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-bar-chart"></i> 全校作品觀看 Top 10
+        </div>
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>名次</th>
+              <th>學生名稱</th>
+              <th>次數</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($top_view10 as $k => $v)
+              <tr>
+                <td>
+                  {{ $k }}
+                  @if($k == 1)<img src="{{ asset('img/crown.png') }}">@endif
+                  @if($k == 2)<img src="{{ asset('img/silver.png') }}">@endif
+                  @if($k == 3)<img src="{{ asset('img/bronze.png') }}">@endif
+                </td>
+                <td>
+                  <img src="{{ url('avatars/'.$v['id']) }}" width="30" height="30" class="rounded-circle">{{ $v['name'] }}
+                </td>
+                <td>
+                  {{ $v['view'] }} 次
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </div>
 @endsection
