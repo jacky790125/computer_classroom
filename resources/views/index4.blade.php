@@ -17,7 +17,7 @@
           <a class="nav-link" href="{{ route('index') }}">最新公告</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('index2') }}">最新作品</a>
+          <a class="nav-link" href="{{ route('index2') }}">最新隨機作品</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('index3') }}">最新校排名</a>

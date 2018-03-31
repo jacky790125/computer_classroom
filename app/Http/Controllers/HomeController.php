@@ -41,7 +41,8 @@ class HomeController extends Controller
         $student_tasks = StudentTask::where('report','<>',null)
             ->where('public','=','1')
             ->orderBy('updated_at','DESC')
-            ->paginate(3);
+            ->paginate(400)
+            ->shuffle();
 
         $data = [
             'student_tasks'=>$student_tasks,
