@@ -197,6 +197,11 @@ Route::any('student_task/open', 'StudentTaskController@open')->name('student_tas
 Route::post('student_task/likes', 'StudentTaskController@likes')->name('student_task.likes');
 Route::post('student_task/views', 'StudentTaskController@views')->name('student_task.views');
 Route::get('student_task/view_one/{student_task}', 'StudentTaskController@view_one')->name('student_task.view_one');
+
+//公開的單一作業
+Route::get('view_student_task/{student_task}', 'HomeController@view_student_task')->name('view_student_task');
+
+
 //學生測驗首頁
 Route::get('student_test/index', 'TestController@student_test_index')->name('student_test.index');
 

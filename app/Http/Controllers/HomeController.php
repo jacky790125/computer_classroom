@@ -177,6 +177,7 @@ class HomeController extends Controller
                 $top_like10[$i]['id'] = $like->user->id;
                 $top_like10[$i]['name'] = $name;
                 $top_like10[$i]['like'] = $like->likes;
+                $top_like10[$i]['task_id'] = $like->id;
                 $i++;
             }
         }
@@ -197,6 +198,7 @@ class HomeController extends Controller
                 $top_view10[$i]['id'] = $view->user->id;
                 $top_view10[$i]['name'] = $name;
                 $top_view10[$i]['view'] = $view->views;
+                $top_view10[$i]['task_id'] = $view->id;
                 $i++;
             }
         }
@@ -345,6 +347,14 @@ class HomeController extends Controller
             'user_data'=>$user_data,
         ];
         return view('index4',$data);
+    }
+
+    public function view_student_task(StudentTask $student_task)
+    {
+        $data = [
+            'student_task'=>$student_task,
+        ];
+        return view('view_student_task',$data);
     }
 
     public function admin()

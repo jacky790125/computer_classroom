@@ -224,7 +224,9 @@
                   </td>
                     <?php $name = (empty($user_data[$k]['nickname']))?$user_data[$k]['username']:$user_data[$k]['nickname'];  ?>
                   <td class="text-primary"><img src="{{ url('avatars/'.$k) }}" width="30" height="30" class="rounded-circle">{{ $name }}</td>
-                  <td><a href="#" class="btn btn-info" onclick="openwindow('{{ url('student_task/view_one/'.$user_data[$k]['like']) }}')">{{ $v }} 次</a></td>
+                  <td>
+                    <a href="{{ route('view_student_task',$user_data[$k]['like']) }}" class="btn btn-info">{{ $v }} 次</a>
+                  </td>
                 </tr>
                 <?php $i++; ?>
               @endforeach
@@ -261,7 +263,9 @@
                   </td>
                     <?php $name = (empty($user_data[$k]['nickname']))?$user_data[$k]['username']:$user_data[$k]['nickname'];  ?>
                   <td class="text-primary"><img src="{{ url('avatars/'.$k) }}" width="30" height="30" class="rounded-circle">{{ $name }}</td>
-                  <td><a href="#" class="btn btn-info" onclick="openwindow('{{ url('student_task/view_one/'.$user_data[$k]['view']) }}')">{{ $v }} 次</a></td>
+                  <td>
+                    <a href="{{ route('view_student_task',$user_data[$k]['view']) }}" class="btn btn-info">{{ $v }} 次</a>
+                  </td>
                 </tr>
                 <?php $i++; ?>
               @endforeach

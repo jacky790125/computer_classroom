@@ -216,7 +216,7 @@
                   <img src="{{ url('avatars/'.$v['id']) }}" width="30" height="30" class="rounded-circle">{{ $v['name'] }}
                 </td>
                 <td>
-                  {{ $v['like'] }} 次
+                  <a href="{{ route('view_student_task',$v['task_id']) }}" class="btn btn-info">{{ $v['like'] }} 次</a>
                 </td>
               </tr>
             @endforeach
@@ -255,7 +255,7 @@
                   <img src="{{ url('avatars/'.$v['id']) }}" width="30" height="30" class="rounded-circle">{{ $v['name'] }}
                 </td>
                 <td>
-                  {{ $v['view'] }} 次
+                  <a href="{{ route('view_student_task',$v['task_id']) }}" class="btn btn-info">{{ $v['view'] }} 次</a>
                 </td>
               </tr>
             @endforeach
