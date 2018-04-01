@@ -15,6 +15,16 @@
       <div class="col-12">
         <h1><img src="{{ asset('img/title/discuss.png') }}" alt="大家討論logo" width="60">大家討論</h1>
         @if(auth()->check())
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">大家討論</a>
+            </li>
+            @if(auth()->user()->group_id == 1)
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('discuss.index2') }}">依發表時間列出</a>
+              </li>
+            @endif
+          </ul>
           @if(@auth()->user()->stop_saying=="1")
             <p class="text-right"><a href="#" class="btn btn-danger">你被禁言</a></p>
           @else

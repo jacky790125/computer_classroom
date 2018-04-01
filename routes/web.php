@@ -127,6 +127,8 @@ Route::group(['middleware' => 'admin'],function() {
 
     Route::get('discuss/{discuss}/admin_destroy', 'DiscussController@admin_destroy')->name('discuss.admin_destroy');
     Route::get('discuss/{discuss}/admin_reback', 'DiscussController@admin_reback')->name('discuss.admin_reback');
+    Route::get('discuss/index2','DiscussController@index2')->name('discuss.index2');
+
 
     Route::post('give', 'StudMessageController@give')->name('stud_message.give');
 

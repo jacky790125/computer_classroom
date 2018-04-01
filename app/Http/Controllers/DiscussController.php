@@ -30,6 +30,18 @@ class DiscussController extends Controller
         return view('discusses.index',$data);
     }
 
+    public function index2()
+    {
+        $discusses = Discuss::where('bad','=',null)
+            ->orderBy('id','DESC')
+            ->paginate(20);
+
+        $data = [
+            'discusses'=>$discusses,
+        ];
+        return view('discusses.index2',$data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
