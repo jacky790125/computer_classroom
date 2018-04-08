@@ -13,6 +13,7 @@ use App\StudType;
 use App\StudTypeArticle;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 
@@ -75,21 +76,29 @@ class HomeController extends Controller
 
 
         //打字最快
-        $types = StudType::orderBy('score','DESC')->paginate(10);
+        //$types = StudType::orderBy('score','DESC')->paginate(10);
+        $types = DB::table('stud_types')->select(DB::raw('user_id,max(score) as score'))
+            ->groupBy('user_id')
+            ->orderBy('score','DESC')
+            ->paginate(10);
+
         if(empty($types)) {
             $top_type10 = [];
         }else{
             $i=1;
             foreach($types as $type){
-                if (empty($type->user->nickname)) {
-                    $name = $type->user->username;
+                $type1 = StudType::where('user_id','=',$type->user_id)
+                    ->where('score','=',$type->score)->first();
+
+                if (empty($type1->user->nickname)) {
+                    $name = $type1->user->username;
                 } else {
-                    $name = $type->user->nickname;
+                    $name = $type1->user->nickname;
                 }
-                $top_type10[$i]['id'] = $type->user_id;
+                $top_type10[$i]['id'] = $type1->user_id;
                 $top_type10[$i]['name'] = $name;
-                $top_type10[$i]['type'] = $type->score;
-                $top_type10[$i]['article'] = $type->stud_type_article->title;
+                $top_type10[$i]['type'] = $type1->score;
+                $top_type10[$i]['article'] = $type1->stud_type_article->title;
                 $i++;
             }
         }
