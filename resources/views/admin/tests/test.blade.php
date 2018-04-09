@@ -168,9 +168,9 @@
                           </td>
                           <td>
                               @if($test->enable == "1")
-                                  啟用
+                                  <a href="{{ route('admin.test_update',$test->id) }}" class="btn btn-success">已啟用</a>
                               @else
-                                  停用
+                                  <a href="{{ route('admin.test_update',$test->id) }}" class="btn btn-secondary">已停用</a>
                               @endif
                           </td>
                           <td>

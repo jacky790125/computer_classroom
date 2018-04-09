@@ -13,7 +13,7 @@
   </ol>
   <div class="row">
     <div class="col-12">
-      <h1><img src="{{ asset('img/title/game.png') }}" alt="遊戲logo" width="60">小資資</h1>
+      <h1><img src="{{ asset('img/title/game.png') }}" alt="遊戲logo" width="60">小資資(設計中)</h1>
     </div>
   </div>
   <table>

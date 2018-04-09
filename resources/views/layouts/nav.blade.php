@@ -1,3 +1,18 @@
+<?php
+//計數器
+    $num = \App\Count::first();
+    if(session('view') != "1"){
+        if(empty($num)){
+            $att['num'] = 1;
+            \App\Count::create($att);
+        }
+        $att['num'] = $num->num+1;
+        $num->update($att);
+        session(['view' => '1']);
+    }else{
+        $att['num'] = $num->num;
+    }
+?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="{{ route('index') }}">和東資訊教學網</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,6 +108,9 @@
                     <li>
                         <a class="nav-link" href="{{ route('game.do10') }}">2.十賭九輸</a>
                     </li>
+                    <li>
+                        <a class="nav-link" href="#">3.快問快答(建置中)</a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
@@ -110,7 +128,7 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
                 <a class="nav-link" href="{{ route('link_index') }}">
                     <i class="fa fa-user"></i>
-                    <span class="nav-link-text">來訪次數：<img src="https://www.f-counter.net/j/29/1519910245/" alt="計數器"></span>
+                    <span class="nav-link-text">來訪次數：{{ $att['num'] }}</span>
                 </a>
             </li>
         </ul>

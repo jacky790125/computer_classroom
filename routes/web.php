@@ -95,6 +95,8 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('admin/test/{test}/delete', 'TestController@test_delete')->name('admin.test_delete');
 
     Route::any('admin/score', 'TestController@score_index')->name('admin.score_index');
+    Route::get('admin/test/{test}/update', 'TestController@test_update')->name('admin.test_update');
+
 
     //公告系統
     Route::get('post/create', 'PostController@create')->name('post.create');

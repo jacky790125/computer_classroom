@@ -251,6 +251,17 @@ class TestController extends Controller
         return redirect()->route('admin.test_index');
     }
 
+    public function test_update(Test $test)
+    {
+        if($test->enable == 1){
+            $att['enable'] = 0;
+        }else{
+            $att['enable'] = 1;
+        }
+        $test->update($att);
+        return redirect()->route('admin.test_index');
+    }
+
     public function student_test_index()
     {
         $tests = Test::orderBy('id','DESC')->get();

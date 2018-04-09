@@ -51,10 +51,14 @@
                   ->first();
             ?>
             @if(empty($has_done))
-            {{ Form::open(['route'=>'student_test.test','method'=>'post','id'=>'test'.$test->id,'onsubmit'=>'return false;']) }}
-            <input type="hidden" name="test_id" value="{{ $test->id }}">
-            <a href="#" class="btn btn-info" onclick="bbconfirm('test{{ $test->id }}','確定要測驗？')">測驗去</a>
-            {{ Form::close() }}
+              @if($test->enable == 1)
+                {{ Form::open(['route'=>'student_test.test','method'=>'post','id'=>'test'.$test->id,'onsubmit'=>'return false;']) }}
+                <input type="hidden" name="test_id" value="{{ $test->id }}">
+                <a href="#" class="btn btn-info" onclick="bbconfirm('test{{ $test->id }}','確定要測驗？')">測驗去</a>
+                {{ Form::close() }}
+              @else
+                <a href="#" class="btn btn-secondary">已停用</a>
+              @endif
             @else
                 <a href="{{ route('student_test.view',$has_done->id) }}" class="btn btn-primary">看成績</a>
             @endif
