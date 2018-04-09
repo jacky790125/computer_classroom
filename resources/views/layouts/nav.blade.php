@@ -1,11 +1,11 @@
 <?php
 //計數器
     $num = \App\Count::first();
+    if(empty($num)){
+        $att['num'] = 1;
+        \App\Count::create($att);
+    }
     if(session('view') != "1"){
-        if(empty($num)){
-            $att['num'] = 1;
-            \App\Count::create($att);
-        }
         $att['num'] = $num->num+1;
         $num->update($att);
         session(['view' => '1']);
