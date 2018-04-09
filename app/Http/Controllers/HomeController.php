@@ -82,9 +82,9 @@ class HomeController extends Controller
             ->orderBy('score','DESC')
             ->paginate(10);
 
-        if(empty($types)) {
+        $top_type10 = [];
+        if(!empty($types)) {
             $top_type10 = [];
-        }else{
             $i=1;
             foreach($types as $type){
                 $type1 = StudType::where('user_id','=',$type->user_id)
