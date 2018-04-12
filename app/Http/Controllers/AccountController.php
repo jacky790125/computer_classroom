@@ -176,4 +176,23 @@ class AccountController extends Controller
         $user->update($att);
         return redirect()->route('admin.account.edit',$user->id);
     }
+
+    public function search(Request $request)
+    {
+        if(!empty($request->input('name'))){
+            if($request->input('type') == "nickname"){
+                $users = User::where('nickname','like','%'.$request->input('name').'%')->get();
+            }
+            if($request->input('type') == "username"){
+                $users = User::where('username','=',$request->input('name'))->get();
+            }
+            if(empty($users)) $users=[];
+        }else{
+            $users = [];
+        }
+        $data = [
+            'users'=>$users,
+        ];
+        return view('admin.account.search',$data);
+    }
 }

@@ -29,6 +29,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('admin.account.group') }}">群組管理</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.search') }}">查user_id</a>
+          </li>
       </ul>
       <table class="table table-light">
         <tr>

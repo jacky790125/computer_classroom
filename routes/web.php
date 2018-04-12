@@ -57,6 +57,9 @@ Route::group(['middleware' => 'admin'],function() {
     Route::post('admin/group','GroupController@store')->name('admin.group.store');
     Route::patch('admin/{group}','GroupController@update')->name('admin.group.update');
 
+    Route::any('admin/search/index', 'AccountController@search')->name('admin.search');
+
+
     //訊息管理
     Route::get('admin/message', 'MessageController@index')->name('admin.message.index');
     Route::post('admin/message/store', 'MessageController@store')->name('admin.message.store');
@@ -133,6 +136,9 @@ Route::group(['middleware' => 'admin'],function() {
 
 
     Route::post('give', 'StudMessageController@give')->name('stud_message.give');
+
+    //查學生的餘額
+    Route::any('student_money/view2', 'HomeController@view_stud_money2')->name('view_stud_money2');
 
 
 

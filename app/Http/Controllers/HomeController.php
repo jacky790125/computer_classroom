@@ -380,6 +380,32 @@ class HomeController extends Controller
         return view('view_stud_money',compact('stud_moneys'));
     }
 
+    public function view_stud_money2(Request $request)
+    {
+        if(!empty($request->input('name'))){
+            if($request->input('type') == "nickname"){
+                $user = User::where('nickname','like','%'.$request->input('name').'%')->first();
+            }
+            if($request->input('type') == "username"){
+                $user = User::where('username','=',$request->input('name'))->first();
+            }
+            if(empty($user)) $user=[];
+        }else{
+            $user = [];
+        }
+
+        if(!empty($user)){
+            $stud_moneys = StudMoney::where('user_id','=',$user->id)
+                ->orderBy('id','DESC')
+                ->get();
+        }else{
+            $stud_moneys=[];
+        }
+
+
+        return view('view_stud_money2',compact('stud_moneys'));
+    }
+
     public function link_index()
     {
         $links = Link::orderBy('id')->get();

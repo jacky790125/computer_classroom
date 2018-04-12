@@ -32,8 +32,15 @@
 
     </style>
 </head>
-
-<body class="fixed-nav sticky-footer bg-dark" id="page-top" onselectstart="return false;" ondragstart="return false;" oncontextmenu="return false;">
+@if(auth()->check())
+    @if(auth()->user()->group_id == "1")
+        <body>
+    @else
+        <body class="fixed-nav sticky-footer bg-dark" id="page-top" onselectstart="return false;" ondragstart="return false;" oncontextmenu="return false;">
+    @endif
+@else
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top" onselectstart="return false;" ondragstart="return false;" oncontextmenu="return false;">
+@endif
 
 @include('layouts.nav')
 <div class="content-wrapper">
