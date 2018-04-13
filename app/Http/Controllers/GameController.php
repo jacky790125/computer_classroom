@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\AskCourse;
+use App\AskQuestion;
 use App\StudMoney;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -242,5 +244,51 @@ class GameController extends Controller
             'number'=>$number,
         ];
         return view('games.do10_done',$data);
+    }
+
+    public function quick_ask()
+    {
+        $ask_courses = AskCourse::orderBy('id','ASC')->pluck('name', 'id')->toArray();
+        $data = [
+            'ask_courses'=>$ask_courses,
+        ];
+        return view('games.quick_ask',$data);
+    }
+
+    public function quick_ask_admin()
+    {
+        $ask_courses = AskCourse::all();
+        $ask_course_menu = AskCourse::orderBy('id','ASC')->pluck('name', 'id')->toArray();
+        $select_ask_course = [];
+        $ask_questions = [];
+        $data = [
+            'ask_courses'=>$ask_courses,
+            'ask_course_menu'=>$ask_course_menu,
+            'select_ask_course'=>$select_ask_course,
+            'ask_questions'=>$ask_questions,
+        ];
+        return view('games.quick_ask_admin',$data);
+    }
+
+    public function quick_ask_store(Request $request)
+    {
+        $att['name'] = $request->input('name');
+        AskCourse::create($att);
+        return redirect()->route('quick_ask_admin');
+    }
+
+    public function quick_ask_select($id)
+    {
+        $select_ask_course = AskCourse::where('id','=',$id)->first();
+        $ask_courses = AskCourse::all();
+        $ask_course_menu = AskCourse::orderBy('id','ASC')->pluck('name', 'id')->toArray();
+        $ask_questions = AskQuestion::where('ask_course_id','=',$id)->get();
+        $data = [
+            'ask_courses'=>$ask_courses,
+            'ask_course_menu'=>$ask_course_menu,
+            'select_ask_course'=>$select_ask_course,
+            'ask_questions'=>$ask_questions,
+        ];
+        return view('games.quick_ask_admin',$data);
     }
 }

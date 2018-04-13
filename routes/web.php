@@ -140,6 +140,12 @@ Route::group(['middleware' => 'admin'],function() {
     //查學生的餘額
     Route::any('student_money/view2', 'HomeController@view_stud_money2')->name('view_stud_money2');
 
+    //快問快答管理
+    Route::get('quick_ask_admin','GameController@quick_ask_admin')->name('quick_ask_admin');
+    Route::post('quick_ask_store','GameController@quick_ask_store')->name('quick_ask_store');
+    Route::get('quick_ask_select/{id}','GameController@quick_ask_select')->name('quick_ask_select');
+
+
 
 
 });
@@ -167,6 +173,8 @@ Route::group(['middleware' => 'auth'],function() {
     //兌換遊戲
     Route::get('game/{id}','GameController@html5_game')->name('game.html5_game');
     Route::post('game/do10_done','GameController@do10_done')->name('do10_done');
+    Route::get('quick_ask','GameController@quick_ask')->name('quick_ask');
+
 
     //討論區
     Route::get('discuss/show/{discuss}', 'DiscussController@show')->name('discuss.show');

@@ -109,7 +109,7 @@
                         <a class="nav-link" href="{{ route('game.do10') }}">2.十賭九輸</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="#">3.快問快答(建置中)</a>
+                        <a class="nav-link" href="{{ route('quick_ask') }}">3.快問快答</a>
                     </li>
                 </ul>
             </li>
