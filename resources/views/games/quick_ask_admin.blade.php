@@ -67,10 +67,12 @@
                                 {{ $ask_course->id }}
                             </td>
                             <td>
-                                <a href="{{ url('quick_ask_select') }}/{{ $ask_course->id }}" class="btn btn-info">{{ $ask_course->name }}</a>
+                                <a href="{{ url('quick_ask_select') }}/{{ $ask_course->id }}" class="btn btn-info">{{ $ask_course->name }} ({{ $ask_course->ask_questions->count() }})</a>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-danger">刪除</a>
+                                @if($ask_course->ask_questions->count() == 0)
+                                <a href="{{ route('quick_course_delete',$ask_course->id) }}" class="btn btn-danger" id="del{{ $ask_course->id }}" onclick="bbconfirm2('del{{ $ask_course->id }}','刪除？')">刪除</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
@@ -93,7 +95,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {{ Form::open(['route'=>'admin.test.question_store','method'=>'post','id'=>'store_question','files' => true,'onsubmit'=>'return false;']) }}
+                        {{ Form::open(['route'=>'quick_question_store','method'=>'post','id'=>'store_question','files' => true,'onsubmit'=>'return false;']) }}
                         <tr>
                             <th>
                                 題目：
@@ -149,10 +151,68 @@
                                 答案D參考圖片：<input type="file" name="file[ans_D_img]">
                             </td>
                         </tr>
+                        <input type="hidden" name="ask_course_id" value="{{ $select_ask_course->id }}">
                         {{ Form::close() }}
                         </tbody>
                     </table>
                     <a href="#" class="btn btn-success" onclick="bbconfirm('store_question','確定新增？')"><i class="fa fa-plus"></i> 新增題目</a>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>序號</th>
+                                    <th>題目</th>
+                                    <th>A</th>
+                                    <th>B</th>
+                                    <th>C</th>
+                                    <th>D</th>
+                                    <th>動作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php $i=1; ?>
+                                @foreach($ask_questions as $ask_question)
+                                    <tr>
+                                        <td>
+                                            {{ $i }}
+                                        </td>
+                                        <td>
+                                            {{ $ask_question->title }}
+                                            @if(!empty($ask_question->title_img))
+                                                <button onclick="openwindow('{{ route('quick_question_view_img',['img'=>'title_img','id'=>$ask_question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{ $ask_question->ans_A }}
+                                            @if(!empty($ask_question->ans_A_img))
+                                                <button onclick="openwindow('{{ route('quick_question_view_img',['img'=>'ans_A_img','id'=>$ask_question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{ $ask_question->ans_B }}
+                                            @if(!empty($ask_question->ans_B_img))
+                                                <button onclick="openwindow('{{ route('quick_question_view_img',['img'=>'ans_B_img','id'=>$ask_question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{ $ask_question->ans_C }}
+                                            @if(!empty($ask_question->ans_C_img))
+                                                <button onclick="openwindow('{{ route('quick_question_view_img',['img'=>'ans_C_img','id'=>$ask_question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{ $ask_question->ans_D }}
+                                            @if(!empty($ask_question->ans_D_img))
+                                                <button onclick="openwindow('{{ route('quick_question_view_img',['img'=>'ans_D_img','id'=>$ask_question->id]) }}')"><img src="{{ asset('img/p.png') }}"></button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('quick_question_delete',$ask_question->id) }}" id="del_q{{ $ask_question->id }}" class="btn btn-danger" onclick="bbconfirm2('del_q{{ $ask_question->id }}','刪除題目？')">刪除</a>
+                                        </td>
+                                    </tr>
+                                    <?php $i++; ?>
+                                @endforeach
+                                </tbody>
+                            </table>
                     @endif
                 </div>
             </div>
@@ -160,4 +220,10 @@
     </div>
 
 </div>
+<script>
+    function openwindow(url_str){
+        window.open (url_str,"視窗","menubar=0,status=0,directories=0,location=0,top=20,left=20,toolbar=0,scrollbars=1,resizable=1,Width=500,Height=300");
+    }
+
+</script>
 @endsection

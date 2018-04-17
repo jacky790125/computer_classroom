@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AskQuestion extends Model
 {
     protected $fillable = [
-        'course_id',
+        'ask_course_id',
         'title',
         'title_img',
         'ans_A',

@@ -283,6 +283,9 @@ class GameController extends Controller
         $ask_courses = AskCourse::all();
         $ask_course_menu = AskCourse::orderBy('id','ASC')->pluck('name', 'id')->toArray();
         $ask_questions = AskQuestion::where('ask_course_id','=',$id)->get();
+
+
+
         $data = [
             'ask_courses'=>$ask_courses,
             'ask_course_menu'=>$ask_course_menu,
@@ -290,5 +293,104 @@ class GameController extends Controller
             'ask_questions'=>$ask_questions,
         ];
         return view('games.quick_ask_admin',$data);
+    }
+
+    public function question_store(Request $request)
+    {
+        $att['ask_course_id'] = $request->input('ask_course_id');
+        $att['title'] = $request->input('title');
+        $att['ans_A'] = $request->input('ans_A');
+        $att['ans_B'] = $request->input('ans_B');
+        $att['ans_C'] = $request->input('ans_C');
+        $att['ans_D'] = $request->input('ans_D');
+        $ask_question = AskQuestion::create($att);
+
+        $files = $request->file('file');
+        if(!empty($files)) {
+            foreach ($files as $k => $v) {
+                $info = [
+                    //'mime-type' => $file->getMimeType(),
+                    //'original_filename' => $file->getClientOriginalName(),
+                    'extension' => $v->getClientOriginalExtension(),
+                    //'size' => $file->getClientSize(),
+                ];
+                $path = "public/quick/" . $ask_question->id . "/";
+                $filename = $k . "." . $info['extension'];
+
+                $v->storeAs($path, $filename);
+
+                $att2[$k] = $path . $filename;
+            }
+            $ask_question->update($att2);
+        }
+        return redirect()->route('quick_ask_admin');
+
+
+    }
+
+    public function quick_course_delete(AskCourse $ask_course)
+    {
+        $ask_course->delete();
+        return redirect()->route('quick_ask_admin');
+    }
+
+    public function quick_question_delete(AskQuestion $ask_question)
+    {
+        $fileT = $ask_question->title_img;
+        $fileA = $ask_question->ans_A_img;
+        $fileB = $ask_question->ans_B_img;
+        $fileC = $ask_question->ans_C_img;
+        $fileD = $ask_question->ans_D_img;
+        if(!empty($fileT)){
+            $path = storage_path('app/'.$fileT);
+            if(file_exists($path)) unlink($path);
+        }
+        if(!empty($fileA)){
+            $path = storage_path('app/'.$fileA);
+            if(file_exists($path)) unlink($path);
+        }
+        if(!empty($fileB)){
+            $path = storage_path('app/'.$fileB);
+            if(file_exists($path)) unlink($path);
+        }
+        if(!empty($fileC)){
+            $path = storage_path('app/'.$fileC);
+            if(file_exists($path)) unlink($path);
+        }
+        if(!empty($fileD)){
+            $path = storage_path('app/'.$fileD);
+            if(file_exists($path)) unlink($path);
+        }
+
+        $ask_question->delete();
+
+        return redirect()->route('quick_ask_select',$ask_question->ask_course_id);
+    }
+
+
+    public function question_view_img($img,$id)
+    {
+        $ask_question = AskQuestion::where('id','=',$id)->first();
+        echo "<img src=".url('quick_question/show_img/'.$ask_question->id.'/'.$img).">";
+
+    }
+
+    public function getImg($id,$img)
+    {
+        $ask_question = AskQuestion::where('id','=',$id)->first();
+        if($img == "title_img") $file = $ask_question->title_img;
+        if($img == "ans_A_img") $file = $ask_question->ans_A_img;
+        if($img == "ans_B_img") $file = $ask_question->ans_B_img;
+        if($img == "ans_C_img") $file = $ask_question->ans_C_img;
+        if($img == "ans_D_img") $file = $ask_question->ans_D_img;
+
+        $path = storage_path('app/'.$file);
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
     }
 }

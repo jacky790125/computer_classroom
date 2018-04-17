@@ -144,6 +144,10 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('quick_ask_admin','GameController@quick_ask_admin')->name('quick_ask_admin');
     Route::post('quick_ask_store','GameController@quick_ask_store')->name('quick_ask_store');
     Route::get('quick_ask_select/{id}','GameController@quick_ask_select')->name('quick_ask_select');
+    Route::post('quick_question_store','GameController@question_store')->name('quick_question_store');
+    Route::get('quick_question/{img}/{id}/view', 'GameController@question_view_img')->name('quick_question_view_img');
+    Route::get('quick_course_delete/{ask_course}', 'GameController@quick_course_delete')->name('quick_course_delete');
+    Route::get('quick_question_delete/{ask_question}', 'GameController@quick_question_delete')->name('quick_question_delete');
 
 
 
@@ -173,7 +177,7 @@ Route::group(['middleware' => 'auth'],function() {
     //兌換遊戲
     Route::get('game/{id}','GameController@html5_game')->name('game.html5_game');
     Route::post('game/do10_done','GameController@do10_done')->name('do10_done');
-    Route::get('quick_ask','GameController@quick_ask')->name('quick_ask');
+
 
 
     //討論區
@@ -191,15 +195,22 @@ Route::group(['middleware' => 'auth'],function() {
     //測驗題目的圖片
     Route::get('question/show_img/{id}/{img}', 'TestController@getImg')->name('question_show_img');
     Route::get('question/view_img/{img}', 'TestController@viewImg')->name('question_view_img');
+
     Route::post('student_test/test', 'TestController@student_test_test')->name('student_test.test');
     Route::post('student_test/store', 'TestController@student_test_store')->name('student_test.store');
     Route::get('student_test/view/{test_score}', 'TestController@student_test_view')->name('student_test.view');
+
+
+    //快問快答的圖片
+    Route::get('quick_question/show_img/{id}/{img}', 'GameController@getImg')->name('quick_question_show_img');
+
 
 
 });
 //兌換遊戲首頁
 Route::get('games/index','GameController@index')->name('game.index');
 Route::get('games/do10','GameController@do10')->name('game.do10');
+Route::get('quick_ask','GameController@quick_ask')->name('quick_ask');
 
 //討論區
 Route::get('discuss/index','DiscussController@index')->name('discuss.index');

@@ -63,19 +63,41 @@
             {{ $answer_array[$k] }}
           </td>
           <td>
-            <h6>{{ $question->title }}</h6>
+            <h6>
+              {{ $question->title }}
+              @if(!empty($question->title_img))
+                <?php $img=str_replace('/','-',$question->title_img); ?>
+                <a href="#" onclick="openwindow('{{ url('question/view_img/'.$img) }}')"><img src="{{ asset('img/p.png') }}"></a>
+              @endif
+            </h6>
           </td>
           <td class="text-danger">
             {{ $question->ans_A }}
+            @if(!empty($question->ans_A_img))
+              <?php $img=str_replace('/','-',$question->ans_A_img); ?>
+                <a href="#" onclick="openwindow('{{ url('question/view_img/'.$img) }}')"><img src="{{ asset('img/p.png') }}"></a>
+            @endif
           </td>
           <td>
             {{ $question->ans_B }}
+            @if(!empty($question->ans_B_img))
+              <?php $img=str_replace('/','-',$question->ans_B_img); ?>
+                <a href="#" onclick="openwindow('{{ url('question/view_img/'.$img) }}')"><img src="{{ asset('img/p.png') }}"></a>
+            @endif
           </td>
           <td>
             {{ $question->ans_C }}
+            @if(!empty($question->ans_C_img))
+              <?php $img=str_replace('/','-',$question->ans_C_img); ?>
+                <a href="#" onclick="openwindow('{{ url('question/view_img/'.$img) }}')"><img src="{{ asset('img/p.png') }}"></a>
+            @endif
           </td>
           <td>
             {{ $question->ans_D }}
+            @if(!empty($question->ans_D_img))
+              <?php $img=str_replace('/','-',$question->ans_D_img); ?>
+                <a href="#" onclick="openwindow('{{ url('question/view_img/'.$img) }}')"><img src="{{ asset('img/p.png') }}"></a>
+            @endif
           </td>
         </tr>
           <?php $num++; ?>
@@ -85,4 +107,10 @@
     </div>
   </div>
 </div>
+<script>
+    function openwindow(url_str){
+        window.open (url_str,"視窗","menubar=0,status=0,directories=0,location=0,top=20,left=20,toolbar=0,scrollbars=1,resizable=1,Width=500,Height=300");
+    }
+
+</script>
 @endsection

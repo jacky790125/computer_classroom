@@ -183,7 +183,7 @@ class TestController extends Controller
     public function question_view_img($img,$id)
     {
         $course_question = CourseQuestion::where('id','=',$id)->first();
-        echo "<img src=".url('question/show_img/'.$course_question->id.'/'.$img)." width=100%>";
+        echo "<img src=".url('question/show_img/'.$course_question->id.'/'.$img).">";
 
     }
 
@@ -497,4 +497,17 @@ class TestController extends Controller
 
         return $response;
     }
+
+    public function Img($img)
+    {
+        $path = storage_path('app/'.$img);
+        $file = File::get($path);
+        $type = File::mimeType($path);
+
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+
+        return $response;
+    }
+
 }
