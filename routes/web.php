@@ -139,6 +139,8 @@ Route::group(['middleware' => 'admin'],function() {
 
     //查學生的餘額
     Route::any('student_money/view2', 'HomeController@view_stud_money2')->name('view_stud_money2');
+    Route::get('student_money/fix_money', 'HomeController@fix_money')->name('fix_money');
+    Route::get('student_money/fix_go', 'HomeController@fix_go')->name('fix_go');
 
     //快問快答管理
     Route::get('quick_ask_admin','GameController@quick_ask_admin')->name('quick_ask_admin');
@@ -203,6 +205,12 @@ Route::group(['middleware' => 'auth'],function() {
 
     //快問快答的圖片
     Route::get('quick_question/show_img/{id}/{img}', 'GameController@getImg')->name('quick_question_show_img');
+
+    //快問快答
+    Route::post('quick_ask_go', 'GameController@quick_ask_go')->name('quick_ask_go');
+    Route::get('quick_ask_do/{id}', 'GameController@quick_ask_do')->name('quick_ask_do');
+    Route::post('quick_ask_answer', 'GameController@quick_ask_answer')->name('quick_ask_answer');
+    Route::post('quick_ask_money', 'GameController@quick_ask_money')->name('quick_ask_money');
 
 
 

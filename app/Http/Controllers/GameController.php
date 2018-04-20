@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AskCourse;
 use App\AskQuestion;
+use App\AskRecord;
 use App\StudMoney;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -323,8 +324,7 @@ class GameController extends Controller
             }
             $ask_question->update($att2);
         }
-        return redirect()->route('quick_ask_admin');
-
+        return redirect()->route('quick_ask_select',$ask_question->ask_course_id);
 
     }
 
@@ -365,6 +365,166 @@ class GameController extends Controller
         $ask_question->delete();
 
         return redirect()->route('quick_ask_select',$ask_question->ask_course_id);
+    }
+
+
+    public function quick_ask_go(Request $request)
+    {
+        $ask_course_id = $request->input('ask_course_id');
+        if(empty($ask_course_id)){
+            $words = "請選擇題庫！";
+            return view('layouts.error',compact('words'));
+        }
+
+        AskRecord::where('user_id','=',auth()->user()->id)
+            ->where('ask_course_id','=',$request->input('ask_course_id'))
+            ->where('play_date','<>',date('Ymd'))
+            ->delete();
+        $play_times = AskRecord::where('user_id','=',auth()->user()->id)
+            ->where('ask_course_id','=',$request->input('ask_course_id'))
+            ->where('play_date','=',date('Ymd'))
+            ->get()
+            ->count();
+
+        if($play_times >2){
+            $words =  "你今天挑戰過三次了，好好讀書再挑戰！ [<a href='".env('QUICK_ASK')."'>返回</a>]";
+            return view('layouts.error',compact('words'));
+        }
+
+        $course = AskCourse::where('id','=',$ask_course_id)->first();
+
+        session(['n' => null]);
+        session(['wrong' => null]);
+
+        $questions = AskQuestion::where('ask_course_id','=',$ask_course_id)
+            ->get()->shuffle();
+        $num =1 ;
+        foreach($questions as $question){
+            if($num == 16 ) break;
+            session(['q'.$num => $question->id]);
+            session(['a'.$num => null]);
+            session(['begin'.$num => null]);
+            $num++;
+        }
+
+
+
+        $data = [
+            'course'=>$course,
+        ];
+        return view('games.quick_ask_go',$data);
+    }
+
+    public function quick_ask_do($id)
+    {
+        if(session('n') == null){
+            $att['ask_course_id'] = $id;
+            $att['user_id'] = auth()->user()->id;
+            $att['play_date'] = date('Ymd');
+            AskRecord::create($att);
+        }
+
+        if(session('wrong') > 2) {
+            $words =  "挑戰失敗！ [<a href='".env('QUICK_ASK')."'>返回</a>]";
+            return view('layouts.error',compact('words'));
+        }
+
+        //避免F5
+        if(session('begin'.session('n')) != null and session('a' .session('n')) ==null){
+            $words =  "按F5或重新整理，即結束！ [<a href='".env('QUICK_ASK')."'>返回</a>]";
+            return view('layouts.error',compact('words'));
+        }
+
+        $course = AskCourse::where('id','=',$id)->first();
+        $questions = AskQuestion::where('ask_course_id','=',$id)
+            ->get();
+
+        $num =1 ;
+        foreach($questions as $question){
+            $question_data[$question->id]['title'] = $question->title;
+            $question_data[$question->id]['ans_1'] = "A"."-".$question->ans_A;
+            $question_data[$question->id]['ans_2'] = "B"."-".$question->ans_B;
+            $question_data[$question->id]['ans_3'] = "C"."-".$question->ans_C;
+            $question_data[$question->id]['ans_4'] = "D"."-".$question->ans_D;
+            $question_data[$question->id]['img_title'] = $question->title_img;
+            $question_data[$question->id]['img_A'] = $question->ans_A_img;
+            $question_data[$question->id]['img_B'] = $question->ans_B_img;
+            $question_data[$question->id]['img_C'] = $question->ans_C_img;
+            $question_data[$question->id]['img_D'] = $question->ans_D_img;
+
+            for($i=1;$i<=4;$i++){
+                $r = rand(1,4);
+                $temp = $question_data[$question->id]['ans_'.$i];
+                $question_data[$question->id]['ans_'.$i] = $question_data[$question->id]['ans_'.$r];;
+                $question_data[$question->id]['ans_'.$r] = $temp;
+            }
+            $num++;
+        }
+
+        $data = [
+            'course'=>$course,
+            'question_data'=>$question_data,
+        ];
+        return view('games.quick_ask_do',$data);
+
+    }
+
+    public function quick_ask_answer(Request $request)
+    {
+        if(!empty(session('a'.$request->input('num')))){
+            $words = "你想做什麼？你按了上一頁，或重新整理！計失敗一次";
+            return view('layouts.error',compact('words'));
+        }
+
+        $course = AskCourse::where('id','=',$request->input('id'))->first();
+
+        if($request->input('answer')=="A"){
+            session(['a'.$request->input('num') => 'right']);
+        }else{
+            session(['a'.$request->input('num') => 'wrong']);
+
+
+            if(empty(session('wrong'))){
+                session(['wrong'=>1]);
+            }else{
+                session(['wrong'=> session('wrong')+1]);
+            }
+        }
+        $data = [
+            'course'=>$course,
+        ];
+        return view('games.quick_ask_answer',$data);
+    }
+
+    public function quick_ask_money(Request $request)
+    {
+        $play_time = StudMoney::where('user_id','=',auth()->user()->id)
+            ->where('thing_id','=',$request->input('id'))
+            ->where('thing','=','quick_ask')
+            ->get()
+            ->count();
+        if($play_time > 2){
+            $words = "你已過關三次，不計入成績！ [<a href='".env('QUICK_ASK')."'>返回</a>]";
+            return view('layouts.error',compact('words'));
+        }
+
+        if(session('n')==15) {
+            $att['user_id'] = auth()->user()->id;
+            $att['thing'] = "quick_ask";
+            $att['thing_id'] = $request->input('id');
+            $att['stud_money'] = "500";
+            $att['description'] = "玩「" . $request->input('name') . "」過關500元！";
+
+            StudMoney::create($att);
+        }else{
+            $words = "你想做什麼？你按了上一頁，或重新整理！計失敗一次";
+            return view('layouts.error',compact('words'));
+        }
+
+        session(['n' => null]);
+
+
+        return redirect()->route('quick_ask');
     }
 
 

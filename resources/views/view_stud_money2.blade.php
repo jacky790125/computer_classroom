@@ -21,9 +21,12 @@
           <li class="nav-item">
             <a class="nav-link active" href="{{ route('view_stud_money2') }}">查詢學生</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('fix_money') }}">餘額修正</a>
+          </li>
         @endif
       </ul>
-      <h1><img src="{{ asset('img/title/money.png') }}" alt="收支狀況logo" width="60">檢視資訊幣收支</h1>
+      <h1><img src="{{ asset('img/title/money.png') }}" alt="收支狀況logo" width="60">檢視學生資訊幣收支</h1>
       <table class="table table-light">
         <tr>
           {{ Form::open(['route' => 'view_stud_money2', 'method' => 'POST','id'=>'search']) }}

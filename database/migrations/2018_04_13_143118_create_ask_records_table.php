@@ -15,6 +15,9 @@ class CreateAskRecordsTable extends Migration
     {
         Schema::create('ask_records', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('ask_course_id');
+            $table->unsignedInteger('user_id');
+            $table->string('play_date');
             $table->timestamps();
         });
     }

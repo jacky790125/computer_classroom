@@ -86,6 +86,7 @@
         });
     }
 
+
     function bbalert(word){
         bootbox.alert(word);
     }

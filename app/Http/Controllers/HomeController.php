@@ -406,6 +406,35 @@ class HomeController extends Controller
         return view('view_stud_money2',compact('stud_moneys'));
     }
 
+    public function fix_money()
+    {
+        return view('fix_money');
+    }
+
+    public function fix_go()
+    {
+        $users = User::all();
+        foreach($users as $user){
+            $total_money = 0;
+            $stud_moneys = StudMoney::where('user_id','=',$user->id)
+                ->orderBy('id','DESC')
+                ->get();
+            foreach($stud_moneys as $stud_money) {
+                if (!empty($stud_moneys)) {
+                    $total_money = $total_money + $stud_money->stud_money;
+                }
+            }
+            if($user->money != $total_money) {
+                $att['money'] = $total_money;
+                $user->update($att);
+            }
+        }
+
+
+        return redirect()->route('fix_money');
+        
+    }
+
     public function link_index()
     {
         $links = Link::orderBy('id')->get();

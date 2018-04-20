@@ -32,8 +32,10 @@
         <i class="fa fa-reorder"></i> 選擇要挑戰的題庫
       </div>
       <div class="card-body">
-        {{ Form::open(['route' => 'student_task.open', 'method' => 'POST']) }}
+        {{ Form::open(['route' => 'quick_ask_go', 'method' => 'POST']) }}
         {{ Form::select('ask_course_id', $ask_courses, null,['id' => 'ask_course_id', 'class' => 'form-control', 'placeholder' => '請選擇題庫','onchange'=>'if(this.value != 0) { this.form.submit(); }']) }}
+        <br>
+        <button class="btn btn-success">送出</button>
         {{ Form::close() }}
       </div>
     </div>
