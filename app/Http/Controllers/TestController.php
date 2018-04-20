@@ -225,11 +225,13 @@ class TestController extends Controller
 
     public function test_store(Request $request)
     {
+        $att['semester'] = $request->input('semester');
         $att['title'] = $request->input('title');
         $att['score'] = $request->input('score');
         $att['enable'] = $request->input('enable');
         $att['for'] = "";
         $att['questions'] = "";
+        //dd($att);
         $for = $request->input('for');
         foreach( $for as $k =>$v){
             $att['for'] .= $v.',';
@@ -331,30 +333,37 @@ class TestController extends Controller
 
     public function student_test_store(Request $request)
     {
-        $att['test_id'] = $request->input('test_id');
-        $att['user_id'] = auth()->user()->id;
-        $questions = $request->input('q');
-        ksort($questions);
-        $answers = "";
-        $num = 0;
-        foreach($questions as $k=>$v){
-            $answers .= $v.",";
-            if($v == "A") $num++;
+        if(session('score_store') != 1){
+            $test = Test::where('id','=',$request->input('test_id'))->first();
+
+            $att['test_id'] = $request->input('test_id');
+            $att['user_id'] = auth()->user()->id;
+            $att['semester'] = $test->semester;
+            $questions = $request->input('q');
+            ksort($questions);
+            $answers = "";
+            $num = 0;
+            foreach($questions as $k=>$v){
+                $answers .= $v.",";
+                if($v == "A") $num++;
+            }
+            $att['answers'] = substr($answers,0,-1);
+            $att['total_score'] = $request->input('score') * $num;
+
+            TestScore::create($att);
+
+            $test = Test::where('id','=',$request->input('test_id'))->first();
+
+            $att2['user_id'] = auth()->user()->id;
+            $att2['thing'] = "student_test";
+            $att2['thing_id'] = $request->input('test_id');
+            $att2['stud_money'] = $request->input('score') * $num;
+            $att2['description'] = "測驗「".$test->title."」得分";
+
+            StudMoney::create($att2);
+            session(['score_store'=>1]);
         }
-        $att['answers'] = substr($answers,0,-1);
-        $att['total_score'] = $request->input('score') * $num;
 
-        TestScore::create($att);
-
-        $test = Test::where('id','=',$request->input('test_id'))->first();
-
-        $att2['user_id'] = auth()->user()->id;
-        $att2['thing'] = "student_test";
-        $att2['thing_id'] = $request->input('test_id');
-        $att2['stud_money'] = $request->input('score') * $num;
-        $att2['description'] = "測驗「".$test->title."」得分";
-
-        StudMoney::create($att2);
 
         return redirect()->route('student_test.index');
     }

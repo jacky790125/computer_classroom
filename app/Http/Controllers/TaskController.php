@@ -82,6 +82,7 @@ class TaskController extends Controller
         foreach( $for as $k =>$v){
             $att['for'] .= $v.',';
         }
+        $att['semester'] = $request->input('semester');
         $att['for'] = substr($att['for'],0,-1);
         $att['type'] = $request->input('type');
         $att['title'] = $request->input('title');
@@ -103,10 +104,12 @@ class TaskController extends Controller
         $create_message = [];
 
         foreach($students as $v){
+            $att1['semester'] = $task->semester;
             $att1['task_id'] = $task->id;
             $att1['user_id'] = $v['id'];
             $att1['year_class_num'] = $v['year_class_num'];
             $one_task = [
+                'semester'=>$att1['semester'],
                 'task_id'=>$att1['task_id'],
                 'user_id'=>$att1['user_id'],
                 'year_class_num'=>$att1['year_class_num'],

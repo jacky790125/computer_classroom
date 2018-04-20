@@ -27,7 +27,7 @@
       <table class="table table-striped">
         <tr>
           <th>
-            時間
+            學期
           </th>
           <th>
             作業類型
@@ -50,8 +50,20 @@
         </tr>
             {{ Form::open(['route' => 'admin.task.store', 'method' => 'POST','id'=>'store_task','onsubmit'=>'return false;']) }}
         <tr>
-          <td>
+            <?php
+            $y = date('Y');
+            $m = date('m');
+            if($m > 7 or $m < 2){
+                $semester = $y-1911 . "1";
+            }
 
+            if($m > 1 and $m < 8){
+                $semester = $y-1912 . "2";
+            }
+
+            ?>
+          <td>
+            {{ Form::text('semester',$semester,['id'=>'semester','class' => 'form-control', 'placeholder' => '請輸入學期','required'=>'required','maxlength'=>'4']) }}
           </td>
           <td>
             {{ Form::select('type', $types, null, ['id' => 'types', 'class' => 'form-control','placeholder'=>'請選擇類型']) }}
@@ -76,7 +88,7 @@
         @foreach($tasks as $task)
           <tr>
             <td nowrap>
-              <i class="fa fa-folder-open-o"></i> {{ substr($task->created_at,0,10) }}
+              <i class="fa fa-folder-open-o"></i> {{ $task->semester }}
             </td>
             <td>
               {{ $types[$task->type] }}

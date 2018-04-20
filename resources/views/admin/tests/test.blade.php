@@ -55,6 +55,9 @@
                       <thead>
                       <tr>
                           <th>
+                              學期
+                          </th>
+                          <th>
                               測驗標題
                           </th>
                           <th>
@@ -74,6 +77,21 @@
                       <tbody>
 
                       <tr>
+                          <?php
+                          $y = date('Y');
+                          $m = date('m');
+                          if($m > 7 or $m < 2){
+                              $semester = $y-1911 . "1";
+                          }
+
+                          if($m > 1 and $m < 8){
+                              $semester = $y-1912 . "2";
+                          }
+
+                          ?>
+                          <td>
+                              {{ Form::text('semester',$semester,['id'=>'semester','class' => 'form-control', 'placeholder' => '請輸入學期','required'=>'required','maxlength'=>'4']) }}
+                          </td>
                           <td>
                               {{ Form::text('title', null, ['id' => 'title', 'class' => 'form-control', 'placeholder' => '測驗標題','required'=>'required']) }}
                           </td>
@@ -128,6 +146,9 @@
                               序號
                           </td>
                           <td>
+                              學期
+                          </td>
+                          <td>
                               名稱
                           </td>
                           <td>
@@ -153,6 +174,9 @@
                       <tr>
                           <td>
                               {{ $i }}
+                          </td>
+                          <td>
+                              {{ $test->semester }}
                           </td>
                           <td>
                               {{ $test->title }}
