@@ -151,6 +151,10 @@ Route::group(['middleware' => 'admin'],function() {
     Route::get('quick_course_delete/{ask_course}', 'GameController@quick_course_delete')->name('quick_course_delete');
     Route::get('quick_question_delete/{ask_question}', 'GameController@quick_question_delete')->name('quick_question_delete');
 
+    //分數管理
+    Route::get('score_task','TestController@score_task')->name('score_task');
+    Route::post('score_task_show','TestController@score_task_show')->name('score_task_show');
+
 
 
 

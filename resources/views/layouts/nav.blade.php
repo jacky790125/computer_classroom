@@ -55,6 +55,9 @@
                             <li>
                                 <a href="{{ route('link.admin_index') }}">0-8.連結管理</a>
                             </li>
+                            <li>
+                                <a href="{{ route('score_task') }}">0-9.學期分數</a>
+                            </li>
                         </ul>
                     </li>
                 @endif
@@ -80,7 +83,7 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
                 <a class="nav-link" href="{{ route('student_test.index') }}">
                     <i class="fa fa-copy"></i>
-                    <span class="nav-link-text">4.學生測驗</span>
+                    <span class="nav-link-text">4.學生測驗(x3)</span>
                 </a>
             </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Work">

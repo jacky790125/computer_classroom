@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TestScore extends Model
 {
     protected $fillable = [
+        'semester',
         'test_id',
         'user_id',
         'answers',

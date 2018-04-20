@@ -15,6 +15,7 @@ class CreateStudentTasksTable extends Migration
     {
         Schema::create('student_tasks', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('semester');
             $table->unsignedInteger('task_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('year_class_num');

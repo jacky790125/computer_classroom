@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\CourseQuestion;
 use App\Group;
+use App\StudentTask;
 use App\StudMoney;
 use App\Test;
 use App\TestScore;
@@ -464,6 +465,67 @@ class TestController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function score_task()
+    {
+        $groups = Group::where('active','=','1')->where('id','>',2)->pluck('name', 'id')->toArray();
+        return view('admin.tests.score_task',compact('groups'));
+    }
+
+    public function score_task_show(Request $request)
+    {
+        $semester = $request->input('semester');
+        $group_id = $request->input('group_id');
+        $users = User::where('group_id','=',$group_id)->orderBy('year_class_num')->get();
+        $class = Group::where('id','=',$group_id)->first();
+
+        foreach($users as $user){
+            $students[$user->id]['num'] = substr($user->year_class_num,3,2);
+            $students[$user->id]['name'] = $user->name;
+            $students[$user->id]['sex'] = $user->sex;
+
+            $tests = TestScore::where('semester','=',$semester)
+                ->where('user_id','=',$user->id)
+                ->get();
+
+            $test_num = $tests->count();
+            $test_score = 0;
+
+            if($test_num != 0){
+                foreach($tests as $test){
+                    $test_score += $test->total_score*3;
+                }
+            }
+
+            $tasks = StudentTask::where('semester','=',$semester)
+                ->where('user_id','=',$user->id)
+                ->get();
+
+            $task_num = $tasks->count();
+            $task_score = 0;
+            if($task_num != 0){
+                foreach($tasks as $task){
+                    $task_score += $task->score;
+                }
+            }
+            if($test_num+$task_num != 0) {
+                $students[$user->id]['score'] = ceil(($test_score + $task_score) / ($test_num * 3 + $task_num));
+            }else{
+                $students[$user->id]['score'] = 0;
+            }
+
+        }
+
+
+        $data = [
+            'semester'=>$semester,
+            'class_name'=>$class->name,
+            'students'=>$students,
+        ];
+
+        return view('admin.tests.score_task_show',$data);
     }
 
     public function getImg($id,$img)

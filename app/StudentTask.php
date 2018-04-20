@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class StudentTask extends Model
 {
     protected $fillable = [
+        'semester',
         'task_id',
         'user_id',
         'year_class_num',

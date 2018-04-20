@@ -15,6 +15,7 @@ class CreateTestsTable extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('semester');
             $table->string('title');
             $table->string('for');
             $table->unsignedInteger('score');
