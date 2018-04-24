@@ -19,9 +19,24 @@
           <i class="fa fa-reorder"></i> 選擇學生作品集
         </div>
         <div class="card-body">
-          {{ Form::open(['route' => 'student_task.open', 'method' => 'POST']) }}
-          {{ Form::select('task_id', $tasks, null,['id' => 'task_id', 'class' => 'form-control', 'placeholder' => '請選擇作品集','onchange'=>'if(this.value != 0) { this.form.submit(); }']) }}
-          {{ Form::close() }}
+            <select name="task_id" id="select1" class="form-control" onchange="if(this.value != 0) { window.location=''; }">
+              <option value="">請選擇</option>
+              @foreach($tasks as $k=>$v)
+              <option value="{{ $k }}/open">{{ $v }}</option>
+              @endforeach
+            </select>
+          <script>
+              $(function(){
+                  // bind change event to select
+                  $('#select1').on('change', function () {
+                      var url = $(this).val(); // get selected value
+                      if (url) { // require a URL
+                          window.location = url; // redirect
+                      }
+                      return false;
+                  });
+              });
+          </script>
         </div>
       </div>
     </div>

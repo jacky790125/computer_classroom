@@ -7,6 +7,7 @@ use App\StudMoney;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
 
 class StudentTaskController extends Controller
@@ -33,37 +34,34 @@ class StudentTaskController extends Controller
         return view('student_tasks.index',$data);
     }
 
-    public function open(Request $request)
+    public function select()
+    {
+        $tasks = Task::orderBy('id','DESC')->pluck('title', 'id')->toArray();
+        $data = [
+            'tasks' => $tasks,
+        ];
+        return view('student_tasks.select', $data);
+    }
+
+    public function open($id)
     {
 
-        $tasks = Task::orderBy('id','DESC')->pluck('title', 'id')->toArray();
+        $task_id = $id;
 
+        $task = Task::where('id','=',$task_id)->first();
 
-        if(empty($request->input('task_id'))) {
+        $student_tasks = StudentTask::where('task_id','=',$task_id)
+            ->where('public','=','1')
+            ->orderBy('updated_at','DESC')
+            ->paginate(10);
 
-            $data = [
-                'tasks' => $tasks,
-            ];
+        $data = [
+            'task'=>$task,
+            'student_tasks' => $student_tasks,
+        ];
 
-            return view('student_tasks.select', $data);
-        }else{
-            $task_id = $request->input('task_id');
+        return view('student_tasks.open', $data);
 
-            $task = Task::where('id','=',$task_id)->first();
-
-            $student_tasks = StudentTask::where('task_id','=',$task_id)
-                ->where('public','=','1')
-                ->get()->shuffle();
-
-            $data = [
-                'task'=>$task,
-                'student_tasks' => $student_tasks,
-            ];
-
-            return view('student_tasks.open', $data);
-
-
-        }
     }
 
     //ajax like值+1

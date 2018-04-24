@@ -233,8 +233,8 @@ Route::post('post/view', 'PostController@view')->name('post.view');
 
 //公開的學生作業
 Route::get('student_task/index', 'StudentTaskController@index')->name('student_task.index');
-Route::get('student_task/select', 'StudentTaskController@open')->name('student_task.select');
-Route::any('student_task/open', 'StudentTaskController@open')->name('student_task.open');
+Route::get('student_task/select', 'StudentTaskController@select')->name('student_task.select');
+Route::get('student_task/{id?}/open', 'StudentTaskController@open')->name('student_task.open');
 Route::post('student_task/likes', 'StudentTaskController@likes')->name('student_task.likes');
 Route::post('student_task/views', 'StudentTaskController@views')->name('student_task.views');
 Route::get('student_task/view_one/{student_task}', 'StudentTaskController@view_one')->name('student_task.view_one');

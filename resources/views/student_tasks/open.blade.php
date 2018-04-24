@@ -17,6 +17,12 @@
   <div class="row">
     <div class="col-12">
     <h1><img src="{{ asset('img/title/one.png') }}" alt="觀看作業logo" width="60">觀看作品</h1>
+        <a href="{{ route('student_task.select') }}" class="btn btn-dark">返回選擇</a>
+        <br>
+        <br>
+        <nav class="nav-item" aria-label="Page navigation">
+            {{ $student_tasks->links('vendor.pagination.bootstrap-4') }}
+        </nav>
         <table class="table" id="dataTable12">
             <thead>
             <tr>
@@ -109,6 +115,9 @@
               </tr>
           @endforeach
         </table>
+        <nav class="nav-item" aria-label="Page navigation">
+            {{ $student_tasks->links('vendor.pagination.bootstrap-4') }}
+        </nav>
     </div>
   </div>
 </div>
