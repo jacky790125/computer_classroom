@@ -408,7 +408,31 @@ class HomeController extends Controller
 
     public function fix_money()
     {
-        return view('fix_money');
+        $users = User::all();
+        $show_user = [];
+        foreach($users as $user){
+            $total_money = 0;
+            $stud_moneys = StudMoney::where('user_id','=',$user->id)
+                ->orderBy('id','DESC')
+                ->get();
+            foreach($stud_moneys as $stud_money) {
+                if (!empty($stud_moneys)) {
+                    $total_money = $total_money + $stud_money->stud_money;
+                }
+            }
+            if($user->money != $total_money) {
+                $show_user[$user->id]['username'] = $user->username;
+                $show_user[$user->id]['year_class_num'] = $user->year_class_num;
+                $show_user[$user->id]['name'] = $user->name;
+                $show_user[$user->id]['user_money'] = $user->money;
+                $show_user[$user->id]['right_money'] = $total_money;
+            }
+        }
+        $data = [
+            'show_user' => $show_user,
+        ];
+
+        return view('fix_money',$data);
     }
 
     public function fix_go()

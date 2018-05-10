@@ -329,7 +329,7 @@ class StudentTaskController extends Controller
 
     public function downloadFile(StudentTask $student_task)
     {
-        if($student_task->user_id != auth()->user()->id){
+        if($student_task->user_id != auth()->user()->id and auth()->user()->group_id != "1"){
             $words = " 這項作業不是你的！";
             return view('layouts.error',compact('words'));
         }

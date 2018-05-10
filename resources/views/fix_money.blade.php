@@ -30,6 +30,44 @@
       <a href="{{ route('fix_go') }}" class="btn btn-success" id="go" onclick="bbconfirm2('go','很花時間喔！')">開始修正</a>
       <br>
       <br>
+      <table class="table table-hover">
+        <tr>
+          <td>
+            班級座號
+          </td>
+          <td>
+            學號
+          </td>
+          <td>
+            姓名
+          </td>
+          <td>
+            目前金額
+          </td>
+          <td>
+            正確金額
+          </td>
+        </tr>
+        @foreach($show_user as $k=>$v)
+          <tr>
+            <td>
+              {{ $v['year_class_num'] }}
+            </td>
+            <td>
+              {{ $v['username'] }}
+            </td>
+            <td>
+              {{ $v['name'] }}
+            </td>
+            <td>
+              {{ $v['user_money'] }}
+            </td>
+            <td>
+              {{ $v['right_money'] }}
+            </td>
+          </tr>
+        @endforeach
+      </table>
     </div>
   </div>
 </div>
